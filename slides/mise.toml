@@ -1,0 +1,27 @@
+[tasks.install]
+description = "Install the Slidev project dependencies"
+sources = ["package.json", "package-lock.json"]
+outputs = ["node_modules/.package-lock.json"]
+run = "npm ci"
+
+[tasks.anim]
+description = "Copy the presenter clips from //remotion into public/anim"
+depends = ["//remotion:render"]
+sources = ["../remotion/out/clips/*.mp4"]
+outputs = ["public/anim/*.mp4"]
+run = "rm -rf public/anim public/architecture.mp4 && mkdir -p public/anim && cp ../remotion/out/clips/*.mp4 public/anim/"
+
+[tasks.build]
+description = "Build the static slides into dist/"
+depends = ["install", "anim"]
+run = "npx slidev build"
+
+[tasks.dev]
+description = "Serve the slides on $CNS_BIND_HOST:3030"
+depends = ["install", "anim"]
+run = "npx slidev --remote --bind $CNS_BIND_HOST --port 3030"
+
+[tasks.export]
+description = "Export the slides to PDF (needs Playwright's headless Chromium)"
+depends = ["install", "anim"]
+run = "npx slidev export"

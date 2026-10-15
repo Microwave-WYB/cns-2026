@@ -1,0 +1,106 @@
+# CNS 2026 Talk — Outline（Slidev，30 分钟）
+
+> 工作文档：每讨论定一段就更新这里。旧的 `../SLIDES.md` 计划不再使用（文件保留）。
+> 屏幕上的文字用英文；本文件的说明用中文。
+
+## 项目
+
+- Slidev 项目就在本目录：`slides.md` 是全部内容，`public/architecture.mp4` 是从 `../remotion/out/` 复制来的动画。
+- `npm run dev` 启动开发服务器，只监听 Tailnet：http://100.83.234.55:3030/ （讲者模式 `/presenter/`，总览 `/overview/`）。
+- 现在用默认主题加深色模式，主题之后再定，先写内容。
+
+## 初稿 v2（2026-10-15，最新）
+
+共 36 页，`overview.png` 是全部页面的缩略图总览（视频页的缩略图是片段第一帧）。
+- 开场 10 页：UCSD 纪录片 → KARR → "That became BLE Theft Auto"（论文背景）→ 第一次投稿只有一个产品，被拒（"lacks scientific novelty"，转述）→ 做了 6 遍，3 个严重漏洞，USENIX 接收 → "If 6 is science… imagine 6,000" → 两格 meme（假论文封面 vs 印满 agent 论文标题的厕纸卷）"not yet another LLM security paper" → 那堆里还有多少。旧的开场说明见下：
+- 开场 6 页（Aaron Schulman、Nishant Bhaskar 用真名和 UCSD 主页照片）→ 论点 5 页。
+- 核心假设 2 页（原生页，放在"广播结构"之后）："How do we classify all these advertisements?"（名字 / MAC OUI / manufacturer ID / UUID 单独都有歧义）→ "Similar devices → similar advertisements"（车、手表、标签三种形状；形状就是指纹，局限写在备注里）。（"广播高度结构化、不需要 embedding" 和相关工作写在这页备注里。）组件 `components/AdStrip.vue`。
+- 管线 12 段视频 + 1 页原生对比：01 Listen 后紧接 "Our scans vs WiGLE"（深 vs 广，互补），再进入 02 广播结构；避免打断后面的 App → WiGLE 验证动画。每段短视频播完停在最后一帧，方便讲解。片段定义在 `../remotion/src/clips.ts`：
+  01 Listen · 02 广播结构 · 03 各不相同 · 04 名字通配符 · 05 同模板成簇 · 06 Company ID → 厂商 · 07 名字 → App · 08 反编译代码 · 09 回到观测数据验证 · 10 全部簇并行 · 11 知识库 · 12 扩大规模。
+- More ways in 5 页：13 从 App（AndroZoo 元数据按蓝牙权限预筛）· 14 WiGLE 验证 · 15 从地点（OSM 有急诊的医院，合成数据，XXTag 等占位名）· 16 医院附近明显偏多 → 新线索（候选）· 17 三个来源汇入同一知识库（WiGLE 只做验证）。
+- 验证 1 页："Found something suspicious?"（hypothesis → validate → buy the real device → 在买来的设备上读 GATT，作为最终证据）。GATT 已并入第 19 页 "How do we classify all these advertisements?" 的最后一行（not broadcast, may not be legal 🙃），原来单独的 GATT 页已删除。
+- 测量 1 页、收尾 2 页。
+- 每页讲者备注里有讲稿要点和措辞提醒。
+- 构建：`mise run //:build`；预览：`mise run //:dev` → http://100.83.234.55:3030/ （讲者模式 `/presenter/`）。
+
+## 初稿 v1（2026-10-14）
+
+`slides.md` 已有完整初稿，共 21 页，覆盖全部 6 段：
+- 开场 6 页：标题 → UCSD documentary → 扫描 → 设备堆 → KARR → 那堆里还有多少（本科生旋转门）。
+- 论点 5 页：互联网被扫描 → "you will be found" → BLE "nobody will notice" → Obscurity is dead → Let defenders see first。
+- 知识库 6 页：动画切成 6 段（`public/anim/01–06`），每页进入时自动播放。
+- 验证 1 页、测量 1 页、收尾 2 页（初稿）。
+- 小动画组件在 `components/`：Pile、RevolvingDoor、ScannedGrid、StreetDevices。
+- 头像仍是 emoji 占位；互联网测量的引用还没加（备注里已标出）。
+- 检查方式：`npx slidev export --format png --output <dir>` 可导出每页 PNG。
+
+## 基本原则
+
+- **重心是未来项目的规划**，不是复述已完成的研究。
+- 风格：轻松、不端正，有玩笑和动画（Slidev：`v-click`、`v-motion`、`v-mark` 手绘标注、自定义 Vue 组件）。
+- 屏幕上字少而大：不放数字、ID、细节行，不放解释性小字；细节留给口头讲。
+- 区分「已做过的工作」和「提议中的系统」；合成数据要标注；引用只用真实文献。
+- 已有的 Remotion 动画（Scan → Collect → Cluster → Attribute → Knowledge → Scale）以 MP4 嵌入，必要时按段切分。
+
+## 核心论点
+
+1. 互联网一直在被扫描、被打指纹（Censys / Shodan 这一类），所以默认假设是 **"you will be found"**，没人敢让服务裸奔。
+2. BLE / IoT 设备散落在现实世界里，除了厂商和用户，**没人知道它是什么**，默认假设是 "nobody will notice"。
+3. AI 时代逆向工程又便宜又快：**只要技术上能发现，就得假设坏人已经发现了**。obscurity 保护不了任何人。
+4. 所以要让 BLE 世界变得可见，让防御方先看见。第一步、也是最重要的一步：**建立 BLE 知识库**。
+
+（第 3 点同时回答了"这是不是在帮攻击者"的问题，不需要单独做一页防守。）
+
+说法上的注意：讲成"假设和压力的差别"，不要说成"互联网在数量上比 IoT 安全多少"这种定量结论。
+
+## 结构与时间
+
+| # | 时间 | 段落 | 状态 |
+|---|------|------|------|
+| 1 | 0–4 分钟 | 开场故事：How BLE security research used to be done at UCSD | 方向已定，画面待细化 |
+| 2 | 4–10 分钟 | 核心论点：Internet 被看见 vs BLE 没人看见 → AI 让 obscurity 失效 | 方向已定 |
+| 3 | 10–21 分钟 | 规划：建立知识库（嵌入现有动画） | 动画已有，切分方式待定 |
+| 4 | 21–24 分钟 | 发现之后：验证，最终买真实设备确认（不讲 Lua 模拟） | 待讨论 |
+| 5 | 24–27 分钟 | 可见之后的测量：部署规模、修复追踪（各一页，点到为止） | 待讨论 |
+| 6 | 27–30 分钟 | 收尾：把 "you will be found" 带进 BLE 世界 | 待讨论 |
+
+## 1. 开场故事（已讨论）
+
+1. **"How BLE security research used to be done at UCSD"**：导师和前 PhD 拿着 WiGLE 到处扫，有意思的设备越堆越多。
+2. **分工**：少数交给 grad 学生深挖，大部分丢给来来去去的本科生。
+3. **KARR，一页带过**：其中一个被 grad 学生（当时读 PhD 的我）深挖，结果是能开锁、点火的汽车模块。只为说明这类研究的分量，不展开 BLE Theft Auto 的细节。
+   - 可以顺手呼应 proximity：车停在街上，攻击者本来就在旁边。
+4. **问题**：KARR 是碰巧被挑中的。**那堆没人深挖的设备里还有多少个？** 人员流动、知识留不住，没法 scale。
+   - 措辞注意：这是一个问题，不暗示那堆里已经发现了什么。
+5. → 引出核心论点。
+
+待定：
+- 头像用真实照片还是卡通，以及对导师和前 PhD 的称呼。
+- 笑点的分寸：自嘲本科生被淹没可以，但不能让人觉得在抱怨导师。
+
+## 2. 核心论点（方向已定）
+
+- 对比画面：互联网上每个服务都被扫描、打标签；BLE 设备在街上发着信号，旁边都是问号。
+- AI 逆向很便宜 → "If it's discoverable, assume it's already discovered."
+- 落点：我们需要 BLE 的知识库。
+
+待定：具体画面、需要引用的互联网测量文献（之后查真实论文）。
+
+## 3. 规划：建立知识库
+
+- 嵌入现有动画（MP4）。可能按 Scan / Collect / Cluster / Attribute / Knowledge / Scale 切成几段分别放在不同页，中间穿插讲解。
+
+待定：切分方式，以及哪些段需要停下来讲解。
+
+## 4. 验证（简短）
+
+- 发现可疑问题 → 先做验证 → 最终都要买真实设备确认。不讲 Lua 模拟的技术细节。
+
+## 5. 可见之后的测量（简短）
+
+- 部署规模估计。
+- 修复追踪：同一设备的广播从旧版本变成新版本。
+
+## 6. 收尾
+
+待讨论。

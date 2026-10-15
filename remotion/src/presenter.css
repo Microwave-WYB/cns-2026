@@ -1,0 +1,15 @@
+:root {color-scheme: dark; font-family: Arial, sans-serif; background: #060b13; color: #dbe9fb;}
+body {margin: 0;}
+main {max-width: 1600px; margin: auto; padding: 16px;}
+.screen {background: #09111e;}
+.canvas {cursor: pointer;}
+.canvas:focus-visible, button:focus-visible {outline: 3px solid #ffd475; outline-offset: -3px;}
+nav {display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 12px;}
+button {font: inherit; background: #17263b; color: #e7f1ff; border: 1px solid #47617f; border-radius: 5px; padding: 9px 12px; cursor: pointer;}
+button[aria-pressed="true"] {border-color: #ffd475;}
+output {margin-left: auto; color: #90aac8; font-size: 14px;}
+p {color: #90aac8; font-size: 14px; line-height: 1.6;}
+.screen:fullscreen {display: flex; flex-direction: column; justify-content: center;}
+.screen:fullscreen .canvas {width: min(100vw, calc((100vh - 68px) * 16 / 9)); align-self: center;}
+.screen:fullscreen nav {justify-content: center;}
+

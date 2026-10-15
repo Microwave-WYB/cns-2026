@@ -1,0 +1,26 @@
+monorepo_root = true
+
+[monorepo]
+config_roots = ["remotion", "slides"]
+
+[tools]
+node = "24"
+
+[env]
+# Dev servers listen only on this address (the Tailnet IP). Override per machine if needed.
+CNS_BIND_HOST = "100.83.234.55"
+
+[tasks.build]
+description = "Render the animation and build the slides"
+depends = ["//slides:build"]
+run = "true"
+
+[tasks.dev]
+description = "Render the animation if needed, then serve the slides on $CNS_BIND_HOST:3030"
+depends = ["//slides:dev"]
+run = "true"
+
+[tasks.check]
+description = "Type-check and verify the animation, build the slides"
+depends = ["//remotion:check", "//slides:build"]
+run = "true"

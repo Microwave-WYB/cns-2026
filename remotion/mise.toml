@@ -1,0 +1,28 @@
+[tasks.install]
+description = "Install the Remotion project dependencies"
+sources = ["package.json", "package-lock.json"]
+outputs = ["node_modules/.package-lock.json"]
+run = "npm ci"
+
+[tasks.check]
+description = "Type-check the animation and verify the playback logic"
+depends = ["install"]
+run = "npm run typecheck && npm run check:playback"
+
+[tasks.render]
+description = "Render both animations and cut the presenter clips (src/clips.ts) into out/clips/"
+depends = ["install"]
+sources = ["src/**/*", "public/**/*", "scripts/render-segments.mjs", "package.json", "package-lock.json"]
+outputs = ["out/architecture.mp4", "out/more-ways.mp4", "out/clips/*.mp4"]
+run = "node --experimental-strip-types scripts/render-segments.mjs"
+
+[tasks.studio]
+description = "Remotion Studio on $CNS_BIND_HOST:3000 (Studio itself has no --host flag; a preload rebinds it)"
+depends = ["install"]
+env = { BIND_PORT = "3000" }
+run = "BIND_HOST=$CNS_BIND_HOST NODE_OPTIONS=\"--require $PWD/scripts/bind-host.cjs\" npx remotion studio src/index.ts --port 3000 --no-open"
+
+[tasks.player]
+description = "Plain Remotion Player page on $CNS_BIND_HOST:3001"
+depends = ["install"]
+run = "npx vite --host $CNS_BIND_HOST --port 3001 --strictPort"
