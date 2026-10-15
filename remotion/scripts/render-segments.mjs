@@ -7,7 +7,7 @@ import {CLIPS} from '../src/clips.ts';
 const run = (args) => execFileSync('npx', args, {stdio: 'inherit'});
 const FILES = {Architecture: 'out/architecture.mp4', MoreWays: 'out/more-ways.mp4'};
 for (const [comp, file] of Object.entries(FILES)) {
-  run(['remotion', 'render', 'src/index.ts', comp, file, '--concurrency=6', '--log=error']);
+  run(['remotion', 'render', 'src/index.ts', comp, file, '--log=error']);
 }
 
 rmSync('out/segments', {recursive: true, force: true});
