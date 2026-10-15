@@ -21,3 +21,21 @@ mise tasks --all      # List all tasks
 ```
 
 For local development, set `CNS_BIND_HOST` in the root `mise.toml` to `127.0.0.1` (the default is a machine-specific Tailnet address).
+
+## Deployment
+
+[View slides](https://Microwave-WYB.github.io/cns-2026/).
+
+GitHub Actions builds the videos and deploys to GitHub Pages **only on pushes to `public`**. Updates to `main` do not deploy.
+
+To publish the current `main`:
+
+```sh
+git push origin main:public
+```
+
+To reproduce the Pages build locally:
+
+```sh
+SLIDEV_BASE=/cns-2026/ mise run //:build
+```

@@ -14,7 +14,7 @@ run = "rm -rf public/anim public/architecture.mp4 && mkdir -p public/anim && cp 
 [tasks.build]
 description = "Build the static slides into dist/"
 depends = ["install", "anim"]
-run = "npx slidev build"
+run = 'npx slidev build --base "${SLIDEV_BASE:-/}"'
 
 [tasks.dev]
 description = "Serve the slides on $CNS_BIND_HOST:3030"
