@@ -68,19 +68,16 @@ Next: Step 3, the manual research on one device.
 ---
 layout: center
 class: text-center
+clicks: 2
 ---
 
 # Step 3: research
 
-<div class="text-4xl mt-10 leading-loose">
-  <div v-click>pick one</div>
-  <div v-click>buy it</div>
-  <div v-click>take it apart</div>
-  <div v-click><strong>what can it really do?</strong></div>
-</div>
+<Eureka :step="$clicks" class="mt-4" />
 
 <!--
-Step 3 is the slow, manual part: pick one interesting device, buy it, open it up, read its app and firmware, and find out what it really does. One device at a time, by one person. That is where the old way stops scaling.
+Animation: Nishant thinking (spinning loader, AI-app style "Thinking… / Working…" status); click: a light bulb; click: the first page of the paper (Please Pay Inside, USENIX Security 2019).
+Step 3 is the slow, manual part: pick one interesting device, buy it, open it up, read its app and firmware, and find out what it really does; for Nishant that became the skimmer paper. One device at a time, by one person. That is where the old way stops scaling.
 Leads into the next slide: one of them, a grad student dug into.
 -->
 

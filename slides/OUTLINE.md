@@ -41,6 +41,7 @@
 - 隐藏 "How do we classify all these advertisements?"（打断节奏）。
 - "From apps" 动画重做：先详细展示一个 App（APK → 反编译 → 高亮 BLE scan filter → 读出指纹 → E-scooter 进知识库），再快速重复同一流程处理其余 App（合成示例）。
 - "Internet-wide measurement already exists" 改为 Censys 两个方向的演示，两页：① Search a product → find every exposed device（搜 Hikvision，点击放大搜索框 → 结果数 → 主机卡片）；② Look up a device → find out what it is（同一台主机的详情页，放大 CAMERA/IOT 标签和服务 → 软件 Hikvision Web Server）。IP 等已模糊；Shodan/Shadowserver 只在备注。
+- "Step 3: research" 改成动画 Eureka.vue：Nishant 头像外一圈转动的 loading + 类似 AI 应用的 "Thinking… / Working…" 闪烁文字 → 点击冒出灯泡 → 再点出现 Please Pay Inside 论文首页。
 - 测量 1 页、收尾 2 页。
 - 每页讲者备注里有讲稿要点和措辞提醒。
 - 构建：`mise run //:build`；预览：`mise run //:dev` → http://100.83.234.55:3030/ （讲者模式 `/presenter/`）。
