@@ -45,7 +45,7 @@
 
 `slides.md` 已有完整初稿，共 21 页，覆盖全部 6 段：
 - 开场 6 页：标题 → UCSD documentary → 扫描 → 设备堆 → KARR → 那堆里还有多少（本科生旋转门）。
-- 论点 5 页：互联网被扫描 → "you will be found" → BLE "nobody will notice" → Obscurity is dead → Let defenders see first。
+- 论点 5 页：互联网被扫描 → "if you're hackable, you will be hacked" → BLE "nobody will notice" → Obscurity is dead → Let defenders see first。
 - 知识库 6 页：动画切成 6 段（`public/anim/01–06`），每页进入时自动播放。
 - 验证 1 页、测量 1 页、收尾 2 页（初稿）。
 - 小动画组件在 `components/`：Pile（已不再使用，文件保留）、RevolvingDoor、ScannedGrid、StreetDevices。
@@ -62,7 +62,7 @@
 
 ## 核心论点
 
-1. 互联网一直在被扫描、被打指纹（Censys / Shodan 这一类），所以默认假设是 **"you will be found"**，没人敢让服务裸奔。
+1. 互联网一直在被扫描、被打指纹（Censys / Shodan 这一类），所以默认假设是 **"if you're hackable, you will be hacked"**，没人敢让服务裸奔。
 2. BLE / IoT 设备散落在现实世界里，除了厂商和用户，**没人知道它是什么**，默认假设是 "nobody will notice"。
 3. AI 时代逆向工程又便宜又快：**只要技术上能发现，就得假设坏人已经发现了**。obscurity 保护不了任何人。
 4. 所以要让 BLE 世界变得可见，让防御方先看见。第一步、也是最重要的一步：**建立 BLE 知识库**。
@@ -80,7 +80,7 @@
 | 3 | 10–21 分钟 | 规划：建立知识库（嵌入现有动画） | 动画已有，切分方式待定 |
 | 4 | 21–24 分钟 | 发现之后：验证，最终买真实设备确认（不讲 Lua 模拟） | 待讨论 |
 | 5 | 24–27 分钟 | 可见之后的测量：部署规模、修复追踪（各一页，点到为止） | 待讨论 |
-| 6 | 27–30 分钟 | 收尾：把 "you will be found" 带进 BLE 世界 | 待讨论 |
+| 6 | 27–30 分钟 | 收尾：把 "if you're hackable, you will be hacked" 带进 BLE 世界 | 待讨论 |
 
 ## 1. 开场故事（已讨论）
 

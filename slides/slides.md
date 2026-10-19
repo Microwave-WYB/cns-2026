@@ -324,7 +324,7 @@ class: text-center
 
 # The Internet's common assumption
 
-<div v-click class="text-5xl mt-10 font-bold">"you <span v-mark.green="1">will</span> be found"</div>
+<div v-click class="text-5xl mt-10 font-bold leading-tight">"if you're hackable,<br>you <span v-mark.green="1">will</span> be hacked"</div>
 
 
 <!--
@@ -877,9 +877,9 @@ layout: center
 class: text-center
 ---
 
-# Make Bluetooth assume<br>"you <span v-mark.green="1">will</span> be found"
+# Make Bluetooth assume<br>"if you're hackable, you <span v-mark.green="1">will</span> be hacked"
 
-<div v-click class="text-2xl mt-10 opacity-80">by the defenders first.</div>
+<div v-click class="text-2xl mt-10 opacity-80">so let defenders find it first.</div>
 
 ---
 layout: center
