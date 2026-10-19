@@ -29,7 +29,7 @@ const rows = [
 </template>
 
 <style scoped>
-.phone { width: 260px; height: 400px; border-radius: 36px; border: 3px solid #3a3a3a; background: #0d0d0d; padding: 34px 10px 12px; position: relative; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+.phone { width: 234px; height: 416px; border-radius: 36px; border: 3px solid #3a3a3a; background: #0d0d0d; padding: 34px 10px 12px; position: relative; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
 .notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 80px; height: 16px; border-radius: 10px; background: #000; }
 .bar { display: flex; justify-content: space-between; align-items: center; padding: 4px 8px 10px; border-bottom: 1px solid #262626; }
 .title { font: 600 17px Inter, system-ui, sans-serif; color: #ededed; }
@@ -39,7 +39,7 @@ const rows = [
 .icon { width: 24px; height: 24px; border-radius: 50%; background: #1f2a38; color: #6b7f99; display: grid; place-items: center; font-size: 13px; }
 .row.qt .icon { background: #173252; color: #9dd0ff; }
 .text { flex: 1; min-width: 0; text-align: left; }
-.name { font: 600 14px ui-monospace, "Noto Sans Mono", monospace; color: #8a8a8a; font-variant-ligatures: none; }
+.name { font: 600 13px ui-monospace, "Noto Sans Mono", monospace; color: #8a8a8a; font-variant-ligatures: none; }
 .row.qt .name { color: #9dd0ff; }
 .addr { font: 10px ui-monospace, monospace; color: #555; }
 .sig { display: flex; align-items: flex-end; gap: 2px; }
