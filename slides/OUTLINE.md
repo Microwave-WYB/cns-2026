@@ -26,7 +26,7 @@
 - More ways in 5 页：13 从 App（AndroZoo 元数据按蓝牙权限预筛）· 14 WiGLE 验证 · 15 从地点（OSM 有急诊的医院，合成数据，XXTag 等占位名）· 16 医院附近明显偏多 → 新线索（候选）· 17 三个来源汇入同一知识库（WiGLE 只做验证）。
 - 验证 1 页："Found something suspicious?"（hypothesis → validate → buy the real device → 在买来的设备上读 GATT，作为最终证据）。GATT 已并入第 19 页 "How do we classify all these advertisements?" 的最后一行（not broadcast, may not be legal 🙃），原来单独的 GATT 页已删除。
 - 指纹澄清（talk/lookup-fingerprint 分支）：按广播结构聚类只是快速分流（决定先查哪一堆），不是最终指纹；查完后提取具体指纹（厂商 ID + 固定字节、私有 UUID、名字模式）存入知识库。新增原生页 "Look it up"（"Remember it" 之后，新广播 → 知识库 → 产品；名字缺失仍可识别；早期原型，数字只在被问时说）。新增原生页 "What an entry looks like"（"Remember it" 与 "Look it up" 之间，真实的 KARR 知识库条目，只用已公开信息：Markdown + YAML frontmatter，用代码行高亮逐步讲解；company ID/UUID/厂商数据字节仓库里没有公开材料，屏幕上以 … 省略；该页是"屏幕上不放数字/ID"原则的有意例外）；"Look it up" 第二行改为用户改名 "My Car"。总页数 39 → 41。
-- "Step 2: so many interesting devices" 改成卡片网格：8 张日常设备卡（咖啡杯、牙刷、床、吊扇、丙烷罐、洗衣机付款盒、卡车空气悬架、Pokémon GO Plus）逐个弹出，最后红框强调 "a gas pump skimmer"（Please Pay Inside, USENIX Security '19，Nishant 的论文），再接 grad students / undergrads 两句。品牌名和数字只在备注里。页数不变。
+- "Step 2" 改成猜谜 3 页（取代原来的 emoji 卡片网格/设备堆）：4 "Step 2: so many interesting devices"（一条假的、脱敏的扫描记录：name Haiku ····、地址隐藏、只写城市、UUID、厂商数据 5C04 …，问 "What is this?"，这是少数有意展示十六进制的页）→ 5 "A ceiling fan."（Big Ass Fans 官网截图 + Haiku 产品图，点击出 "…by a company literally called Big Ass Fans."）→ 6 "And sometimes it's this"（红框 gas pump skimmer，Please Pay Inside, USENIX Security '19，Nishant 的论文；再接 grad students / undergrads 两句）。页数 41 → 43。
 - 测量 1 页、收尾 2 页。
 - 每页讲者备注里有讲稿要点和措辞提醒。
 - 构建：`mise run //:build`；预览：`mise run //:dev` → http://100.83.234.55:3030/ （讲者模式 `/presenter/`）。
