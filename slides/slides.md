@@ -24,31 +24,15 @@ class: text-center
 <div v-click class="text-2xl opacity-60 mt-6">(a documentary)</div>
 
 ---
+clicks: 2
+---
 
 # Step 1: drive around and scan
 
-<div class="flex justify-center items-start gap-8 mt-6">
-  <div class="flex gap-5">
-    <div v-motion :initial="{ y: 40, opacity: 0 }" :enter="{ y: 0, opacity: 1 }" class="text-center">
-      <img src="/people/aaron.jpg" class="portrait" />
-      <div class="text-xl mt-3">Aaron Schulman</div>
-    </div>
-    <div v-motion :initial="{ y: 40, opacity: 0 }" :enter="{ y: 0, opacity: 1, transition: { delay: 200 } }" class="text-center">
-      <img src="/people/nishant.jpg" class="portrait" />
-      <div class="text-xl mt-3">Nishant Bhaskar</div>
-    </div>
-  </div>
-  <div v-click class="text-center">
-    <img src="/shots/wigle.jpg" class="rounded-lg" style="height: 340px; border: 1px solid #333" />
-    <div class="text-xl mt-3 opacity-60">WiGLE: crowdsourced Wi-Fi / Bluetooth map</div>
-  </div>
-</div>
-
-<style>
-.portrait { width: 200px; height: 340px; border-radius: 10px; object-fit: cover; object-position: 50% 20%; border: 1px solid #333; }
-</style>
+<Wardrive :step="$clicks" class="mt-6" />
 
 <!--
+Animation: click 1, Aaron sends Nishant out ("go scan!") and a phone running WiGLE appears; click 2, Nishant and the phone ride in a car around the city, "?" devices popping up along the way. Schematic, not real data.
 Say: they drove around with WiGLE, everywhere, and kept going "ooh… what's that?"
 Photos: Aaron from his UCSD homepage (cseweb.ucsd.edu/~schulman), Nishant from cseweb.ucsd.edu/~nibhaska.
 WiGLE: a crowdsourced wardriving database of Wi-Fi, cell and Bluetooth sightings with locations, collected by volunteers' phones.
