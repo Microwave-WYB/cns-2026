@@ -391,11 +391,12 @@ layout: center
 class: text-center
 ---
 
-# Let defenders see first
+# We want a <span style="color:#9dd0ff">Censys</span> for Bluetooth
 
-<div v-click class="text-4xl mt-10">step 1: a <strong>BLE knowledge base</strong></div>
-
-<div v-click class="text-2xl mt-8 opacity-70">every device we hear → a fingerprint → a product → an app → a vendor</div>
+<!--
+Ties back to the Internet measurement slide: the Internet has Censys / Shodan / Shadowserver, so defenders see what is exposed first. We want the same for Bluetooth.
+First step: a BLE knowledge base: every device we hear → a fingerprint → a product → an app → a vendor.
+-->
 
 ---
 layout: center

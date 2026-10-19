@@ -45,7 +45,7 @@
 
 `slides.md` 已有完整初稿，共 21 页，覆盖全部 6 段：
 - 开场 6 页：标题 → UCSD documentary → 扫描 → 设备堆 → KARR → 那堆里还有多少（本科生旋转门）。
-- 论点 5 页：互联网被扫描 → "if you're hackable, you will be hacked" → BLE "nobody will notice" → Obscurity is dead → Let defenders see first。
+- 论点 5 页：互联网被扫描 → "if you're hackable, you will be hacked" → BLE "nobody will notice" → Obscurity is dead → "We want a Censys for Bluetooth"（原 Let defenders see first，只留一句话，知识库说明进备注）。
 - 知识库 6 页：动画切成 6 段（`public/anim/01–06`），每页进入时自动播放。
 - 验证 1 页、测量 1 页、收尾 2 页（初稿）。
 - 小动画组件在 `components/`：Pile（已不再使用，文件保留）、RevolvingDoor、ScannedGrid、StreetDevices。
