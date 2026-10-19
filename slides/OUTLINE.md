@@ -17,17 +17,31 @@
 
 ## 初稿 v2（2026-10-15，最新）
 
-共 43 页；`overview.png` 是旧版缩略图总览，尚未随本次页面调整重新生成。
-- 开场 10 页：UCSD 纪录片 → KARR → "We wrote a paper on it."（只讲写了论文、被拒：Reviewer #2 "Only one vulnerability. Lacks scientific novelty."，转述；原 "That became BLE Theft Auto" 背景页已删，论文背景移入备注）→ 做了 6 遍，3 个严重漏洞，USENIX 接收 → "If 6 is science… imagine 6,000" → 两格 meme（假论文封面 vs 印满 agent 论文标题的厕纸卷）"not yet another LLM security paper"。
+共 51 页（其中 "The obvious next paper" 用 hide: true 隐藏，实际放映 48 页）；`overview.png` 是旧版缩略图总览，尚未随本次页面调整重新生成。
+- 开场 10 页：UCSD 纪录片 → KARR → "That became BLE Theft Auto"（论文背景）→ 第一次投稿只有一个产品，被拒（"lacks scientific novelty"，转述）→ 做了 6 遍，3 个严重漏洞，USENIX 接收 → "If 6 is science… imagine 6,000" → 两格 meme（假论文封面 vs 印满 agent 论文标题的厕纸卷）"not yet another LLM security paper"。
 - 第 11 页直接展示互联网已有测量基础：Censys（主机/服务地图）、Shodan（设备/服务搜索）、Shadowserver（扫描与暴露报告），备注含官方来源。删去学生流动转折页，并替换泛化的互联网扫描动画页；衔接由讲者口述，不再增加转折页。
 - 核心假设 2 页（原生页，放在"广播结构"之后）："How do we classify all these advertisements?"（名字 / MAC OUI / manufacturer ID / UUID 单独都有歧义）→ "Similar devices → similar advertisements"（车、手表、标签三种形状；形状就是指纹，局限写在备注里）。（"广播高度结构化、不需要 embedding" 和相关工作写在这页备注里。）组件 `components/AdStrip.vue`。
 - 管线 12 段视频："Why not just use WiGLE?"（原生页，逐条点出 WiGLE 的局限：只有名字和 MAC、名字只能通配符、随机 MAC 无从匹配、API 不适合复杂查询 → "So we built our own scanner."）放在 "Let defenders see first" 之后、01 Listen 之前；WiGLE 之后只用于验证。每段短视频播完停在最后一帧，方便讲解。片段定义在 `../remotion/src/clips.ts`：
   01 Listen · 02 广播结构 · 03 各不相同 · 04 名字通配符 · 05 同模板成簇 · 06 Company ID → 厂商 · 07 名字 → App · 08 反编译代码 · 09 回到观测数据验证 · 10 全部簇并行 · 11 知识库 · 12 扩大规模。
 - More ways in 5 页：13 从 App（AndroZoo 元数据按蓝牙权限预筛）· 14 WiGLE 验证 · 15 从地点（OSM 有急诊的医院，合成数据，XXTag 等占位名）· 16 医院附近明显偏多 → 新线索（候选）· 17 三个来源汇入同一知识库（WiGLE 只做验证）。
 - 验证 1 页："Found something suspicious?"（hypothesis → validate → buy the real device → 在买来的设备上读 GATT，作为最终证据）。GATT 已并入第 19 页 "How do we classify all these advertisements?" 的最后一行（not broadcast, may not be legal 🙃），原来单独的 GATT 页已删除。
-- 指纹澄清（talk/lookup-fingerprint 分支）：按广播结构聚类只是快速分流（决定先查哪一堆），不是最终指纹；查完后提取具体指纹（厂商 ID + 固定字节、私有 UUID、名字模式）存入知识库。新增原生页 "Look it up"（"Remember it" 之后，新广播 → 知识库 → 产品；名字缺失仍可识别；早期原型，数字只在被问时说）。新增原生页 "What an entry looks like"（"Remember it" 与 "Look it up" 之间，真实的 KARR 知识库条目，只用已公开信息：Markdown + YAML frontmatter，用代码行高亮逐步讲解；company ID/UUID/厂商数据字节仓库里没有公开材料，屏幕上以 … 省略；该页是"屏幕上不放数字/ID"原则的有意例外）；"Look it up" 第二行改为用户改名 "My Car"。总页数 39 → 41。
-- "Step 2" 改成猜谜 3 页（取代原来的 emoji 卡片网格/设备堆）：4 "Step 2: so many interesting devices"（一条假的、脱敏的扫描记录：name Haiku ····、地址隐藏、只写城市、UUID、厂商数据 5C04 …，问 "What is this?"，这是少数有意展示十六进制的页）→ 5 "A ceiling fan."（Big Ass Fans 官网截图 + Haiku 产品图，点击出 "…by a company literally called Big Ass Fans."）→ 6 "And sometimes it's this"（红框 gas pump skimmer，Please Pay Inside, USENIX Security '19，Nishant 的论文；再接 grad students / undergrads 两句）。页数 41 → 43。
-- 重排（演示期间不插页）："What an entry looks like" 和 "Look it up" 移到 "One knowledge base"（演示最后一段视频）之后；"More data, more clusters" 备注不再指向 Look it up 页（"we'll see how lookup works in a moment"）。之后是发现部分："What turned up"（逐条点出日常用途，品牌名只在备注）→ "This one talks to your gas pedal"（Pedal Commander，纯文字：tune it from your phone / …or switch the pedal off / what if it's not your phone?，只作为线索提问，未分析其安全性；官网会把无头浏览器重定向走，所以没有产品图）→ "Found something suspicious?"。新顺序：37 One knowledge base → 38 What an entry looks like → 39 Look it up → 40 What turned up → 41 This one talks to your gas pedal → 42 Found something suspicious?。页数 43 → 45。2026-10-18：删去论文背景页并与被拒页合并、去掉第 4 页误留的空白页，45 → 43。
+- 指纹澄清（talk/lookup-fingerprint 分支）：按广播结构聚类只是快速分流（决定先查哪一堆），不是最终指纹；查完后提取具体指纹（厂商 ID + 固定字节、私有 UUID、名字模式）存入知识库。新增原生页 "Look it up"（"Remember it" 之后，新广播 → 知识库 → 产品；名字缺失仍可识别；早期原型，数字只在被问时说）。新增原生页 "What an entry looks like"（"Remember it" 与 "Look it up" 之间，真实的 KARR 知识库条目，只用已公开信息：Markdown + YAML frontmatter，代码高亮三步：frontmatter → 正文 → 全部；company ID/UUID/厂商数据字节仓库里没有公开材料，屏幕上以 … 省略；该页是"屏幕上不放数字/ID"原则的有意例外）；"Look it up" 第二行改为用户改名 "My Car"。总页数 39 → 41。
+- 最终版（用真实图片，只留两个例子）：4 "Step 2: find out what's out there" = Furbo 官网真实图（会扔零食的摄像头，来自我们的扫描/wiki）；5 "And sometimes it's this" = Please Pay Inside 论文里的两张真实 skimmer 照片（Figure 1 裹灰色胶管的内置 skimmer、Figure 2 回收的 skimmer 电路板）+ 引用 + grad/undergrads 两句。吊扇页已删；总页数 44。
+- 再改：去掉 grad/undergrads 两句（太尴尬），新增 "Step 3: research" 页（pick one → buy it → take it apart → what can it really do?），接在 skimmer 页之后、"One of them, a grad student dug into…" 之前。页数 44 → 45。
+- 再改：删掉 "One of them, a grad student dug into…"，换成 3 页真实发现过程："We kept seeing QT"（手机扫描 App 效果图 PhoneScan.vue，列表里满是 QT XXXXXXXX → what is QT?）→ "So we checked WiGLE…"（真实数据：caralarm-paper 里的 WiGLE QT 下载，圣地亚哥县约 14.8 万条记录画在 OSM 深色底图上，右边是打码的 "QT XXXXXXXX" 列表；QtMap.vue 已不再使用）→ "So we googled it"（Google 搜 "QT FCC ID" 的桌面结果页截图，第一条结果就是 fccid.io 的 2ASRL-1069）→ "An FCC filing"（fccid.io 备案页截图）→ "Its user manual"（ManualZoom.vue：像 PDF 阅读器一样，点击依次放大封面导语"electronic vehicle security"→ 滚到 App 功能页放大"arm/lock or disarm/unlock"→ 滚到第 6 页放大 App 截图里的 "QT 5958868"；"That became BLE Theft Auto" 页已删，论文标题和作者移到备注；"与街上看到的名字一致 → 逆向、写论文"只在口述/备注里）。页数 45 → 47。
+- （被取代）修订：第 4 页不再是假扫描记录猜谜，改成 Aaron/Nishant 引出的 "people use Bluetooth for very unexpected things"，点击出现一张有趣的卡（智能贞操锁，Pen Test Partners 2020，屏幕上委婉写 "a smart lock for a very private purpose"，备注有真名和来源，太敏感可替换）；后接 "And a ceiling fan."（我们自己的发现）→ skimmer 压轴。页数 45 不变。
+- （旧版）"Step 2" 改成猜谜 3 页（取代原来的 emoji 卡片网格/设备堆）：4 "Step 2: so many interesting devices"（一条假的、脱敏的扫描记录：name Haiku ····、地址隐藏、只写城市、UUID、厂商数据 5C04 …，问 "What is this?"，这是少数有意展示十六进制的页）→ 5 "A ceiling fan."（Big Ass Fans 官网截图 + Haiku 产品图，点击出 "…by a company literally called Big Ass Fans."）→ 6 "And sometimes it's this"（红框 gas pump skimmer，Please Pay Inside, USENIX Security '19，Nishant 的论文；再接 grad students / undergrads 两句）。页数 41 → 43。
+- 重排（演示期间不插页）："What an entry looks like" 和 "Look it up" 移到 "One knowledge base"（演示最后一段视频）之后；"More data, more clusters" 备注不再指向 Look it up 页（"we'll see how lookup works in a moment"）。之后是发现部分："What turned up"（WikiScroll.vue：wiki 里109 个产品家族（合并了重复的 LED 控制器、Dreo 等）一行一个、自动向上滚动，左列识别方式、右列产品/用途）→ "This one talks to your gas pedal"（Pedal Commander，纯文字：tune it from your phone / …or switch the pedal off / what if it's not your phone?，只作为线索提问，未分析其安全性；官网会把无头浏览器重定向走，所以没有产品图）→ "Found something suspicious?"。新顺序：37 One knowledge base → 38 What an entry looks like → 39 Look it up → 40 What turned up → 41 This one talks to your gas pedal → 42 Found something suspicious?。页数 43 → 45。
+- 说明书页之后新增 "So we took the app apart"：只保留标题和简化示意的 challenge-response 代码（hash(challenge, name, mode, KEY)，DEALER_KEY / USER_KEY 硬编码且打码）；download/decompile 和 "same keys, every KARR" 改为口述；然后才是 "First submission"。
+- "Obscurity is dead" 换成 3 页纯图（DEF CON）：合影（点击放大到左二：一个 DEF CON 上遇到的人，用 AI 20 分钟复现了我们的攻击）→ 他在 DEF CON 讲复现的现场照 → 他的幻灯片 "Works on sim, confirmed also on real signals in Las Vegas"。论点（AI 让逆向变便宜，"If it's discoverable, assume it's already discovered"）放在备注里口述。
+- 隐藏（hide: true）："This one talks to your gas pedal"、"Found something suspicious?"、"Once BLE is visible, we can measure"；"What turned up" 之后直接收尾。
+- "Step 1: drive around and scan" 改成小动画 Wardrive.vue：城市地图上拿着 WiGLE 手机的 Nishant；点击后沿着街道到处走，沿途冒出信号点，右边复用 PhoneScan.vue 手机，扫到的名字逐个出现（Oral-B、Tile、Ember Mug、MyQ 等；示意，非真实数据）。
+- Step 2 删掉 Furbo 页，只保留 skimmer 页（标题改为 "Step 2: find out what's out there"）。
+- WiGLE 页之后新增 "Our own scanner"：我们自己扫描 App 的真实截图（点击依次放大：设备列表 → 单个设备 → General Information → Raw Data；Govee 设备；设备 ID、坐标、MAC 后三字节、名字后缀、raw data 里 0x09 名字字节已模糊）。
+- 隐藏 "How do we classify all these advertisements?"（打断节奏）。
+- "From apps" 动画重做：先详细展示一个 App（APK → 反编译 → 高亮 BLE scan filter → 读出指纹 → E-scooter 进知识库），再快速重复同一流程处理其余 App（合成示例）。
+- "Internet-wide measurement already exists" 改为 Censys 两个方向的演示，两页：① Search a product → find every exposed device（搜 Hikvision，点击放大搜索框 → 结果数 → 主机卡片）；② Look up a device → find out what it is（同一台主机的详情页，放大 CAMERA/IOT 标签和服务 → 软件 Hikvision Web Server）。IP 等已模糊；Shodan/Shadowserver 只在备注。
+- "Step 3: research" 改成动画 Eureka.vue：Nishant 头像外一圈转动的 loading + 类似 AI 应用的 "Thinking… / Working…" 闪烁文字 → 点击冒出灯泡 → 再点出现 Please Pay Inside 论文首页。
 - 测量 1 页、收尾 2 页。
 - 每页讲者备注里有讲稿要点和措辞提醒。
 - 构建：`mise run //:build`；预览：`mise run //:dev` → http://100.83.234.55:3030/ （讲者模式 `/presenter/`）。
@@ -36,7 +50,7 @@
 
 `slides.md` 已有完整初稿，共 21 页，覆盖全部 6 段：
 - 开场 6 页：标题 → UCSD documentary → 扫描 → 设备堆 → KARR → 那堆里还有多少（本科生旋转门）。
-- 论点 5 页：互联网被扫描 → "you will be found" → BLE "nobody will notice" → Obscurity is dead → Let defenders see first。
+- 论点 5 页：互联网被扫描 → "if you're hackable, you will be hacked" → BLE "nobody will notice" → Obscurity is dead → "We want a Censys for Bluetooth"（原 Let defenders see first，只留一句话，知识库说明进备注）。
 - 知识库 6 页：动画切成 6 段（`public/anim/01–06`），每页进入时自动播放。
 - 验证 1 页、测量 1 页、收尾 2 页（初稿）。
 - 小动画组件在 `components/`：Pile（已不再使用，文件保留）、RevolvingDoor、ScannedGrid、StreetDevices。
@@ -53,7 +67,7 @@
 
 ## 核心论点
 
-1. 互联网一直在被扫描、被打指纹（Censys / Shodan 这一类），所以默认假设是 **"you will be found"**，没人敢让服务裸奔。
+1. 互联网一直在被扫描、被打指纹（Censys / Shodan 这一类），所以默认假设是 **"if you're hackable, you will be hacked"**，没人敢让服务裸奔。
 2. BLE / IoT 设备散落在现实世界里，除了厂商和用户，**没人知道它是什么**，默认假设是 "nobody will notice"。
 3. AI 时代逆向工程又便宜又快：**只要技术上能发现，就得假设坏人已经发现了**。obscurity 保护不了任何人。
 4. 所以要让 BLE 世界变得可见，让防御方先看见。第一步、也是最重要的一步：**建立 BLE 知识库**。
@@ -71,7 +85,7 @@
 | 3 | 10–21 分钟 | 规划：建立知识库（嵌入现有动画） | 动画已有，切分方式待定 |
 | 4 | 21–24 分钟 | 发现之后：验证，最终买真实设备确认（不讲 Lua 模拟） | 待讨论 |
 | 5 | 24–27 分钟 | 可见之后的测量：部署规模、修复追踪（各一页，点到为止） | 待讨论 |
-| 6 | 27–30 分钟 | 收尾：把 "you will be found" 带进 BLE 世界 | 待讨论 |
+| 6 | 27–30 分钟 | 收尾：把 "if you're hackable, you will be hacked" 带进 BLE 世界 | 待讨论 |
 
 ## 1. 开场故事（已讨论）
 

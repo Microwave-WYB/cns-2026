@@ -1,5 +1,5 @@
 import {AbsoluteFill, Sequence, useCurrentFrame} from 'remotion';
-import {C, Glyph, SANS, Txt, inOut, lerp, p, useFonts} from './arch/kit';
+import {C, Glyph, MONO, SANS, Txt, inOut, lerp, p, useFonts} from './arch/kit';
 import {type Ad, parseAds, rand} from './arch/data';
 import {KBRow, type KBEntry, SEED_ENTRIES} from './arch/Knowledge';
 import {StripView} from './arch/Strip';
@@ -40,13 +40,13 @@ const WIGLE_ROW = 0; // the app lead with a distinctive name, checked against Wi
 const KBP = {x: 1220, y: 150, w: 660, row: 46};
 const SRC_LABEL = {scan: 'scans', app: 'apps', place: 'places'};
 const KnowledgePanel = ({f}: {f: number}) => {
-  const appIn = (i: number) => p(f, 400 + i * 6, 426 + i * 6, inOut);
+  const appIn = (i: number) => appKbIn(f, i);
   const placeIn = (i: number) => p(f, MW.apps + 340 + i * 12, MW.apps + 366 + i * 12, inOut);
   const conv = f - MW.apps - MW.places;
   const pulse = conv > 0 ? 0.5 + 0.5 * Math.sin(conv / 6) : 0;
   const rows: {e: KBEntry; src: keyof typeof SRC_LABEL; k: number; checked?: number}[] = [
     ...SEED_ENTRIES.map((e) => ({e, src: 'scan' as const, k: 1})),
-    ...APP_LEADS.map((e, i) => ({e, src: 'app' as const, k: appIn(i), checked: i === WIGLE_ROW ? 1 : 0})),
+    ...APP_LEADS.map((e, i) => ({e, src: 'app' as const, k: appIn(i), checked: i === WIGLE_ROW ? p(f, 404, 414) : 0})),
     ...PLACE_LEADS.map((e, i) => ({e, src: 'place' as const, k: placeIn(i)})),
   ];
   return <g>
@@ -59,78 +59,108 @@ const KnowledgePanel = ({f}: {f: number}) => {
         <KBRow e={e} x={KBP.x} y={y} w={KBP.w} h={KBP.row} flash={1 - k}/>
         <Txt x={KBP.x + KBP.w - 14} y={y + KBP.row / 2 + 4} size={17} anchor="end"
           color={src === 'scan' ? C.blue : src === 'app' ? C.purple : C.yellow}>{SRC_LABEL[src]}</Txt>
-        {checked ? <Txt x={KBP.x + KBP.w - 90} y={y + KBP.row / 2 + 4} size={17} anchor="end" color={C.green} weight={700}>✓ WiGLE</Txt> : null}
+        {checked ? <Txt opacity={checked} x={KBP.x + KBP.w - 90} y={y + KBP.row / 2 + 4} size={17} anchor="end" color={C.green} weight={700}>✓ WiGLE</Txt> : null}
       </g>;
     })}
   </g>;
 };
 
 // ---------------------------------------------------------------- section 1: apps
-const CARDS = (() => {
-  const g = rand(5150);
-  return Array.from({length: 70}, (_, i) => ({
-    c: i % 10, r: Math.floor(i / 10), hue: Math.floor(g() * 6), bt: [3, 9, 15, 22, 34, 47].includes(i),
-    perms: 2 + Math.floor(g() * 3),
-  }));
-})();
-const BT_CARDS = CARDS.map((c, i) => ({...c, i})).filter((c) => c.bt);
-const HUES = ['#2f7fe0', '#16968e', '#8b5cf6', '#e0779c', '#d9a43a', '#7a8a99'];
-const cardPos = (c: {c: number; r: number}) => ({x: 80 + c.c * 108, y: 232 + c.r * 92});
+// One app in detail (decompile → find the BLE scan filter → read off the fingerprint → knowledge),
+// then the same loop, fast, for the rest.
 const rowY = (i: number) => 262 + i * 74;
+const DETAIL_END = 225;
+const rowStart = (n: number) => n === 0 ? 205 : 225 + (n - 1) * 22;
+export const appKbIn = (f: number, n: number) => n === 0 ? p(f, 182, 205, inOut) : p(f, rowStart(n) + 14, rowStart(n) + 26, inOut);
+
+// An APK file icon: a page with a folded corner and the Android head, 28x28 at (x, y).
+const ApkIcon = ({x, y, s = 1}: {x: number; y: number; s?: number}) => <g transform={`translate(${x} ${y}) scale(${s})`}>
+  <path d="M 3 0 H 19 L 26 7 V 28 H 3 Z" fill="#e8eaed"/>
+  <path d="M 19 0 V 7 H 26" fill="#c3c7cc"/>
+  <path d="M 7.5 21 A 7 7 0 0 1 21.5 21 Z" fill="#3ddc84"/>
+  <path d="M 9.5 15.5 L 8 13 M 19.5 15.5 L 21 13" stroke="#3ddc84" strokeWidth={1.4} strokeLinecap="round"/>
+  <circle cx={11.8} cy={18.6} r={0.9} fill="#e8eaed"/><circle cx={17.2} cy={18.6} r={0.9} fill="#e8eaed"/>
+</g>;
+
+// Decompiled source of the first (synthetic) app; lines 1-4 are the scan filter.
+const CODE: {t: string; c: string}[][] = [
+  [{t: 'ScanFilter', c: C.blueHi}, {t: ' filter = ', c: C.text}, {t: 'new', c: C.purple}, {t: ' ScanFilter.Builder()', c: C.text}],
+  [{t: '    .setDeviceName(', c: C.text}, {t: '"ES-4"', c: C.green}, {t: ')', c: C.text}],
+  [{t: '    .setServiceUuid(ParcelUuid.fromString(', c: C.text}, {t: '"0000fee7-…"', c: C.green}, {t: '))', c: C.text}],
+  [{t: '    .setManufacturerData(', c: C.text}, {t: '0x0D12', c: C.yellow}, {t: ', …)', c: C.text}],
+  [{t: '    .build();', c: C.text}],
+  [{t: 'scanner.startScan(List.of(filter), settings, callback);', c: C.sub}],
+];
+const CP = {x: 100, y: 270, w: 1040, line: 40};
 
 const Apps = ({f}: {f: number}) => {
-  const query = p(f, 96, 116);
-  const filt = p(f, 112, 160);
-  const fly = (i: number) => p(f, 176 + i * 6, 226 + i * 6, inOut);
   const fadeAll = 1 - p(f, 450, 478);
   const wig = p(f, 350, 370) * (1 - p(f, 420, 440));
+  const detail = 1 - p(f, DETAIL_END - 20, DETAIL_END);
   const g = rand(77);
   const dots = Array.from({length: 46}, () => {
     const cl = [[260, 70], [520, 50], [700, 80], [880, 60], [420, 140], [960, 150]][Math.floor(g() * 6)];
     return {x: 120 + cl[0] + (g() - 0.5) * 120, y: 760 + cl[1] + (g() - 0.5) * 60, d: g()};
   });
+  const lead0 = APP_LEADS[0];
+  const hl = p(f, 125, 145);
+  const fp = p(f, 150, 175);
   return <g opacity={fadeAll}>
     <Txt x={80} y={150} size={40} color={C.text} weight={700}>From apps</Txt>
-    <g opacity={p(f, 20, 40)}>
+    <g opacity={p(f, 10, 30)}>
       <rect x={330} y={118} width={250} height={42} rx={21} fill="none" stroke={C.sub}/>
-      <Txt x={455} y={147} size={22} color={C.sub} anchor="middle">AndroZoo metadata</Txt>
-    </g>
-    <g opacity={query}>
+      <Txt x={455} y={147} size={22} color={C.sub} anchor="middle">AndroZoo</Txt>
       <rect x={600} y={118} width={330} height={42} rx={21} fill={C.blue} fillOpacity={0.16} stroke={C.blue} strokeWidth={2}/>
       <Txt x={765} y={147} size={22} color={C.blueHi} anchor="middle" weight={650}>permission: Bluetooth</Txt>
     </g>
 
-    {/* metadata cards; the Bluetooth ones get downloaded */}
-    {CARDS.map((c, i) => {
-      if (c.bt) return null;
-      const {x, y} = cardPos(c);
-      const k = p(f, 30 + (i % 17) * 2, 50 + (i % 17) * 2);
-      return <g key={i} opacity={k * (1 - 0.88 * filt)}>
-        <rect x={x} y={y} width={96} height={76} rx={10} fill="#1c1c1c" stroke="#333333"/>
-        <rect x={x + 10} y={y + 12} width={28} height={28} rx={7} fill={HUES[c.hue]}/>
-        {Array.from({length: c.perms}, (_, j) => <rect key={j} x={x + 10 + j * 26} y={y + 52} width={20} height={10} rx={5} fill="#474747"/>)}
-      </g>;
-    })}
-    {BT_CARDS.map((c, n) => {
-      const {x: cx, y: cy} = cardPos(c);
-      const t = fly(n);
-      const x = lerp(cx, 100, t), y = lerp(cy, rowY(n) - 38, t);
-      const k = p(f, 30 + (c.i % 17) * 2, 50 + (c.i % 17) * 2);
-      const lead = APP_LEADS[n];
-      const an = p(f, 240 + n * 16, 268 + n * 16);
-      return <g key={c.i} opacity={k}>
-        <rect x={x} y={y} width={96} height={76} rx={10} fill="#1c1c1c" stroke={C.blue} strokeWidth={1 + 2 * filt}/>
-        <rect x={x + 10} y={y + 12} width={28} height={28} rx={7} fill={HUES[c.hue]}/>
-        <g opacity={1 - t}>
-          {Array.from({length: c.perms}, (_, j) => <rect key={j} x={x + 10 + j * 26} y={y + 52} width={20} height={10} rx={5} fill={j === 0 ? C.blue : '#474747'}/>)}
+    {/* one app in detail */}
+    <g opacity={detail}>
+      <g opacity={p(f, 30, 45)}>
+        <ApkIcon x={100} y={196} s={1.6}/>
+        <Txt x={160} y={230} size={26} color={C.text} weight={650}>com.example.scooter.apk</Txt>
+        <Txt x={520} y={230} size={22} color={C.purple} opacity={p(f, 50, 62)}>→ decompile</Txt>
+      </g>
+      <g opacity={p(f, 52, 66)}>
+        <rect x={CP.x} y={CP.y} width={CP.w} height={CODE.length * CP.line + 30} rx={14} fill="#181818" stroke="#333333"/>
+        {CODE.map((line, i) => <text key={i} x={CP.x + 24} y={CP.y + 42 + i * CP.line} fontSize={23} fontFamily={MONO}
+          style={{whiteSpace: 'pre'}} opacity={p(f, 62 + i * 9, 70 + i * 9)}>
+          {line.map((seg, j) => <tspan key={j} fill={seg.c}>{seg.t}</tspan>)}
+        </text>)}
+        {/* the scan filter */}
+        <rect x={CP.x + 12} y={CP.y + 14} width={960} height={4 * CP.line + 6} rx={8} fill={C.purple} fillOpacity={0.1 * hl}
+          stroke={C.purple} strokeWidth={2} opacity={hl}/>
+        <g opacity={hl}>
+          <rect x={CP.x + CP.w - 180} y={CP.y - 18} width={170} height={36} rx={18} fill={C.bg} stroke={C.purple} strokeWidth={2}/>
+          <Txt x={CP.x + CP.w - 95} y={CP.y + 8} size={20} color={C.purple} anchor="middle" weight={650}>scan filter</Txt>
         </g>
-        <Txt x={x + 66} y={y + 34} size={16} anchor="middle" color={C.text} weight={700} opacity={t}>APK</Txt>
-        <Txt x={x + 66} y={y + 62} size={20} anchor="middle" color={C.green} opacity={t}>↓</Txt>
-        {/* agent extracts the scan fingerprint and what the app controls */}
-        <g opacity={an}>
-          <Txt x={240} y={rowY(n) + 8} size={26} color={C.purple}>→</Txt>
-          <StripView ads={lead.ads} x={290} y={rowY(n)} pitch={10} h={22} parse={lead.ads.length} solid={1} norm={1} sgap={5}/>
-          <Txt x={640} y={rowY(n) + 9} size={26} color={C.text} weight={650}>{lead.product}</Txt>
+      </g>
+      {/* the fingerprint read off the filter, and what the app is for */}
+      <g opacity={fp}>
+        <Txt x={CP.x} y={CP.y + CODE.length * CP.line + 90} size={22} color={C.sub}>fingerprint</Txt>
+        <StripView ads={lead0.ads} x={CP.x + 140} y={CP.y + CODE.length * CP.line + 82} pitch={12} h={26} parse={lead0.ads.length} solid={1} norm={1} sgap={6}/>
+        <Txt x={CP.x + 560} y={CP.y + CODE.length * CP.line + 92} size={28} color={C.purple}>→</Txt>
+        <Txt x={CP.x + 610} y={CP.y + CODE.length * CP.line + 92} size={30} color={C.text} weight={700}>{lead0.product}</Txt>
+      </g>
+    </g>
+
+    {/* the loop, repeated: app → scan filter → fingerprint → knowledge */}
+    {APP_LEADS.map((lead, n) => {
+      const s0 = rowStart(n);
+      const y = rowY(n);
+      const icon = p(f, s0, s0 + 6);
+      const code = p(f, s0 + 4, s0 + 10);
+      const out = p(f, s0 + 10, s0 + 18);
+      return <g key={n} opacity={icon}>
+        <ApkIcon x={100} y={y - 14}/>
+        <g opacity={code}>
+          {[0, 1, 2].map((j) => <rect key={j} x={148} y={y - 14 + j * 10} width={j === 1 ? 60 : 72} height={6} rx={3}
+            fill={j === 1 ? C.purple : '#474747'}/>)}
+        </g>
+        <g opacity={out}>
+          <Txt x={240} y={y + 8} size={26} color={C.purple}>→</Txt>
+          <StripView ads={lead.ads} x={290} y={y} pitch={10} h={22} parse={lead.ads.length} solid={1} norm={1} sgap={5}/>
+          <Txt x={640} y={y + 9} size={26} color={C.text} weight={650}>{lead.product}</Txt>
         </g>
       </g>;
     })}
