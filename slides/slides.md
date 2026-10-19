@@ -38,8 +38,9 @@ class: text-center
   </div>
 </div>
 
-<div v-click class="text-4xl text-center mt-10">WiGLE, everywhere</div>
-<div v-click class="text-3xl text-center mt-6 opacity-80">"ooh… what's <em>that</em>?"</div>
+<div v-click="1" class="text-4xl text-center mt-10">WiGLE, everywhere</div>
+<div v-click="1" class="text-xl text-center mt-2 opacity-60">a crowdsourced map of Wi-Fi and Bluetooth devices, collected by volunteers' phones</div>
+<div v-click="2" class="text-3xl text-center mt-6 opacity-80">"ooh… what's <em>that</em>?"</div>
 
 <style>
 .avatar { width: 150px; height: 150px; border-radius: 9999px; object-fit: cover; object-position: 50% 18%; margin: 0 auto; border: 3px solid #4ea8ff; }
@@ -47,6 +48,7 @@ class: text-center
 
 <!--
 Photos: Aaron from his UCSD homepage (cseweb.ucsd.edu/~schulman), Nishant from cseweb.ucsd.edu/~nibhaska.
+WiGLE: a crowdsourced wardriving database of Wi-Fi, cell and Bluetooth sightings with locations, collected by volunteers' phones.
 Tone: affectionate. They did the hard, curious work; the joke is about scale, not about them.
 -->
 
@@ -269,18 +271,22 @@ layout: center
 
 # Why not just use WiGLE?
 
-<div class="text-3xl mt-8 leading-loose">
-  <div v-click>Bluetooth: a <strong>name</strong> and a <strong>MAC</strong>, not the advertisement</div>
-  <div v-click>names: <strong>wildcards</strong> only</div>
-  <div v-click>random MACs: <strong>nothing to match</strong></div>
-  <div v-click>API: <strong>no complex queries</strong></div>
+<div class="grid grid-cols-[1.2fr_1fr] gap-10 mt-6 items-center">
+  <img src="/shots/wigle.jpg" class="rounded-lg" style="aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid #333" />
+  <div class="text-2xl leading-loose whitespace-nowrap">
+    <div v-click>Bluetooth: <strong>no advertisement data</strong></div>
+    <div v-click>names: <strong>wildcards</strong> only</div>
+    <div v-click>random MACs: <strong>nothing to match</strong></div>
+    <div v-click>API: <strong>no complex queries</strong></div>
+  </div>
 </div>
 
-<div v-click class="text-4xl mt-10" style="color:#9dd0ff">So we built our own scanner.</div>
+<div v-click class="text-4xl mt-8 text-center" style="color:#9dd0ff">So we built our own scanner.</div>
 
 <!--
+WiGLE is a crowdsourced wardriving database of Wi-Fi, cell and Bluetooth sightings with locations; we already met it in the opening story. Screenshot: the map area of the public wigle.net landing page, logged out (cropped to avoid the stats numbers), captured 2026-10-18.
 The natural first move, once we know what we want to build, is to look at WiGLE. It is a great crowdsourced map; here is what it exposes for our purpose (not a criticism).
-- For Bluetooth it basically keeps a name and a MAC address, plus location. Not the advertisement contents: no manufacturer data, no UUIDs, no structure.
+- For Bluetooth it basically keeps a name and a MAC address, plus location (slide: "no advertisement data"). Not the advertisement contents: no manufacturer data, no UUIDs, no structure.
 - Names can only be matched with simple wildcards. If a product's name does not fit a wildcard, you cannot find it.
 - If the MAC address is random, there is basically nothing to match on.
 - The API is not convenient for complex queries.
