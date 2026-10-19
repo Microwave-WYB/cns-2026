@@ -13,15 +13,15 @@
 
 ## TODO
 
-- [ ] **"Our scans vs WiGLE" 放哪里还没定**（目前在第 17 页，紧跟 Listen 之后）。放在 Listen 之后和放在 App 路线中间都打断流程；并入 "Validate with WiGLE" 那页的方案也没定下来。暂时不动，之后再想。
+- [x] "Our scans vs WiGLE" 的位置已解决：改成 "Why not just use WiGLE?"，放在 "Let defenders see first" 之后、Listen 之前（讲 WiGLE 的局限 → 自建扫描器）。
 
 ## 初稿 v2（2026-10-15，最新）
 
-共 41 页；`overview.png` 是旧版缩略图总览，尚未随本次页面调整重新生成。
+共 41 页（WiGLE 页只是挪位，页数不变）；`overview.png` 是旧版缩略图总览，尚未随本次页面调整重新生成。
 - 开场 10 页：UCSD 纪录片 → KARR → "That became BLE Theft Auto"（论文背景）→ 第一次投稿只有一个产品，被拒（"lacks scientific novelty"，转述）→ 做了 6 遍，3 个严重漏洞，USENIX 接收 → "If 6 is science… imagine 6,000" → 两格 meme（假论文封面 vs 印满 agent 论文标题的厕纸卷）"not yet another LLM security paper"。
 - 第 11 页直接展示互联网已有测量基础：Censys（主机/服务地图）、Shodan（设备/服务搜索）、Shadowserver（扫描与暴露报告），备注含官方来源。删去学生流动转折页，并替换泛化的互联网扫描动画页；衔接由讲者口述，不再增加转折页。
 - 核心假设 2 页（原生页，放在"广播结构"之后）："How do we classify all these advertisements?"（名字 / MAC OUI / manufacturer ID / UUID 单独都有歧义）→ "Similar devices → similar advertisements"（车、手表、标签三种形状；形状就是指纹，局限写在备注里）。（"广播高度结构化、不需要 embedding" 和相关工作写在这页备注里。）组件 `components/AdStrip.vue`。
-- 管线 12 段视频 + 1 页原生对比：01 Listen 后紧接 "Our scans vs WiGLE"（深 vs 广，互补），再进入 02 广播结构；避免打断后面的 App → WiGLE 验证动画。每段短视频播完停在最后一帧，方便讲解。片段定义在 `../remotion/src/clips.ts`：
+- 管线 12 段视频："Why not just use WiGLE?"（原生页，逐条点出 WiGLE 的局限：只有名字和 MAC、名字只能通配符、随机 MAC 无从匹配、API 不适合复杂查询 → "So we built our own scanner."）放在 "Let defenders see first" 之后、01 Listen 之前；WiGLE 之后只用于验证。每段短视频播完停在最后一帧，方便讲解。片段定义在 `../remotion/src/clips.ts`：
   01 Listen · 02 广播结构 · 03 各不相同 · 04 名字通配符 · 05 同模板成簇 · 06 Company ID → 厂商 · 07 名字 → App · 08 反编译代码 · 09 回到观测数据验证 · 10 全部簇并行 · 11 知识库 · 12 扩大规模。
 - More ways in 5 页：13 从 App（AndroZoo 元数据按蓝牙权限预筛）· 14 WiGLE 验证 · 15 从地点（OSM 有急诊的医院，合成数据，XXTag 等占位名）· 16 医院附近明显偏多 → 新线索（候选）· 17 三个来源汇入同一知识库（WiGLE 只做验证）。
 - 验证 1 页："Found something suspicious?"（hypothesis → validate → buy the real device → 在买来的设备上读 GATT，作为最终证据）。GATT 已并入第 19 页 "How do we classify all these advertisements?" 的最后一行（not broadcast, may not be legal 🙃），原来单独的 GATT 页已删除。

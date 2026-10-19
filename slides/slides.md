@@ -267,6 +267,31 @@ class: text-center
 layout: center
 ---
 
+# Why not just use WiGLE?
+
+<div class="text-3xl mt-8 leading-loose">
+  <div v-click>Bluetooth: a <strong>name</strong> and a <strong>MAC</strong>, not the advertisement</div>
+  <div v-click>names: <strong>wildcards</strong> only</div>
+  <div v-click>random MACs: <strong>nothing to match</strong></div>
+  <div v-click>API: <strong>no complex queries</strong></div>
+</div>
+
+<div v-click class="text-4xl mt-10" style="color:#9dd0ff">So we built our own scanner.</div>
+
+<!--
+The natural first move, once we know what we want to build, is to look at WiGLE. It is a great crowdsourced map; here is what it exposes for our purpose (not a criticism).
+- For Bluetooth it basically keeps a name and a MAC address, plus location. Not the advertisement contents: no manufacturer data, no UUIDs, no structure.
+- Names can only be matched with simple wildcards. If a product's name does not fit a wildcard, you cannot find it.
+- If the MAC address is random, there is basically nothing to match on.
+- The API is not convenient for complex queries.
+So we decided to build our own scanner and database; that is the next step, Listen.
+WiGLE is still useful later, for validation (see "Validate with WiGLE"): a quick, broad check that a device exists in the wild and where. Deep (ours) and wide (WiGLE) are complementary. No numbers here.
+-->
+
+---
+layout: center
+---
+
 # Listen
 
 <SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
@@ -274,36 +299,9 @@ layout: center
 </SlidevVideo>
 
 <!--
-A scanner drives around and records every advertisement it hears. Passive: nothing is sent to the devices. Advertisement bytes vs. what the receiver adds (signal strength, time, place) are different things. All data in these videos is synthetic.
+So we listen ourselves. A scanner drives around and records every advertisement it hears. Passive: nothing is sent to the devices. Advertisement bytes vs. what the receiver adds (signal strength, time, place) are different things. All data in these videos is synthetic.
 -->
 
----
-
-# Our scans vs WiGLE
-
-<div class="grid grid-cols-[1fr_380px_1fr] gap-6 mt-8 items-center">
-  <div v-click="1">
-    <div class="text-4xl font-bold whitespace-nowrap" style="color:#9dd0ff">our scans</div>
-    <div class="text-3xl mt-6"><strong>deep</strong></div>
-    <div class="text-2xl opacity-80 mt-2">the full advertisement:<br>every structure, every byte</div>
-    <div class="text-2xl opacity-60 mt-6">only where we drive</div>
-  </div>
-  <DepthBreadth :step="$clicks" />
-  <div v-click="2">
-    <div class="text-4xl font-bold" style="color:#4ade80">WiGLE</div>
-    <div class="text-3xl mt-6"><strong>wide</strong></div>
-    <div class="text-2xl opacity-80 mt-2">crowdsourced, worldwide</div>
-    <div class="text-2xl opacity-60 mt-6">only name + manufacturer ID + location</div>
-  </div>
-</div>
-
-
-<!--
-Say: Deep × wide → complementary.
-Why not just our own data? Ours is deep: the raw advertisement, so we can cluster and fingerprint precisely, but only where our scanners have been.
-WiGLE is wide: crowdsourced from all over the world, but each record has only the name, manufacturer ID and location.
-So we discover and fingerprint with our data, and use WiGLE to check, quickly and broadly, that a device exists in the wild and where.
--->
 ---
 layout: center
 ---
