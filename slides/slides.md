@@ -378,17 +378,42 @@ Say: Besides the vendor and the user, nobody knows what these are.
 -->
 
 ---
-layout: center
-class: text-center
+layout: full
+clicks: 1
 ---
 
-# Obscurity is dead
-
-<div v-click class="text-3xl mt-10 opacity-80">AI makes reverse engineering cheap and fast</div>
-
-<div v-click class="text-5xl mt-10 font-bold">If it's discoverable,<br><span v-mark.orange="3">assume it's already discovered.</span></div>
+<div class="absolute inset-0 overflow-hidden flex items-center justify-center" style="background:#121212">
+  <img src="/defcon/group.jpg" style="height: 100%; max-width: none; transform-origin: 30.4% 22.3%; transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1)"
+    :style="{ transform: $clicks >= 1 ? 'translate(19.6%, 27.7%) scale(5)' : 'none' }" />
+</div>
 
 <!--
+DEF CON. Click: zoom in on the second person from the left: a random guy we met at DEF CON. He reproduced our KARR attack with AI in about 20 minutes.
+-->
+
+---
+layout: full
+---
+
+<div class="absolute inset-0 flex items-center justify-center" style="background:#121212">
+  <img src="/defcon/talk.jpg" style="height: 100%; max-width: none" />
+</div>
+
+<!--
+Then he gave a talk at DEF CON about it: "2026.07: KARR Security", showing the press coverage of our paper.
+-->
+
+---
+layout: full
+---
+
+<div class="absolute inset-0 flex items-center justify-center" style="background:#121212">
+  <img src="/defcon/repro.jpg" style="height: 100%; max-width: none" />
+</div>
+
+<!--
+His slide: "Works on sim, confirmed also on real signals in Las Vegas". His own tool decodes the KARR advertisements.
+The point: AI makes reverse engineering cheap and fast. If it's discoverable, assume it's already discovered.
 This also answers "aren't you helping attackers?": we assume they already are looking. The question is whether defenders can see too.
 -->
 
