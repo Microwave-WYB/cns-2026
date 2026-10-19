@@ -93,7 +93,7 @@ Everyday Bluetooth: each card is an example we have seen in our own recent scans
 - coffee mug: Ember
 - toothbrush: Oral-B
 - bed: Eight Sleep Pod
-- ceiling fan: Big Ass Fans Haiku
+- ceiling fan: Big Ass Fans Haiku. Say: "made by a company literally called Big Ass Fans"
 - propane tank gauge: Otodata
 - laundry machine's payment box: PayRange BluKey
 - truck air suspension: Air Lift WirelessOne / WirelessAir
