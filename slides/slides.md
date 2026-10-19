@@ -282,6 +282,8 @@ class: text-center
 <div v-click class="text-8xl mt-10 font-bold">imagine 6,000</div>
 
 ---
+hide: true
+---
 
 # The obvious next paper
 

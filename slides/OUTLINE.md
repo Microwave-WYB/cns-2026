@@ -17,7 +17,7 @@
 
 ## 初稿 v2（2026-10-15，最新）
 
-共 49 页；`overview.png` 是旧版缩略图总览，尚未随本次页面调整重新生成。
+共 49 页（其中 "The obvious next paper" 用 hide: true 隐藏，实际放映 48 页）；`overview.png` 是旧版缩略图总览，尚未随本次页面调整重新生成。
 - 开场 10 页：UCSD 纪录片 → KARR → "That became BLE Theft Auto"（论文背景）→ 第一次投稿只有一个产品，被拒（"lacks scientific novelty"，转述）→ 做了 6 遍，3 个严重漏洞，USENIX 接收 → "If 6 is science… imagine 6,000" → 两格 meme（假论文封面 vs 印满 agent 论文标题的厕纸卷）"not yet another LLM security paper"。
 - 第 11 页直接展示互联网已有测量基础：Censys（主机/服务地图）、Shodan（设备/服务搜索）、Shadowserver（扫描与暴露报告），备注含官方来源。删去学生流动转折页，并替换泛化的互联网扫描动画页；衔接由讲者口述，不再增加转折页。
 - 核心假设 2 页（原生页，放在"广播结构"之后）："How do we classify all these advertisements?"（名字 / MAC OUI / manufacturer ID / UUID 单独都有歧义）→ "Similar devices → similar advertisements"（车、手表、标签三种形状；形状就是指纹，局限写在备注里）。（"广播高度结构化、不需要 embedding" 和相关工作写在这页备注里。）组件 `components/AdStrip.vue`。
