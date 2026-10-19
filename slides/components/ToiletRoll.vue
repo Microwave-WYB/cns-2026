@@ -9,23 +9,21 @@ const titles = [
 
 <template>
   <svg viewBox="0 0 360 400" class="roll">
-    <!-- hanging sheet -->
-    <defs>
-      <clipPath id="sheet"><rect x="70" y="90" width="220" height="300" /></clipPath>
-    </defs>
-    <rect x="70" y="90" width="220" height="300" fill="#f4f1ea" />
-    <g clip-path="url(#sheet)" fill="#4a4a4a" style="font: 13px Georgia, serif">
-      <text v-for="(t, i) in titles" :key="i" x="84" :y="112 + i * 24">{{ t }}</text>
+    <!-- A thick cylinder, with its axis about as long as its diameter. -->
+    <ellipse cx="110" cy="110" rx="50" ry="76" fill="#f4f1ea" />
+    <rect x="110" y="34" width="160" height="152" fill="#f4f1ea" />
+    <!-- The sheet leaves the front tangent, not the back or the bottom. -->
+    <path d="M60 110 H220 V374 l-10 -4 -10 6 -10 -5 -10 4 -10 -3 -10 5 -10 -5 -10 3 -10 -4 -10 5 -10 -4 -10 5 -10 -4 -10 3 -10 -4 -10 2 Z"
+      fill="#f4f1ea" />
+    <g fill="#4a4a4a" style="font: 11px Georgia, serif">
+      <text v-for="(t, i) in titles" :key="i" x="70" :y="147 + i * 18">{{ t }}</text>
     </g>
-    <!-- perforations -->
-    <line v-for="y in [190, 290]" :key="y" x1="70" x2="290" :y1="y" :y2="y" stroke="#bdb7aa" stroke-dasharray="4 5" />
-    <!-- torn bottom edge -->
-    <path d="M70 390 l12 -8 l12 8 l12 -8 l12 8 l12 -8 l12 8 l12 -8 l12 8 l12 -8 l12 8 l12 -8 l12 8 l12 -8 l12 8 l12 -8 l12 8 l12 -8 l4 3 V400 H70 Z" fill="#111" />
-    <!-- roll -->
-    <rect x="60" y="30" width="240" height="70" rx="6" fill="#ece8df" />
-    <ellipse cx="60" cy="65" rx="22" ry="35" fill="#ddd8cc" />
-    <ellipse cx="60" cy="65" rx="9" ry="15" fill="#8a7a62" />
-    <ellipse cx="300" cy="65" rx="22" ry="35" fill="#f4f1ea" />
+    <line v-for="y in [192, 264, 336]" :key="y" x1="64" x2="216" :y1="y" :y2="y" stroke="#c9c2b5" stroke-dasharray="3 4" />
+    <!-- Exposed circular layers and cardboard core on the right end. -->
+    <ellipse cx="270" cy="110" rx="50" ry="76" fill="#e5dfd2" stroke="#c8bfad" />
+    <ellipse v-for="r in [44, 38, 32, 26]" :key="r" cx="270" cy="110" :rx="r" :ry="r * 1.52" fill="none" stroke="#cec5b3" stroke-width="0.8" />
+    <ellipse cx="270" cy="110" rx="21" ry="32" fill="#aa8e68" />
+    <ellipse cx="270" cy="110" rx="15" ry="26" fill="#554536" />
   </svg>
 </template>
 

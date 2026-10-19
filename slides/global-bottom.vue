@@ -4,3 +4,9 @@
     {{ $nav.currentPage }} / {{ $nav.total }}
   </div>
 </template>
+
+<style>
+:root {
+  --slidev-transition-duration: 150ms;
+}
+</style>

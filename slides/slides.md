@@ -1,7 +1,7 @@
 ---
 title: Toward a Continuous, Ecosystem-Scale Bluetooth Security Observatory
 colorSchema: dark
-transition: slide-left
+transition: fade
 mdc: true
 ---
 
@@ -183,31 +183,29 @@ All titles are made up.
 -->
 
 ---
-layout: center
-class: text-center
----
 
-# How many more are still in the pile?
+# Internet-wide measurement already exists
 
-<RevolvingDoor v-click class="mt-12" />
-
-
-<!--
-Say: This doesn't scale.
-It's a question, we are not claiming anything was found in the pile.
-Undergrads come and go; what they learned leaves with them. Discoveries depend on luck: which device happened to be picked.
--->
-
----
-
-# Meanwhile, on the Internet…
-
-<ScannedGrid class="mt-8" />
-
+<div class="grid grid-cols-3 gap-6 mt-8">
+  <a v-for="c in [
+    { name: 'Censys', img: '/shots/censys.jpg', url: 'https://www.censys.com/', line: 'Map Internet hosts and services' },
+    { name: 'Shodan', img: '/shots/shodan.jpg', url: 'https://www.shodan.io/', line: 'Search exposed devices and services' },
+    { name: 'Shadowserver', img: '/shots/shadowserver.jpg', url: 'https://dashboard.shadowserver.org/', line: 'Scan and report exposures to defenders' },
+  ]" :key="c.name" :href="c.url" target="_blank" rel="noopener noreferrer" class="block" style="border-bottom: none">
+    <img :src="c.img" class="w-full rounded-lg" style="aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid #333" />
+    <div class="text-2xl font-bold mt-4" style="color:#9dd0ff">{{ c.name }}</div>
+    <div class="text-lg mt-1 opacity-80">{{ c.line }}</div>
+  </a>
+</div>
 
 <!--
-Say: Everything is scanned and fingerprinted, all the time.
-Internet-wide scanning / fingerprinting platforms (Censys, Shodan-style). Add real citations before the talk.
+Examples of established Internet measurement infrastructure, not identical services:
+- Censys: repeated Internet-wide scanning and structured observations of publicly reachable hosts and services. https://docs.censys.com/docs/internet-scanning
+- Shodan: a search engine for Internet-connected devices, collecting service banners and metadata. https://help.shodan.io/the-basics/what-is-shodan
+- Shadowserver: Internet-wide scanning with exposure reports for network owners and defenders; not a public search engine. https://www.shadowserver.org/what-we-do/data-collection/
+Screenshots: Censys Platform host search for 8.8.8.8 (platform.censys.io, logged out), shodan.io homepage, dashboard.shadowserver.org (public dashboard), captured 2026-10-15.
+Coverage, scan frequency and access models differ. Do not claim every device or every service is measured continuously.
+The speaker supplies the transition from the previous slide; no extra slide about student turnover or one-off discovery is needed.
 -->
 
 ---
@@ -271,7 +269,7 @@ layout: center
 
 # Listen
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/01-scan.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -312,7 +310,7 @@ layout: center
 
 # What's inside an advertisement
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/02-parse.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -367,12 +365,11 @@ But all of these come back later as clues for attribution (company ID → vendor
   <AdStrip :tile="10" v-click="2" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'name',n:9}]" label='"W-4F1C2"' />
   <AdStrip :tile="10" v-click="2" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'name',n:5}]" label='"W-7"' />
 
-  <div v-click="3" class="text-3xl row-span-3 mt-3 whitespace-nowrap">tag</div>
+  <div v-click="3" class="text-3xl row-span-3 mt-3 whitespace-nowrap">tracker</div>
   <AdStrip :tile="10" v-click="3" class="mt-3" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'svc',n:12}]" />
   <AdStrip :tile="10" v-click="3" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'svc',n:12}]" />
   <AdStrip :tile="10" v-click="3" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'svc',n:12}]" />
 </div>
-
 
 <!--
 Say: The shape is the fingerprint.
@@ -388,7 +385,7 @@ layout: center
 
 # Every product looks different
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/03-pile.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -402,7 +399,7 @@ layout: center
 
 # Names are wildcards
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/04-wildcard.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -416,7 +413,7 @@ layout: center
 
 # Same template → same cluster
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/05-cluster.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -430,7 +427,7 @@ layout: center
 
 # Company ID → vendor
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/06-sig.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -444,7 +441,7 @@ layout: center
 
 # Name pattern → app
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/07-appstore.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -458,7 +455,7 @@ layout: center
 
 # The app's code matches
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/08-decompile.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -473,7 +470,7 @@ layout: center
 
 # Check against what we saw
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/09-validate.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -487,7 +484,7 @@ layout: center
 
 # Every cluster, in parallel
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/10-parallel.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -501,7 +498,7 @@ layout: center
 
 # Remember it
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/11-knowledge.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -515,7 +512,7 @@ layout: center
 
 # More data, more clusters
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/12-scale.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -530,7 +527,7 @@ layout: center
 
 # From apps
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/13-apps.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -544,7 +541,7 @@ layout: center
 
 # Validate with WiGLE
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/14-wigle.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -558,7 +555,7 @@ layout: center
 
 # From places
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/15-hospitals.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -572,7 +569,7 @@ layout: center
 
 # What's unusual there?
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/16-overrep.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -586,7 +583,7 @@ layout: center
 
 # One knowledge base
 
-<SlidevVideo autoplay autoreset="slide" class="mx-auto rounded-lg mt-2" style="height: 420px">
+<SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/17-converge.mp4" type="video/mp4" />
 </SlidevVideo>
 
@@ -651,4 +648,3 @@ class: text-center
 ---
 
 # Thanks! Questions?
-
