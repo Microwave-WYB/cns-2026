@@ -474,6 +474,8 @@ An advertisement is a list of AD structures: length · type · value. Walk throu
 -->
 
 ---
+hide: true
+---
 
 # How do we classify all these advertisements?
 
