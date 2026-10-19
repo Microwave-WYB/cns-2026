@@ -54,7 +54,7 @@ Tone: affectionate. They did the hard, curious work; the joke is about scale, no
 
 ---
 
-# Step 2: so many interesting devices
+# Step 2: find out what's out there
 
 <img src="/shots/furbo.jpg" class="mx-auto mt-4 rounded-lg" style="height: 340px; border: 1px solid #333" />
 
