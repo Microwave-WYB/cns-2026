@@ -112,13 +112,53 @@ layout: center
 class: text-center
 ---
 
-# One of them, a grad student dug into…
+# We kept seeing "QT"
 
-<div v-click class="text-4xl mt-12">…a hidden module that let us<br><span v-mark.red="2">unlock someone's car</span></div>
+<div class="text-4xl mt-10 leading-loose">
+  <div v-click>on the <strong>highway</strong></div>
+  <div v-click>in <strong>parking lots</strong></div>
+  <div v-click>at <strong>gas stations</strong></div>
+</div>
+
+<div v-click class="text-6xl mt-8 font-bold" style="font-family: ui-monospace, monospace; color:#9dd0ff">QT ····</div>
 
 <!--
-KARR, one slide only. The attack unlocks the car; it does not start it. The grad student was me (as a PhD). Do not go into BLE Theft Auto details.
-Optional aside: the car sits on the street, so "an attacker must be nearby" is not much comfort.
+In our own scans one name prefix, "QT" followed by a module ID, kept showing up everywhere: on the highway, in parking lots, at gas stations. Nobody on the team knew what it was. Curiosity, not a plan.
+-->
+
+---
+layout: center
+class: text-center
+---
+
+# So we googled it
+
+<div class="text-3xl mt-4 opacity-80" style="font-family: ui-monospace, monospace">"QT FCC ID"</div>
+
+<img v-click src="/shots/fccid-qt.jpg" class="mx-auto mt-6 rounded-lg" style="height: 360px; border: 1px solid #333" />
+
+<!--
+Every radio device sold in the US has an FCC ID, and the filing is public. Searching the name plus "FCC ID" found a filing; the page lists the applicant and equipment class.
+Screenshot: fccid.io page for the filing, logged out, captured 2026-10-19. The filing page says "QT Solutions Bluetooth Sensor" by QT Solutions PTY LTD. The user manual page of the same filing is behind a Cloudflare check, so it is not captured here.
+-->
+
+---
+layout: center
+class: text-center
+---
+
+# The manual: "QT" + serial number
+
+<div class="text-3xl mt-10 leading-loose">
+  <div v-click>the same name format we saw on the street</div>
+  <div v-click>so it <strong>is</strong> that product</div>
+  <div v-click class="mt-6" style="color:#9dd0ff">then: reverse engineer it, write the paper</div>
+</div>
+
+<!--
+TODO: add a screenshot of the user manual page (the part showing the "QT" + serial number format). It needs a manual capture because the page sits behind a Cloudflare check.
+The manual shows the name format, "QT" plus a serial number. That matched what we saw, which confirmed the identification. Then the real work: reverse engineering the module and its app, and writing the paper.
+KARR, one slide only. The attack unlocks the car; it does not start it. The grad student who dug in was me (as a PhD). Do not go into BLE Theft Auto details. Optional aside: the car sits on the street, so "an attacker must be nearby" is not much comfort.
 -->
 
 ---
