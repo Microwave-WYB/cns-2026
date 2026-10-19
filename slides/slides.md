@@ -359,11 +359,12 @@ Say: Besides the vendor and the user, nobody knows what these are.
 -->
 
 ---
-layout: full
 clicks: 1
 ---
 
-<div class="absolute inset-0 overflow-hidden flex items-center justify-center" style="background:#121212">
+# DEF CON 34
+
+<div class="mx-auto mt-4 rounded-xl overflow-hidden flex items-center justify-center" style="height: 420px; width: fit-content; border: 1px solid #333">
   <img src="/defcon/group.jpg" style="height: 100%; max-width: none; transform-origin: 30.4% 22.3%; transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1)"
     :style="{ transform: $clicks >= 1 ? 'translate(19.6%, 27.7%) scale(5)' : 'none' }" />
 </div>
