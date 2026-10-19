@@ -442,7 +442,7 @@ clicks: 4
 <!--
 Clicks zoom in: 1 the live list of devices, 2 one device (name and address), 3 general information (signal, time, location, accuracy), 4 the raw advertisement broken into AD structures.
 So we built our own scanner: an Android app that records every advertisement in full, not just a name and a MAC. Here: a Govee thermometer (Govee_H6199_…), with signal strength, time, location, and the raw advertisement broken into its AD structures (flags, name, manufacturer data).
-Screenshot from our app, captured 2026-10-19; device ID, coordinates, the last three MAC bytes, the name suffix and the raw data bytes are blurred.
+Screenshot from our app, captured 2026-10-19; device ID, coordinates, the last three MAC bytes, the name suffix and the name (0x09) bytes in the raw data are blurred.
 -->
 
 ---
