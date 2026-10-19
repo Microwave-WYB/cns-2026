@@ -74,9 +74,17 @@ const CARDS = (() => {
   }));
 })();
 const BT_CARDS = CARDS.map((c, i) => ({...c, i})).filter((c) => c.bt);
-const HUES = ['#2f7fe0', '#16968e', '#8b5cf6', '#e0779c', '#d9a43a', '#7a8a99'];
 const cardPos = (c: {c: number; r: number}) => ({x: 80 + c.c * 108, y: 232 + c.r * 92});
 const rowY = (i: number) => 262 + i * 74;
+
+// An APK file icon: a page with a folded corner and the Android head, 28x28 at (x, y).
+const ApkIcon = ({x, y}: {x: number; y: number}) => <g transform={`translate(${x} ${y})`}>
+  <path d="M 3 0 H 19 L 26 7 V 28 H 3 Z" fill="#e8eaed"/>
+  <path d="M 19 0 V 7 H 26" fill="#c3c7cc"/>
+  <path d="M 7.5 21 A 7 7 0 0 1 21.5 21 Z" fill="#3ddc84"/>
+  <path d="M 9.5 15.5 L 8 13 M 19.5 15.5 L 21 13" stroke="#3ddc84" strokeWidth={1.4} strokeLinecap="round"/>
+  <circle cx={11.8} cy={18.6} r={0.9} fill="#e8eaed"/><circle cx={17.2} cy={18.6} r={0.9} fill="#e8eaed"/>
+</g>;
 
 const Apps = ({f}: {f: number}) => {
   const query = p(f, 96, 116);
@@ -107,7 +115,7 @@ const Apps = ({f}: {f: number}) => {
       const k = p(f, 30 + (i % 17) * 2, 50 + (i % 17) * 2);
       return <g key={i} opacity={k * (1 - 0.88 * filt)}>
         <rect x={x} y={y} width={96} height={76} rx={10} fill="#1c1c1c" stroke="#333333"/>
-        <rect x={x + 10} y={y + 12} width={28} height={28} rx={7} fill={HUES[c.hue]}/>
+        <ApkIcon x={x + 10} y={y + 12}/>
         {Array.from({length: c.perms}, (_, j) => <rect key={j} x={x + 10 + j * 26} y={y + 52} width={20} height={10} rx={5} fill="#474747"/>)}
       </g>;
     })}
@@ -120,7 +128,7 @@ const Apps = ({f}: {f: number}) => {
       const an = p(f, 240 + n * 16, 268 + n * 16);
       return <g key={c.i} opacity={k}>
         <rect x={x} y={y} width={96} height={76} rx={10} fill="#1c1c1c" stroke={C.blue} strokeWidth={1 + 2 * filt}/>
-        <rect x={x + 10} y={y + 12} width={28} height={28} rx={7} fill={HUES[c.hue]}/>
+        <ApkIcon x={x + 10} y={y + 12}/>
         <g opacity={1 - t}>
           {Array.from({length: c.perms}, (_, j) => <rect key={j} x={x + 10 + j * 26} y={y + 52} width={20} height={10} rx={5} fill={j === 0 ? C.blue : '#474747'}/>)}
         </g>
