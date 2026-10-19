@@ -513,18 +513,18 @@ layout: center
 
 # What an entry looks like
 
-```md {1|2-5|6-11|10|7-9|11|12-13|16-19}
+```md {1|2-5|6-11|7|8-10|11|12-13|16-19}
 ---
 family: karr-module
 product: KARR (dealer-installed vehicle module)
 vendor: KARR Security
 app: KARR Security app
 fingerprint:
-  company_id: …      # omitted on slide
-  mfr_data: …        # omitted on slide
-  service_uuids: …   # omitted on slide
-  name: { pattern: "QT <digits>" }
-  shape: …           # triage only
+  name: { regex: "^QT [0-9A-F]{7,8}$" }
+  company_id: none    # field reused for module data, not a SIG ID
+  mfr_data: 6 bytes, per-module
+  service_uuids: none
+  shape: [name, flags, mfr(6)]    # triage only
 confidence: high
 evidence: [paper, real_devices, vendor_disclosure]
 ---
@@ -536,13 +536,13 @@ Disclosed to the vendor, who developed patches.
 ```
 
 <!--
-This is a real entry, built only from what is already public (our BLE Theft Auto paper; the QT name prefix was presented at DEF CON). The values shown are the publicly disclosed ones; the other fingerprint fields are omitted on the slide. The talk-wide rule is no numbers or IDs on screen; this slide is the deliberate exception.
+This is a real entry, built only from what is already public (our BLE Theft Auto paper; the QT name prefix was presented at DEF CON). The values shown are the publicly disclosed ones, checked against our own scan aggregates (no device-level data). The talk-wide rule is no numbers or IDs on screen; this slide is the deliberate exception.
 Entries are plain Markdown files kept in git. They are compiled into the lookup index, which is the "Look it up" step.
 1. Frontmatter: one entry per product family.
 2. Identity: product, vendor and app. This is what a match tells us.
 3. The fingerprint block: everything we match new advertisements against.
-4. The name pattern: KARR modules advertise names starting with "QT" followed by digits. Names alone are weak, so on its own it never decides.
-5. The firmware-level fields (company ID, fixed manufacturer-data bytes, service UUIDs): the entry has them; omitted here. Several fields are matched together.
+4. The name is a regex, not a wildcard: "QT " plus 7-8 uppercase hex characters. KARR names normally cannot be renamed anyway.
+5. company_id, mfr_data, service_uuids: the "company id" bytes vary per module and are not a Bluetooth SIG company ID, so a single field is unreliable (ties back to "How do we classify all these advertisements?"). There is no stability field: an entry lists several independent features, so if one changes (e.g. a renamed device elsewhere) the others still match.
 6. The shape is for triage only: it told us which pile to investigate, it is not matched on.
 7. Confidence and evidence: the published paper, real devices tested, vendor disclosure.
 8. The body: what it is and what we found (the advertisement carries the module name and mode; no pairing by default; a challenge-response with fixed keys shared across all modules; no encryption). Readable by the next student or agent.
