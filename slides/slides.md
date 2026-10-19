@@ -117,7 +117,6 @@ class: text-center
 <div v-click class="mx-auto mt-10 rounded-xl p-8 text-left" style="max-width: 760px; background:#1c1c1c; border:1px solid #3a3a3a">
   <div class="text-xl opacity-60">Reviewer #2: <span style="color:#f87171">reject</span></div>
   <div class="text-4xl mt-4 leading-snug">"Only one vulnerability.<br>Lacks scientific novelty."</div>
-  <div class="text-lg opacity-50 mt-6">(paraphrased)</div>
 </div>
 
 <!--
