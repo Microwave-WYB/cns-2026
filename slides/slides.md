@@ -414,7 +414,6 @@ layout: center
   </div>
 </div>
 
-<div v-click class="text-4xl mt-8 text-center" style="color:#9dd0ff">So we built our own scanner.</div>
 
 <!--
 WiGLE is a crowdsourced wardriving database of Wi-Fi, cell and Bluetooth sightings with locations; we already met it in the opening story. Screenshot: the map area of the public wigle.net landing page, logged out (cropped to avoid the stats numbers), captured 2026-10-18.
