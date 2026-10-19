@@ -164,13 +164,13 @@ class: text-center
 
 # So we googled it
 
-<div class="text-3xl mt-4 opacity-80" style="font-family: ui-monospace, monospace">"QT FCC ID"</div>
+<div class="text-5xl mt-10" style="font-family: ui-monospace, monospace; color:#9dd0ff">"QT FCC ID"</div>
 
-<img v-click src="/shots/fccid-qt.jpg" class="mx-auto mt-6 rounded-lg" style="height: 360px; border: 1px solid #333" />
+<!-- TODO: Google results screenshot (headless capture is blocked by Google's bot check); add as /shots/google-qt-fcc.jpg -->
 
 <!--
-Every radio device sold in the US has an FCC ID, and the filing is public. Searching the name plus "FCC ID" found a filing; the page lists the applicant and equipment class.
-Screenshot: fccid.io page for the filing, logged out, captured 2026-10-19. The filing page says "QT Solutions Bluetooth Sensor" by QT Solutions PTY LTD. The user manual page of the same filing is behind a Cloudflare check, so it is not captured here.
+Every radio device sold in the US has an FCC ID, and the filing is public. So we searched the name plus "FCC ID".
+TODO: add a screenshot of the Google results page (Google blocks the headless browser, so it needs a manual capture).
 -->
 
 ---
@@ -178,17 +178,51 @@ layout: center
 class: text-center
 ---
 
-# The manual: "QT" + serial number
+# An FCC filing
 
-<div class="text-3xl mt-10 leading-loose">
-  <div v-click>the same name format we saw on the street</div>
-  <div v-click>so it <strong>is</strong> that product</div>
-  <div v-click class="mt-6" style="color:#9dd0ff">then: reverse engineer it, write the paper</div>
+<img src="/shots/fccid-qt.jpg" class="mx-auto mt-6 rounded-lg" style="height: 400px; border: 1px solid #333" />
+
+<!--
+The search led to FCC ID 2ASRL-1069: "QT Solutions Bluetooth Sensor" by QT Solutions PTY LTD. The filing includes a user manual.
+Screenshot: fccid.io page for the filing, logged out, captured 2026-10-19.
+-->
+
+---
+layout: center
+class: text-center
+---
+
+# Its user manual
+
+<img src="/shots/karr-manual-cover.jpg" class="mx-auto mt-4 rounded-lg" style="height: 420px; border: 1px solid #333" />
+
+<!--
+The user manual in that FCC filing: "SWDS · KARR Security Systems · BT Series · Customer User Guide". The last page of the manual carries the same FCC ID, 2ASRL-1069. So the QT module is the KARR BT system, a dealer-installed car security system.
+Source: user manual in FCC filing 2ASRL-1069 (fccid.io), retrieved 2026-10-19.
+-->
+
+---
+layout: center
+class: text-center
+---
+
+# And there it was
+
+<div class="flex justify-center items-center gap-10 mt-2">
+  <div class="rounded-lg" style="width: 607px; height: 450px; overflow: hidden; background: #fff; border: 1px solid #333">
+    <img src="/shots/karr-manual-p6.jpg"
+      :style="{ width: '607px', height: '450px', transformOrigin: '0 0', transition: 'transform 1.6s cubic-bezier(0.65, 0, 0.35, 1)',
+        transform: $clicks >= 1 ? 'translate(-1403.9px, -743.0px) scale(8)' : 'none' }" />
+  </div>
+  <div class="text-left" style="width: 330px">
+    <div v-click="2" class="text-3xl">the <strong>same name</strong> we saw on the street</div>
+    <div v-click="3" class="text-3xl mt-6" style="color:#9dd0ff">→ reverse engineer it, write the paper</div>
+  </div>
 </div>
 
 <!--
-TODO: add a screenshot of the user manual page (the part showing the "QT" + serial number format). It needs a manual capture because the page sits behind a Cloudflare check.
-The manual shows the name format, "QT" plus a serial number. That matched what we saw, which confirmed the identification. Then the real work: reverse engineering the module and its app, and writing the paper.
+A page of the manual (click: zoom into the phone screenshot, "Unit Settings") shows the unit's name: "QT" plus a serial number. The same format we saw everywhere on the street, which confirmed the identification: the QT devices are KARR modules. (The serial shown is the manual's own example.)
+Then the real work: reverse engineering the module and its app, and writing the paper.
 KARR, one slide only. The attack unlocks the car; it does not start it. The grad student who dug in was me (as a PhD). Do not go into BLE Theft Auto details. Optional aside: the car sits on the street, so "an attacker must be nearby" is not much comfort.
 -->
 
