@@ -372,10 +372,10 @@ But all of these come back later as clues for attribution (company ID → vendor
 </div>
 
 <!--
-Say: The shape is the fingerprint.
-Core assumption of the whole pipeline: the same kind of device sends the same shape of advertisement, which structures, in which order, how long. The structure is usually fixed in firmware; names and a few bytes change.
+Say: The shape is how we sort quickly, not the final answer.
+Core assumption of the triage step: the same kind of device sends the same shape of advertisement, which structures, in which order, how long. The structure is usually fixed in firmware; names and a few bytes change. Clustering by shape is cheap: it sorts the flood of advertisements into piles and decides which pile to investigate next. The specific fingerprint (vendor ID, fixed bytes, private UUIDs, name pattern) is extracted only after a pile has been investigated.
 Advertisements are highly structured (typed fields in a fixed layout), so the structure itself is the feature; no learned embedding needed. If asked: related ML work either does supervised re-identification across MAC randomisation (byte n-grams) or learns physical-layer RF fingerprints, i.e. hardware identity, not product structure.
-Limitation (say it): different products built on the same chip or SDK can look alike, so a shared shape is a candidate group, and attribution still has to confirm what it is.
+Limitation (say it): different products built on the same chip or SDK can look alike, so a shared shape is only a candidate pile, and investigation still has to confirm what it is.
 Synthetic examples.
 -->
 
@@ -504,6 +504,31 @@ layout: center
 
 <!--
 Every answer becomes a reusable entry: fingerprint ↔ product ↔ app ↔ vendor. Knowledge doesn't leave when a student graduates.
+Each entry stores a specific fingerprint (vendor ID, fixed bytes in the manufacturer data, private UUIDs, name pattern) linked to the product, app and vendor, not the raw shape. The shape was only for triage.
+-->
+
+---
+layout: center
+---
+
+# Look it up
+
+<div class="grid grid-cols-[auto_auto_auto] gap-x-6 gap-y-10 mt-10 items-center">
+  <AdStrip :tile="8" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'mfg',n:11},{t:'name',n:7}]" label='"VX-22"' />
+  <div v-click="1" class="text-2xl opacity-70 whitespace-nowrap">→ knowledge base →</div>
+  <div v-click="1" class="text-3xl font-semibold whitespace-nowrap">car module</div>
+
+  <AdStrip v-click="2" :tile="8" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'mfg',n:11}]" label="name missing" />
+  <div v-click="3" class="text-2xl opacity-70 whitespace-nowrap">→ knowledge base →</div>
+  <div v-click="3" class="text-3xl font-semibold whitespace-nowrap">car module</div>
+</div>
+
+<!--
+A new advertisement arrives; we match it against the fingerprints stored in the knowledge base and get a product label. Second example: the name was changed or is missing, and it is still recognized through the other fields.
+Several fields are matched together (vendor ID, fixed bytes, private UUIDs, name pattern), so a renamed device is still recognized; no single field decides.
+Advertisements we cannot match become the next investigation list. This ties to "only new templates need investigating".
+Say: this is an early prototype on our own scan data; we built it this week. Synthetic example on the slide.
+Numbers only if asked, and say they are preliminary: roughly half of the non-Apple advertisement types already match a knowledge-base entry; with the name removed, more than 80% of name-matched rows still match the same family.
 -->
 
 ---
@@ -517,7 +542,7 @@ layout: center
 </SlidevVideo>
 
 <!--
-Known fingerprints are recognized instantly; only new templates need investigating, in batches, by agents.
+Known fingerprints are recognized instantly (the Look it up step); only new templates need investigating, in batches, by agents.
 Some of yesterday's noise (one-off advertisements) gets enough sightings to form a cluster of its own: noise strips light up and fly into new clusters.
 -->
 
