@@ -188,20 +188,13 @@ class: text-center
 
 # So we took the app apart
 
-<div class="flex justify-center items-center gap-5 text-3xl mt-6">
-  <div v-click="1">download the app</div>
-  <div v-click="2" class="opacity-50">→</div>
-  <div v-click="2">decompile it</div>
-</div>
-
-<div v-click="3" class="mx-auto mt-8 text-left rounded-xl px-6 py-4" style="width: 760px; background:#1c1c1c; border:1px solid #2f2f2f; font-family: ui-monospace, monospace; font-variant-ligatures: none; font-size: 20px; line-height: 1.7; white-space: pre">
+<div class="mx-auto mt-10 text-left rounded-xl px-6 py-4" style="width: 760px; background:#1c1c1c; border:1px solid #2f2f2f; font-family: ui-monospace, monospace; font-variant-ligatures: none; font-size: 20px; line-height: 1.7; white-space: pre">
   <div><span style="color:#6b6b6b">// challenge-response, simplified; keys redacted</span></div>
   <div>response = hash(challenge, <span style="color:#9dd0ff">name</span>, <span style="color:#9dd0ff">mode</span>, <span style="color:#f87171">KEY</span>)</div>
   <div><span style="color:#f87171">DEALER_KEY</span> = <span style="display:inline-block; width: 10em; height: 0.9em; background:#3a3a3a; border-radius: 3px; vertical-align: middle"></span>&nbsp;&nbsp;<span style="color:#6b6b6b">// hard-coded</span></div>
   <div><span style="color:#f87171">USER_KEY</span>&nbsp;&nbsp;&nbsp;= <span style="display:inline-block; width: 10em; height: 0.9em; background:#3a3a3a; border-radius: 3px; vertical-align: middle"></span>&nbsp;&nbsp;<span style="color:#6b6b6b">// hard-coded</span></div>
 </div>
 
-<div v-click="4" class="text-4xl mt-8">same keys, <strong style="color:#f87171">every KARR</strong></div>
 
 <!--
 We downloaded the KARR Android app and decompiled it. Authentication is a custom application-layer challenge-response over BLE: the module sends random challenge bytes, and the app answers with a hash of the challenge, the module name and mode (both broadcast in the advertisement, highlighted) and one of two hard-coded fixed keys: a dealer-level key (operate and configure) and a user-level key (operate only).
