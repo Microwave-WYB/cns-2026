@@ -573,70 +573,6 @@ Each entry stores a specific fingerprint (vendor ID, fixed bytes in the manufact
 layout: center
 ---
 
-# What an entry looks like
-
-```md {1|2-5|6-8|7|8|9|12-18}
----
-family: karr-module
-product: KARR (dealer-installed vehicle module)
-vendor: KARR Security
-app: KARR Security app
-fingerprint:
-  name: { regex: "^QT [0-9A-F]{7,8}$" }
-  mfr_data: { length: 6 }
-confidence: high
----
-
-# KARR module
-Dealer-installed car security module, phone-app controlled.
-Locks/unlocks doors, arms/disarms the immobilizer.
-Broadcasts its name ("QT" + module ID) and mode,
-plus 6 bytes of manufacturer data.
-Site: [karrsecurity.com](https://karrsecurity.com/)
-Android app: `com.whgos.swdscustomerapp`
-```
-
-<!--
-This is a real entry, built only from what is already public (our BLE Theft Auto paper; the QT name prefix was presented at DEF CON). The values shown are the publicly disclosed ones, checked against our own scan aggregates (no device-level data). The talk-wide rule is no numbers or IDs on screen; this slide is the deliberate exception.
-Entries are plain Markdown files kept in git. They are compiled into the lookup index, which is the "Look it up" step.
-1. Frontmatter: one entry per product family.
-2. Identity: product, vendor and app. This is what a match tells us.
-3. The fingerprint block: everything we match new advertisements against.
-4. The name is a regex, not a wildcard: "QT " plus 7-8 uppercase hex characters. KARR names normally cannot be renamed anyway.
-5. mfr_data: only the length is matched. The first two bytes vary per module and are not a Bluetooth SIG company ID, so we don't use them; this is why a single field is unreliable (ties back to "How do we classify all these advertisements?"). There is no stability field: an entry lists several independent features, so if one changes (e.g. a renamed device elsewhere) the others still match. A fingerprint lists only features that actually match.
-6. Confidence: high, because of the published paper and real-device testing. There is no evidence field; provenance lives in the git history and the linked paper.
-7. The body: what a human reads: what the device is, what it is used for, what it broadcasts, plus reference links (vendor site cited in the paper; Android package from a Google Play search listing). Links live in the body because they are for humans; frontmatter only holds what the matcher reads. No FCC ID could be found publicly; it would go in the body when known. Paper wording: a dealership pre-installed security system that allows users to lock/unlock doors and arm/disarm the immobilizer. The paper says the advertisements contain the module name and mode; we do not claim which bytes hold the mode. The advertisement structure (name, flags, 6 bytes of manufacturer data) is what first put these modules in one pile (triage); it is described in the text, not stored as a matching field. General rule: frontmatter = what the matcher reads, body = what a human reads.
-Context, notes only (do not put on the slide): the paper found no pairing by default, a challenge-response with fixed keys shared across all modules, and no encryption; we disclosed to the vendor, who developed patches.
--->
-
----
-layout: center
----
-
-# Look it up
-
-<div class="grid grid-cols-[auto_auto_auto] gap-x-6 gap-y-10 mt-10 items-center">
-  <AdStrip :tile="8" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'mfg',n:11},{t:'name',n:7}]" label='"VX-22"' />
-  <div v-click="1" class="text-2xl opacity-70 whitespace-nowrap">→ knowledge base →</div>
-  <div v-click="1" class="text-3xl font-semibold whitespace-nowrap">car module</div>
-
-  <AdStrip v-click="2" :tile="8" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'mfg',n:11},{t:'name',n:6}]" label='"My Car"' />
-  <div v-click="3" class="text-2xl opacity-70 whitespace-nowrap">→ knowledge base →</div>
-  <div v-click="3" class="text-3xl font-semibold whitespace-nowrap">car module</div>
-</div>
-
-<!--
-A new advertisement arrives; we match it against the fingerprints stored in the knowledge base and get a product label. Second example: the owner renamed the device to "My Car", and it is still recognized through the other fields.
-Several fields are matched together (vendor ID, fixed bytes, private UUIDs, name pattern), so a renamed device is still recognized; no single field decides.
-Advertisements we cannot match become the next investigation list. This ties to "only new templates need investigating".
-Say: this is an early prototype on our own scan data; we built it this week. Synthetic example on the slide.
-Numbers only if asked, and say they are preliminary: roughly half of the non-Apple advertisement types already match a knowledge-base entry; with the name removed, more than 80% of name-matched rows still match the same family.
--->
-
----
-layout: center
----
-
 # More data, more clusters
 
 <SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
@@ -644,7 +580,7 @@ layout: center
 </SlidevVideo>
 
 <!--
-Known fingerprints are recognized instantly (the Look it up step); only new templates need investigating, in batches, by agents.
+Known fingerprints are recognized instantly (we'll see how lookup works in a moment); only new templates need investigating, in batches, by agents.
 Some of yesterday's noise (one-off advertisements) gets enough sightings to form a cluster of its own: noise strips light up and fly into new clusters.
 -->
 
@@ -716,6 +652,115 @@ layout: center
 
 <!--
 Scans, apps and places all feed the same knowledge base; WiGLE helps validate along the way.
+-->
+
+---
+layout: center
+---
+
+# What an entry looks like
+
+```md {1|2-5|6-8|7|8|9|12-18}
+---
+family: karr-module
+product: KARR (dealer-installed vehicle module)
+vendor: KARR Security
+app: KARR Security app
+fingerprint:
+  name: { regex: "^QT [0-9A-F]{7,8}$" }
+  mfr_data: { length: 6 }
+confidence: high
+---
+
+# KARR module
+Dealer-installed car security module, phone-app controlled.
+Locks/unlocks doors, arms/disarms the immobilizer.
+Broadcasts its name ("QT" + module ID) and mode,
+plus 6 bytes of manufacturer data.
+Site: [karrsecurity.com](https://karrsecurity.com/)
+Android app: `com.whgos.swdscustomerapp`
+```
+
+<!--
+This is a real entry, built only from what is already public (our BLE Theft Auto paper; the QT name prefix was presented at DEF CON). The values shown are the publicly disclosed ones, checked against our own scan aggregates (no device-level data). The talk-wide rule is no numbers or IDs on screen; this slide is the deliberate exception.
+Entries are plain Markdown files kept in git. They are compiled into the lookup index, which is the "Look it up" step.
+1. Frontmatter: one entry per product family.
+2. Identity: product, vendor and app. This is what a match tells us.
+3. The fingerprint block: everything we match new advertisements against.
+4. The name is a regex, not a wildcard: "QT " plus 7-8 uppercase hex characters. KARR names normally cannot be renamed anyway.
+5. mfr_data: only the length is matched. The first two bytes vary per module and are not a Bluetooth SIG company ID, so we don't use them; this is why a single field is unreliable (ties back to "How do we classify all these advertisements?"). There is no stability field: an entry lists several independent features, so if one changes (e.g. a renamed device elsewhere) the others still match. A fingerprint lists only features that actually match.
+6. Confidence: high, because of the published paper and real-device testing. There is no evidence field; provenance lives in the git history and the linked paper.
+7. The body: what a human reads: what the device is, what it is used for, what it broadcasts, plus reference links (vendor site cited in the paper; Android package from a Google Play search listing). Links live in the body because they are for humans; frontmatter only holds what the matcher reads. No FCC ID could be found publicly; it would go in the body when known. Paper wording: a dealership pre-installed security system that allows users to lock/unlock doors and arm/disarm the immobilizer. The paper says the advertisements contain the module name and mode; we do not claim which bytes hold the mode. The advertisement structure (name, flags, 6 bytes of manufacturer data) is what first put these modules in one pile (triage); it is described in the text, not stored as a matching field. General rule: frontmatter = what the matcher reads, body = what a human reads.
+Context, notes only (do not put on the slide): the paper found no pairing by default, a challenge-response with fixed keys shared across all modules, and no encryption; we disclosed to the vendor, who developed patches.
+-->
+
+---
+layout: center
+---
+
+# Look it up
+
+<div class="grid grid-cols-[auto_auto_auto] gap-x-6 gap-y-10 mt-10 items-center">
+  <AdStrip :tile="8" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'mfg',n:11},{t:'name',n:7}]" label='"VX-22"' />
+  <div v-click="1" class="text-2xl opacity-70 whitespace-nowrap">→ knowledge base →</div>
+  <div v-click="1" class="text-3xl font-semibold whitespace-nowrap">car module</div>
+
+  <AdStrip v-click="2" :tile="8" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'mfg',n:11},{t:'name',n:6}]" label='"My Car"' />
+  <div v-click="3" class="text-2xl opacity-70 whitespace-nowrap">→ knowledge base →</div>
+  <div v-click="3" class="text-3xl font-semibold whitespace-nowrap">car module</div>
+</div>
+
+<!--
+A new advertisement arrives; we match it against the fingerprints stored in the knowledge base and get a product label. Second example: the owner renamed the device to "My Car", and it is still recognized through the other fields.
+Several fields are matched together (vendor ID, fixed bytes, private UUIDs, name pattern), so a renamed device is still recognized; no single field decides.
+Advertisements we cannot match become the next investigation list. This ties to "only new templates need investigating".
+Say: this is an early prototype on our own scan data; we built it this week. Synthetic example on the slide.
+Numbers only if asked, and say they are preliminary: roughly half of the non-Apple advertisement types already match a knowledge-base entry; with the name removed, more than 80% of name-matched rows still match the same family.
+-->
+
+---
+layout: center
+---
+
+# What turned up
+
+<div class="text-3xl mt-8 leading-loose">
+  <div v-click>heat your <strong>coffee mug</strong></div>
+  <div v-click>cool your <strong>bed</strong></div>
+  <div v-click>pay for <strong>laundry</strong></div>
+  <div v-click>raise a <strong>truck's suspension</strong></div>
+  <div v-click>log a <strong>trucker's driving hours</strong></div>
+  <div v-click>open your <strong>garage</strong></div>
+</div>
+
+<!--
+Early, medium-confidence attributions from our own scans and wiki; plain uses, no claims about security.
+- heat your coffee mug: Ember
+- cool your bed: Eight Sleep Pod
+- pay for laundry: PayRange BluKey
+- raise a truck's suspension: Air Lift WirelessOne / WirelessAir
+- log a trucker's driving hours: Xirgo HarpBT electronic logging device (ELDs are legally required in US trucks)
+- open your garage: Chamberlain myQ
+-->
+
+---
+layout: center
+---
+
+# This one talks to your gas pedal
+
+<div class="text-4xl mt-10 leading-loose">
+  <div v-click>tune it from your <strong>phone</strong></div>
+  <div v-click>…or switch the <strong>pedal off</strong></div>
+</div>
+
+<div v-click class="text-4xl mt-10" style="color:#9dd0ff">what if it's not your phone?</div>
+
+<!--
+Pedal Commander: an aftermarket drive-by-wire throttle controller that sits between the accelerator pedal sensor and the vehicle control module.
+Its app talks over Bluetooth and offers modes (Eco / City / Sport / Sport+). An anti-theft feature in the app can temporarily disable the gas pedal. Pairing uses a six-digit serial printed on the unit.
+We only saw it rarely in our scans, and we have NOT analyzed its security. Phrase it strictly as a question: it is a lead, like KARR was. Next: hypothesis, validate, buy the device.
+No product photo: the vendor site redirects our headless browser, so none was captured.
 -->
 
 ---
