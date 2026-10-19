@@ -829,23 +829,12 @@ layout: center
 
 # What turned up
 
-<div class="text-3xl mt-8 leading-loose">
-  <div v-click>heat your <strong>coffee mug</strong></div>
-  <div v-click>cool your <strong>bed</strong></div>
-  <div v-click>pay for <strong>laundry</strong></div>
-  <div v-click>raise a <strong>truck's suspension</strong></div>
-  <div v-click>log a <strong>trucker's driving hours</strong></div>
-  <div v-click>open your <strong>garage</strong></div>
-</div>
+<WikiScroll class="mx-auto mt-2" style="width: 900px" />
 
 <!--
-Early, medium-confidence attributions from our own scans and wiki; plain uses, no claims about security.
-- heat your coffee mug: Ember
-- cool your bed: Eight Sleep Pod
-- pay for laundry: PayRange BluKey
-- raise a truck's suspension: Air Lift WirelessOne / WirelessAir
-- log a trucker's driving hours: Xirgo HarpBT electronic logging device (ELDs are legally required in US trucks)
-- open your garage: Chamberlain myQ
+Every product family in our research wiki so far, scrolling: left is the name pattern, right is what it is. Each wiki entry also matches on company field / service UUIDs, not shown here. Early, medium-confidence attributions from our own scans; candidates, not authenticated identities. No device-level identifiers: these are family-level fingerprints.
+Point out a few as they scroll by: a heated coffee mug (Ember), a smart-bed cooler (Eight Sleep Pod), a laundry payment box (PayRange BluKey), truck air suspension (Air Lift), a trucker's electronic logging device (Xirgo HarpBT; ELDs are legally required in US trucks), a garage opener (Chamberlain myQ), a gas-pedal controller (Pedal Commander).
+If asked: 116 families listed here (wiki pages with a structured "How to recognize it" block, minus rollup/unknown pages).
 -->
 
 ---
