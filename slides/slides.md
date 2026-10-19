@@ -27,26 +27,29 @@ class: text-center
 
 # Step 1: drive around and scan
 
-<div class="grid grid-cols-2 gap-12 mt-6 text-center">
-  <div v-motion :initial="{ x: -200, opacity: 0 }" :enter="{ x: 0, opacity: 1 }">
-    <img src="/people/aaron.jpg" class="avatar" />
-    <div class="text-2xl mt-3">Aaron Schulman</div>
+<div class="flex justify-center items-start gap-8 mt-6">
+  <div class="flex gap-5">
+    <div v-motion :initial="{ y: 40, opacity: 0 }" :enter="{ y: 0, opacity: 1 }" class="text-center">
+      <img src="/people/aaron.jpg" class="portrait" />
+      <div class="text-xl mt-3">Aaron Schulman</div>
+    </div>
+    <div v-motion :initial="{ y: 40, opacity: 0 }" :enter="{ y: 0, opacity: 1, transition: { delay: 200 } }" class="text-center">
+      <img src="/people/nishant.jpg" class="portrait" />
+      <div class="text-xl mt-3">Nishant Bhaskar</div>
+    </div>
   </div>
-  <div v-motion :initial="{ x: 200, opacity: 0 }" :enter="{ x: 0, opacity: 1, transition: { delay: 250 } }">
-    <img src="/people/nishant.jpg" class="avatar" />
-    <div class="text-2xl mt-3">Nishant Bhaskar</div>
+  <div v-click class="text-center">
+    <img src="/shots/wigle.jpg" class="rounded-lg" style="height: 340px; border: 1px solid #333" />
+    <div class="text-xl mt-3 opacity-60">WiGLE: crowdsourced Wi-Fi / Bluetooth map</div>
   </div>
 </div>
 
-<div v-click="1" class="text-4xl text-center mt-10">WiGLE, everywhere</div>
-<div v-click="1" class="text-xl text-center mt-2 opacity-60">a crowdsourced map of Wi-Fi and Bluetooth devices, collected by volunteers' phones</div>
-<div v-click="2" class="text-3xl text-center mt-6 opacity-80">"ooh… what's <em>that</em>?"</div>
-
 <style>
-.avatar { width: 150px; height: 150px; border-radius: 9999px; object-fit: cover; object-position: 50% 18%; margin: 0 auto; border: 3px solid #4ea8ff; }
+.portrait { width: 200px; height: 340px; border-radius: 10px; object-fit: cover; object-position: 50% 20%; border: 1px solid #333; }
 </style>
 
 <!--
+Say: they drove around with WiGLE, everywhere, and kept going "ooh… what's that?"
 Photos: Aaron from his UCSD homepage (cseweb.ucsd.edu/~schulman), Nishant from cseweb.ucsd.edu/~nibhaska.
 WiGLE: a crowdsourced wardriving database of Wi-Fi, cell and Bluetooth sightings with locations, collected by volunteers' phones.
 Tone: affectionate. They did the hard, curious work; the joke is about scale, not about them.
