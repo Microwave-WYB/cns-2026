@@ -834,11 +834,12 @@ layout: center
 <!--
 Every product family in our research wiki so far, scrolling: left is the name pattern, right is what it is. Each wiki entry also matches on company field / service UUIDs, not shown here. Early, medium-confidence attributions from our own scans; candidates, not authenticated identities. No device-level identifiers: these are family-level fingerprints.
 Point out a few as they scroll by: a heated coffee mug (Ember), a smart-bed cooler (Eight Sleep Pod), a laundry payment box (PayRange BluKey), truck air suspension (Air Lift), a trucker's electronic logging device (Xirgo HarpBT; ELDs are legally required in US trucks), a garage opener (Chamberlain myQ), a gas-pedal controller (Pedal Commander).
-If asked: 110 families listed here (wiki pages with a structured "How to recognize it" block, minus rollup/unknown pages; near-identical families such as several generic LED controllers and two Dreo pages merged for the slide).
+If asked: 109 families listed here (wiki pages with a structured "How to recognize it" block, minus rollup/unknown pages; near-identical families such as several generic LED controllers and two Dreo pages merged for the slide).
 -->
 
 ---
 layout: center
+hide: true
 ---
 
 # This one talks to your gas pedal
@@ -860,6 +861,7 @@ No product photo: the vendor site redirects our headless browser, so none was ca
 ---
 layout: center
 class: text-center
+hide: true
 ---
 
 # Found something suspicious?
@@ -878,6 +880,7 @@ Say: The knowledge base tells us which device is worth buying.
 Keep it short. Earlier checks can rule out many hypotheses cheaply; real hardware is always the final confirmation, before any disclosure.
 -->
 
+hide: true
 ---
 
 # Once BLE is visible, we can measure
