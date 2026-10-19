@@ -100,11 +100,13 @@ class: text-center
 
 # One of them, a grad student dug into…
 
-<div v-click class="text-4xl mt-12">…a hidden module that let us<br><span v-mark.red="2">unlock someone's car</span></div>
+<img src="/shots/karr-figure.jpg" class="mx-auto mt-6 rounded-lg" style="width: 72%; border: 1px solid #333" />
+
+<div v-click class="text-3xl mt-6">a hidden module that let us <span v-mark.red="2">unlock someone's car</span></div>
 
 <!--
-KARR, one slide only. The attack unlocks the car; it does not start it. The grad student was me (as a PhD). Do not go into BLE Theft Auto details.
-Optional aside: the car sits on the street, so "an attacker must be nearby" is not much comfort.
+KARR, one slide only. Figure 1 from our BLE Theft Auto paper: the aftermarket module is spliced into the car's wiring (ignition, horn, lights, doors) and controlled from a phone over BLE. The attack unlocks the car; it does not start it. The grad student was me (as a PhD). Do not go into details here.
+Image: Figure 1, Yu, Wei et al., "BLE Theft Auto", USENIX Security 2026 (our own paper).
 -->
 
 ---
