@@ -513,7 +513,7 @@ layout: center
 
 # What an entry looks like
 
-```md {1|2-5|6-8|7|8|9-10|11-13|16-20}
+```md {1|2-5|6-8|7|8|9-10|13-19}
 ---
 family: karr-module
 product: KARR (dealer-installed vehicle module)
@@ -524,9 +524,6 @@ fingerprint:
   mfr_data: { length: 6 }
 confidence: high
 evidence: [paper, real_devices, vendor_disclosure]
-links:
-  site: karrsecurity.com
-  android: com.whgos.swdscustomerapp
 ---
 
 # KARR module
@@ -534,6 +531,8 @@ Dealer-installed car security module, phone-app controlled.
 Locks/unlocks doors, arms/disarms the immobilizer.
 Broadcasts its name ("QT" + module ID) and mode,
 plus 6 bytes of manufacturer data.
+Site: [karrsecurity.com](https://karrsecurity.com/)
+Android app: `com.whgos.swdscustomerapp`
 ```
 
 <!--
@@ -545,8 +544,7 @@ Entries are plain Markdown files kept in git. They are compiled into the lookup 
 4. The name is a regex, not a wildcard: "QT " plus 7-8 uppercase hex characters. KARR names normally cannot be renamed anyway.
 5. mfr_data: only the length is matched. The first two bytes vary per module and are not a Bluetooth SIG company ID, so we don't use them; this is why a single field is unreliable (ties back to "How do we classify all these advertisements?"). There is no stability field: an entry lists several independent features, so if one changes (e.g. a renamed device elsewhere) the others still match. A fingerprint lists only features that actually match.
 6. Confidence and evidence: the published paper, real devices tested, vendor disclosure.
-7. Links: reference links that tools may later fetch to verify the entry: the vendor site (cited in the paper) and the Android package (from a Google Play search listing). No FCC ID could be found publicly, so there is no fcc key; it would go here when known.
-8. The body: what a human reads: what the device is, what it is used for, what it broadcasts. Paper wording: a dealership pre-installed security system that allows users to lock/unlock doors and arm/disarm the immobilizer. The paper says the advertisements contain the module name and mode; we do not claim which bytes hold the mode. The advertisement structure (name, flags, 6 bytes of manufacturer data) is what first put these modules in one pile (triage); it is described in the text, not stored as a matching field. General rule: frontmatter = what the matcher reads, body = what a human reads.
+7. The body: what a human reads: what the device is, what it is used for, what it broadcasts, plus reference links (vendor site cited in the paper; Android package from a Google Play search listing). Links live in the body because they are for humans; frontmatter only holds what the matcher reads. No FCC ID could be found publicly; it would go in the body when known. Paper wording: a dealership pre-installed security system that allows users to lock/unlock doors and arm/disarm the immobilizer. The paper says the advertisements contain the module name and mode; we do not claim which bytes hold the mode. The advertisement structure (name, flags, 6 bytes of manufacturer data) is what first put these modules in one pile (triage); it is described in the text, not stored as a matching field. General rule: frontmatter = what the matcher reads, body = what a human reads.
 Context, notes only (do not put on the slide): the paper found no pairing by default, a challenge-response with fixed keys shared across all modules, and no encryption; we disclosed to the vendor, who developed patches.
 -->
 
