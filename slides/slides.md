@@ -114,7 +114,7 @@ class: text-center
 
 # We kept seeing "QT"
 
-<QtMap :step="$clicks" class="mx-auto mt-4" style="width: 720px" />
+<QtMap :step="$clicks" class="mx-auto mt-4" style="width: 860px" />
 
 <div class="text-3xl mt-3">
   <span v-click="1" class="mx-4">highway</span>
@@ -123,7 +123,7 @@ class: text-center
 </div>
 
 <!--
-In our own scans one name prefix, "QT" followed by a module ID, kept showing up everywhere: on the highway, in parking lots, at gas stations. Nobody on the team knew what it was. Curiosity, not a plan. The map is a schematic illustration, not real locations or data.
+In our own scans one name prefix, "QT" followed by a module ID, kept showing up everywhere: on the highway, in parking lots, at gas stations. Nobody on the team knew what it was. Curiosity, not a plan. The map is a schematic illustration, not real locations or data; the serial numbers in the list are synthetic, in the observed format ("QT " + 7-8 hex digits).
 -->
 
 ---

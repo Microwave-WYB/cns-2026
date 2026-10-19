@@ -1,99 +1,88 @@
 <script setup lang="ts">
-// Schematic map (not real data), drawn in the style of the scan animation (remotion/src/arch/Scan.tsx):
-// "QT" cars light up along the highway, in parking lots and at gas stations.
-const props = defineProps<{ step: number }>()
-
-const HWY = [[30, 905], [470, 870], [790, 330], [1320, 240]] as const
-const bez = (t: number) => {
-  const u = 1 - t
-  const w = [u * u * u, 3 * u * u * t, 3 * u * t * t, t * t * t]
-  return [w.reduce((s, k, i) => s + k * HWY[i][0], 0), w.reduce((s, k, i) => s + k * HWY[i][1], 0)]
-}
-const normal = (t: number) => {
-  const [x0, y0] = bez(Math.max(0, t - 0.005))
-  const [x1, y1] = bez(Math.min(1, t + 0.005))
-  const l = Math.hypot(x1 - x0, y1 - y0)
-  return [-(y1 - y0) / l, (x1 - x0) / l]
-}
-const HWY_D = `M ${HWY[0].join(' ')} C ${HWY.slice(1).map((q) => q.join(' ')).join(', ')}`
-const ROADS = [
-  'M 120 140 C 300 420 260 700 420 1040',
-  'M 560 120 C 640 380 760 520 980 620 S 1240 820 1320 1000',
-  'M 40 480 C 360 520 720 600 1320 560',
-  'M 900 110 C 960 300 1040 420 1320 420',
-]
+// Schematic crossroads (not real data), drawn in the style of the scan animation (remotion/src/arch/Scan.tsx):
+// "QT" sightings pinned on the highway, in the parking lots and at the gas station; the log lists their names.
+defineProps<{ step: number }>()
 
 type Car = { x: number; y: number; rot: number; g: number }
 const cars: Car[] = []
-// group 1: highway
-for (let i = 0; i < 9; i++) {
-  const t = 0.07 + i * 0.105
-  const [x, y] = bez(t)
-  const [nx, ny] = normal(t)
-  const [ax, ay] = bez(t + 0.01)
-  const side = i % 2 ? 9 : -9
-  cars.push({ x: x + nx * side, y: y + ny * side, rot: Math.atan2(ay - y, ax - x) * 180 / Math.PI, g: 1 })
-}
-// group 2: parking lots
-const LOTS = [{ x: 110, y: 560, w: 260, h: 150 }, { x: 960, y: 740, w: 260, h: 150 }]
-for (const l of LOTS)
-  for (let i = 0; i < 6; i++)
-    cars.push({ x: l.x + 45 + (i % 3) * 80, y: l.y + 45 + Math.floor(i / 3) * 72, rot: -90, g: 2 })
-// group 3: gas stations
-const STATIONS = [{ x: 600, y: 770 }, { x: 430, y: 280 }]
-for (const s of STATIONS)
-  for (const dx of [-30, 30]) cars.push({ x: s.x + dx, y: s.y + 52, rot: -90, g: 3 })
+// group 1: highway (two lanes)
+for (const [x, y] of [[90, 318], [300, 318], [820, 318], [1080, 318], [180, 362], [450, 362], [740, 362], [980, 362]])
+  cars.push({ x, y, rot: 0, g: 1 })
+// group 2: parking lots (stalls)
+const LOTS = [{ x: 700, y: 70, w: 420, h: 180 }, { x: 700, y: 440, w: 420, h: 150 }]
+const STALLS = [
+  ...[0, 1, 2, 3, 4].map((i) => ({ x: 750 + i * 80, y: 120 })),
+  ...[0, 1, 2, 3, 4].map((i) => ({ x: 750 + i * 80, y: 200 })),
+  ...[0, 1, 2, 3, 4].map((i) => ({ x: 750 + i * 80, y: 515 })),
+]
+const TAKEN = [0, 1, 3, 4, 6, 7, 9, 10, 12, 13]
+for (const i of TAKEN) cars.push({ x: STALLS[i].x, y: STALLS[i].y, rot: -90, g: 2 })
+// group 3: gas station (cars at the pumps)
+const PUMPS = [{ x: 220, y: 160 }, { x: 380, y: 160 }]
+for (const p of PUMPS) for (const dx of [-38, 38]) cars.push({ x: p.x + dx, y: p.y + 10, rot: -90, g: 3 })
 
-// background devices that are not QT, so the QT ones stand out
+// synthetic serials in the observed name format ("QT " + 7-8 hex digits); not real devices
 let seed = 20261019
 const rnd = () => ((seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648)
-const noise = Array.from({ length: 34 }, () => ({ x: 60 + rnd() * 1230, y: 250 + rnd() * 660, k: Math.floor(rnd() * 3) }))
+const hex = (n: number) => Array.from({ length: n }, () => '0123456789ABCDEF'[Math.floor(rnd() * 16)]).join('')
+const log = [...cars.map((c) => c.g), 3, 3, 3, 3, 3, 3, 3, 3].map((g) => ({ g, name: `QT ${hex(rnd() < 0.5 ? 7 : 8)}` }))
 </script>
 
 <template>
-  <svg viewBox="30 230 1290 700" class="map">
+  <div class="wrap">
+  <svg viewBox="0 0 1200 640" class="map">
     <defs>
       <pattern id="qt-dotgrid" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.1" fill="#2a2a2a" /></pattern>
     </defs>
-    <rect x="30" y="230" width="1290" height="700" rx="18" fill="url(#qt-dotgrid)" />
-    <path v-for="(d, i) in ROADS" :key="i" :d="d" stroke="#1f1f1f" stroke-width="12" fill="none" stroke-linecap="round" />
-    <path :d="HWY_D" stroke="#262626" stroke-width="34" fill="none" />
-    <path :d="HWY_D" stroke="#3a3a3a" stroke-width="1.2" fill="none" stroke-dasharray="14 18" opacity="0.8" />
+    <rect width="1200" height="640" rx="18" fill="url(#qt-dotgrid)" />
 
-    <rect v-for="(l, i) in LOTS" :key="'lot' + i" :x="l.x" :y="l.y" :width="l.w" :height="l.h" rx="10"
-      fill="#181818" stroke="#2c2c2c" stroke-width="1.5" />
-    <g v-for="(s, i) in STATIONS" :key="'st' + i" :transform="`translate(${s.x} ${s.y})`">
-      <rect x="-70" y="10" width="140" height="80" rx="10" fill="#181818" stroke="#2c2c2c" stroke-width="1.5" />
-      <g fill="none" stroke="#6b6b6b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="-7" y="-26" width="14" height="20" rx="2" />
-        <path d="M -4 -21 H 4 M 7 -20 h 4 v 10" />
-      </g>
+    <!-- crossroads: highway (horizontal) and a local road (vertical) -->
+    <rect x="555" y="0" width="70" height="640" fill="#1f1f1f" />
+    <rect x="0" y="290" width="1200" height="100" fill="#262626" />
+    <path d="M0 340 H1200" stroke="#3a3a3a" stroke-width="1.5" stroke-dasharray="14 18" />
+    <path d="M590 0 V290 M590 390 V640" stroke="#333" stroke-width="1.2" stroke-dasharray="10 14" />
+
+    <!-- gas station: canopy and pumps -->
+    <rect x="130" y="70" width="340" height="190" rx="12" fill="#181818" stroke="#2c2c2c" stroke-width="1.5" />
+    <rect x="150" y="95" width="300" height="140" rx="6" fill="none" stroke="#333" stroke-dasharray="6 8" />
+    <g v-for="(p, i) in PUMPS" :key="'p' + i" :transform="`translate(${p.x} ${p.y - 10})`" fill="none" stroke="#6b6b6b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="-8" y="-12" width="16" height="24" rx="2" />
+      <path d="M -4 -6 H 4 M 8 -9 h 5 v 12" />
     </g>
+    <text x="300" y="58" text-anchor="middle" class="place">gas station</text>
 
-    <g v-for="(n, i) in noise" :key="'n' + i" :transform="`translate(${n.x} ${n.y})`" fill="none" stroke="#3d4756" stroke-width="1.4">
-      <rect v-if="n.k === 0" x="-5" y="-8" width="10" height="16" rx="2" />
-      <circle v-else-if="n.k === 1" r="6" />
-      <rect v-else x="-5" y="-5" width="10" height="10" rx="3" />
+    <!-- parking lots with stall lines -->
+    <g v-for="(l, i) in LOTS" :key="'lot' + i">
+      <rect :x="l.x" :y="l.y" :width="l.w" :height="l.h" rx="12" fill="#181818" stroke="#2c2c2c" stroke-width="1.5" />
     </g>
+    <path v-for="(s, i) in STALLS" :key="'stall' + i" :d="`M ${s.x - 40} ${s.y - 30} V ${s.y + 30}`" stroke="#2c2c2c" stroke-width="1.5" />
+    <text x="910" y="58" text-anchor="middle" class="place">parking</text>
 
-    <g v-for="(c, i) in cars" :key="'c' + i" :transform="`translate(${c.x} ${c.y})`">
-      <template v-if="step >= c.g">
-        <circle r="10" fill="none" stroke="#4ea8ff" stroke-width="1.4" class="ripple" :style="{ animationDelay: `${(i * 0.37) % 2.2}s` }" />
-        <circle r="18" fill="none" stroke="#9dd0ff" stroke-opacity="0.35" />
-      </template>
-      <g :transform="`rotate(${c.rot})`" fill="none" :stroke="step >= c.g ? '#9dd0ff' : '#6b7f99'" stroke-width="1.6" class="car">
-        <rect x="-13" y="-6.5" width="26" height="13" rx="5" />
-        <path d="M 4 -5 V 5 M -7 -5 V 5" />
-      </g>
-      <text v-if="step >= c.g" y="-24" text-anchor="middle" class="qt">QT</text>
+    <!-- a store, for scenery -->
+    <rect x="130" y="450" width="340" height="140" rx="12" fill="#181818" stroke="#2c2c2c" stroke-width="1.5" />
+    <text x="300" y="528" text-anchor="middle" class="place">store</text>
+
+    <g v-for="(c, i) in cars" :key="'c' + i" :transform="`translate(${c.x} ${c.y})`" class="pin" :style="{ opacity: step >= c.g ? 1 : 0 }">
+      <circle r="9" fill="none" stroke="#4ea8ff" stroke-width="1.4" class="ripple" :style="{ animationDelay: `${(i * 0.37) % 2.2}s` }" />
+      <path d="M0 0 C -9 -12 -12 -18 -12 -24 A 12 12 0 1 1 12 -24 C 12 -18 9 -12 0 0 Z" fill="#4ea8ff" stroke="#9dd0ff" stroke-width="1.2" />
+      <circle cy="-24" r="4.5" fill="#121212" />
     </g>
   </svg>
+  <div class="log">
+    <div v-for="(l, i) in log" :key="'l' + i" class="row" :style="{ opacity: step >= l.g ? 1 : 0, transitionDelay: `${(i % 10) * 60}ms` }">{{ l.name }}</div>
+  </div>
+  </div>
 </template>
 
 <style scoped>
-.map { width: 100%; background: #121212; border-radius: 18px; }
-.car { transition: stroke 0.4s; }
-.qt { font: 600 17px ui-monospace, "Noto Sans Mono", monospace; fill: #9dd0ff; }
+.wrap { display: flex; gap: 16px; align-items: stretch; }
+.wrap > .log { align-self: stretch; }
+.map { flex: 1; min-width: 0; background: #121212; border-radius: 18px; }
+.log { width: 250px; aspect-ratio: auto; max-height: 100%; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; align-content: start; gap: 4px 12px; padding: 12px 14px;
+  background: #161616; border: 1px solid #2a2a2a; border-radius: 12px; font: 12.5px ui-monospace, "Noto Sans Mono", monospace; color: #9dd0ff; font-variant-ligatures: none; }
+.row { transition: opacity 0.3s; white-space: nowrap; text-align: left; }
+.pin { transition: opacity 0.4s; }
+.place { font: 500 18px Inter, system-ui, sans-serif; fill: #6b6b6b; }
 .ripple { animation: ripple 2.2s ease-out infinite; transform-box: fill-box; transform-origin: center; }
 @keyframes ripple { from { transform: scale(0.8); opacity: 0.6; } to { transform: scale(3.2); opacity: 0; } }
 </style>
