@@ -292,29 +292,22 @@ All titles are made up.
 -->
 
 ---
+clicks: 3
+---
 
 # Internet-wide measurement already exists
 
-<div class="grid grid-cols-3 gap-6 mt-8">
-  <a v-for="c in [
-    { name: 'Censys', img: '/shots/censys.jpg', url: 'https://www.censys.com/', line: 'Map Internet hosts and services' },
-    { name: 'Shodan', img: '/shots/shodan.jpg', url: 'https://www.shodan.io/', line: 'Search exposed devices and services' },
-    { name: 'Shadowserver', img: '/shots/shadowserver.jpg', url: 'https://dashboard.shadowserver.org/', line: 'Scan and report exposures to defenders' },
-  ]" :key="c.name" :href="c.url" target="_blank" rel="noopener noreferrer" class="block" style="border-bottom: none">
-    <img :src="c.img" class="w-full rounded-lg" style="aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid #333" />
-    <div class="text-2xl font-bold mt-4" style="color:#9dd0ff">{{ c.name }}</div>
-    <div class="text-lg mt-1 opacity-80">{{ c.line }}</div>
-  </a>
+<div class="mx-auto mt-2 overflow-hidden rounded-lg" style="width: 760px; height: 434px; border: 1px solid #333">
+  <img src="/shots/censys-search.jpg" style="width: 760px; height: 434px; max-width: none; transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform-origin 1.2s cubic-bezier(0.65, 0, 0.35, 1)"
+    :style="(([fx, fy, z]) => ({ transformOrigin: `${fx * 100}% ${fy * 100}%`, transform: `translate(${(0.5 - fx) * 100}%, ${(0.5 - fy) * 100}%) scale(${z})` }))([[0.5,0.5,1],[0.34,0.192,2.6],[0.47,0.195,3.2],[0.7,0.44,1.9]][Math.min($clicks, 3)])" />
 </div>
 
 <!--
-Examples of established Internet measurement infrastructure, not identical services:
-- Censys: repeated Internet-wide scanning and structured observations of publicly reachable hosts and services. https://docs.censys.com/docs/internet-scanning
-- Shodan: a search engine for Internet-connected devices, collecting service banners and metadata. https://help.shodan.io/the-basics/what-is-shodan
-- Shadowserver: Internet-wide scanning with exposure reports for network owners and defenders; not a public search engine. https://www.shadowserver.org/what-we-do/data-collection/
-Screenshots: Censys Platform host search for 8.8.8.8 (platform.censys.io, logged out), shodan.io homepage, dashboard.shadowserver.org (public dashboard), captured 2026-10-15.
+Live demo, as a screenshot: searching Censys for one product. Click 1: the query, host.services.software.product:"Hikvision" (a camera / video-recorder vendor). Click 2: the result count (if asked: about 825,000 hosts). Click 3: each result is one Internet-facing device, with its network, location, open services and tags like CAMERA / IOT / LOGIN_PAGE.
+That is what defenders have for the Internet: pick a product, see every exposed instance. Shodan and Shadowserver do similar things (search engine; exposure reports to network owners).
+Screenshot: platform.censys.io search, logged out, captured 2026-10-19 via auto-browser; host IPs and hostnames blurred.
+Sources: Censys https://docs.censys.com/docs/internet-scanning ; Shodan https://help.shodan.io/the-basics/what-is-shodan ; Shadowserver https://www.shadowserver.org/what-we-do/data-collection/
 Coverage, scan frequency and access models differ. Do not claim every device or every service is measured continuously.
-The speaker supplies the transition from the previous slide; no extra slide about student turnover or one-off discovery is needed.
 -->
 
 ---

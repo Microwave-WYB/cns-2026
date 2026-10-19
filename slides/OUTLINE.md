@@ -40,6 +40,7 @@
 - WiGLE 页之后新增 "Our own scanner"：我们自己扫描 App 的真实截图（点击依次放大：设备列表 → 单个设备 → General Information → Raw Data；Govee 设备；设备 ID、坐标、MAC 后三字节、名字后缀、raw data 里 0x09 名字字节已模糊）。
 - 隐藏 "How do we classify all these advertisements?"（打断节奏）。
 - "From apps" 动画重做：先详细展示一个 App（APK → 反编译 → 高亮 BLE scan filter → 读出指纹 → E-scooter 进知识库），再快速重复同一流程处理其余 App（合成示例）。
+- "Internet-wide measurement already exists" 改为 Censys 搜索演示：搜 Hikvision 的结果页截图（IP/主机名模糊），点击依次放大搜索框 → 结果数 → 单个主机卡片；Shodan/Shadowserver 只在备注。
 - 测量 1 页、收尾 2 页。
 - 每页讲者备注里有讲稿要点和措辞提醒。
 - 构建：`mise run //:build`；预览：`mise run //:dev` → http://100.83.234.55:3030/ （讲者模式 `/presenter/`）。
