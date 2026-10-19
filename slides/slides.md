@@ -56,12 +56,53 @@ Tone: affectionate. They did the hard, curious work; the joke is about scale, no
 
 # Step 2: so many interesting devices
 
-<Pile class="mt-6" />
-
-<div class="grid grid-cols-2 gap-12 mt-10 text-2xl">
-  <div v-click>a few → <strong>grad students</strong> dig in</div>
-  <div v-click>the rest → <strong>undergrads</strong> 🫠</div>
+<div class="grid grid-cols-4 gap-4 mt-4 text-center">
+  <div v-for="(c, i) in [
+    { e: '☕', t: 'coffee mug' },
+    { e: '🪥', t: 'toothbrush' },
+    { e: '🛏️', t: 'bed' },
+    { e: '🌀', t: 'ceiling fan' },
+    { e: '🔥', t: 'propane tank gauge' },
+    { e: '🧺', t: 'laundry payment box' },
+    { e: '🚚', t: 'truck air suspension' },
+    { e: '🎮', t: 'Pokémon GO Plus' },
+  ]" :key="c.t" v-click="1" class="card" :style="{ transitionDelay: i * 120 + 'ms' }">
+    <div class="text-4xl">{{ c.e }}</div>
+    <div class="text-base mt-1 opacity-80">{{ c.t }}</div>
+  </div>
 </div>
+
+<div v-click="2" class="card star mt-4 mx-auto text-center">
+  <div class="text-5xl">⛽ 💳</div>
+  <div class="text-3xl font-bold mt-1" style="color:#f87171">a gas pump skimmer</div>
+  <div class="text-sm mt-1 opacity-60">Please Pay Inside, USENIX Security '19</div>
+</div>
+
+<div class="grid grid-cols-2 gap-12 mt-5 text-xl">
+  <div v-click="3">a few → <strong>grad students</strong> dig in</div>
+  <div v-click="4">the rest → <strong>undergrads</strong> 🫠</div>
+</div>
+
+<style>
+.card { background: #1c1c1c; border: 2px solid #2f2f2f; border-radius: 12px; padding: 8px 6px; }
+.star { width: 60%; border-color: #f87171; box-shadow: 0 0 24px rgba(248, 113, 113, 0.35); }
+</style>
+
+<!--
+Everyday Bluetooth: each card is an example we have seen in our own recent scans (attribution confidence: medium, from our wiki). Brands, for the notes only:
+- coffee mug: Ember
+- toothbrush: Oral-B
+- bed: Eight Sleep Pod
+- ceiling fan: Big Ass Fans Haiku
+- propane tank gauge: Otodata
+- laundry machine's payment box: PayRange BluKey
+- truck air suspension: Air Lift WirelessOne / WirelessAir
+- Pokémon GO Plus
+Bluetooth is in everything; some of it is fun, some of it is scary.
+Punchline, the gas pump skimmer: not from our scans but from Nishant's published paper (he is on the previous slide): Bhaskar, Bland, Levchenko, Schulman, "Please Pay Inside: Evaluating Bluetooth-based Detection of Gas Pump Skimmers", USENIX Security 2019. They built the Bluetana app for inspectors. A perfect example of "a grad student dug in".
+Numbers only if asked: Bluetooth scans at 1,185 gas stations in six states; 64 Bluetooth skimmers found in four states, all recovered by law enforcement.
+Then: a few interesting ones go to grad students, the rest to undergrads.
+-->
 
 ---
 layout: center
