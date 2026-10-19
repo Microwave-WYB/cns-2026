@@ -114,18 +114,31 @@ class: text-center
 
 # We kept seeing "QT"
 
-<img src="/shots/qt-map.jpg" class="mx-auto mt-6 rounded-xl" style="width: 900px" />
-
-<div class="flex justify-around text-2xl mt-3 opacity-70" style="width: 900px; margin-left: auto; margin-right: auto">
-  <div>San Diego</div>
-  <div>Bay Area</div>
+<div class="flex justify-center gap-6 mt-4 items-stretch">
+  <img src="/shots/qt-wigle-sd.jpg" class="rounded-xl" style="height: 430px" />
+  <div class="rounded-xl px-5 py-3 text-left" style="background:#161616; border:1px solid #2a2a2a; font-family: ui-monospace, monospace; font-variant-ligatures: none; color:#9dd0ff; font-size: 17px; line-height: 1.55; overflow: hidden; height: 430px">
+    <div>QT XXXXXXXX</div>
+    <div>QT XXXXXXX</div>
+    <div>QT XXXXXXXX</div>
+    <div>QT XXXXXXXX</div>
+    <div>QT XXXXXXX</div>
+    <div>QT XXXXXXXX</div>
+    <div>QT XXXXXXX</div>
+    <div>QT XXXXXXXX</div>
+    <div>QT XXXXXXXX</div>
+    <div>QT XXXXXXX</div>
+    <div>QT XXXXXXXX</div>
+    <div>QT XXXXXXXX</div>
+    <div>QT XXXXXXX</div>
+    <div class="opacity-50">…</div>
+  </div>
 </div>
 
 <!--
-Real data: every "QT" sighting in our own scans (name matches "QT " + 7-8 hex digits), plotted on OpenStreetMap. Each circle is a ~1 km grid cell (coordinates rounded to two decimals), sized by how many distinct QT devices we saw there; no serial numbers and no exact locations are shown.
-In our own scans one name prefix, "QT" followed by a module ID, kept showing up: along the coast near Oceanside, in North County, near the border, and right on the freeway in the Bay Area. Nobody on the team knew what it was. Curiosity, not a plan.
-If asked for numbers: 18 distinct devices, about 1,200 scan rows, 8 grid cells. (Read-only query on our database, 2026-10-19.)
-Map: © OpenStreetMap contributors (standard tiles, darkened with a CSS filter), rendered with Leaflet.
+Every dot is a Bluetooth device named "QT" + a module ID, in WiGLE's crowdsourced data for San Diego County (the WiGLE download we made for the BLE Theft Auto paper, name like "QT %"). They are everywhere: on every freeway, in every neighborhood. Our own scans see the same names. Nobody on the team knew what it was. Curiosity, not a plan.
+The list on the right shows the name format only; serial numbers are masked (X), no real IDs on screen.
+If asked: about 148,000 distinct WiGLE records (network IDs) in this map area; WiGLE locations are its own trilaterated estimates. Our own first-party scans also contain QT names in San Diego County (11 devices).
+Map: © OpenStreetMap contributors (standard tiles, darkened with a CSS filter); data: WiGLE; rendered with Leaflet.
 -->
 
 ---
