@@ -54,42 +54,19 @@ Tone: affectionate. They did the hard, curious work; the joke is about scale, no
 
 ---
 
-# Step 2: so many interesting devices
-
-<div class="mx-auto mt-6 p-6 rounded-xl text-left" style="width: 760px; background:#1c1c1c; border: 2px solid #2f2f2f; font-family: ui-monospace, monospace; font-variant-ligatures: none">
-  <div class="grid grid-cols-[130px_1fr] gap-x-4 text-xl leading-loose">
-    <span class="opacity-50">name</span><span><strong style="color:#9dd0ff">Haiku ····</strong></span>
-    <span class="opacity-50">address</span><span>••:••:••:••:••:••</span>
-    <span class="opacity-50">location</span><span>somewhere in San Diego</span>
-    <span class="opacity-50">service</span><span>e0fc1000-1fb1-4168-96df-b3f057a86e01</span>
-    <span class="opacity-50">mfr data</span><span>5C04 …</span>
-    <span class="opacity-50">seen</span><span>often</span>
-  </div>
-</div>
-
-<div class="text-5xl text-center mt-8">What is this?</div>
-
-<!--
-A fake-but-realistic scan record; the values come from our own scans, sanitized: the address is hidden, the name suffix is hidden, the location is only a city. Let the audience guess: a poetry app? a smart speaker? Nothing else is revealed on this slide.
--->
-
 ---
 layout: center
 class: text-center
 ---
 
-# A ceiling fan.
+# Step 2: so many interesting devices
 
-<div class="grid grid-cols-[1.4fr_1fr] gap-8 mt-6 items-stretch">
-  <img src="/shots/bigassfans-site.jpg" class="rounded-lg w-full self-center" style="border: 1px solid #333" />
-  <img src="/shots/haiku-fan.jpg" class="rounded-lg w-full" style="height: 100%; max-height: 330px; object-fit: cover; border: 1px solid #333" />
-</div>
+<div class="text-4xl mt-10" v-click>most of them, we never figured out</div>
 
-<div v-click class="text-3xl mt-8">…by a company literally called <strong>Big Ass Fans</strong>.</div>
+<div class="text-5xl mt-10" v-click>what are people <em>doing</em> with Bluetooth out here?</div>
 
 <!--
-The device is a Haiku ceiling fan from Big Ass Fans. Say the joke line on the click.
-Screenshots: bigassfans.com homepage (logged out, popups dismissed) and the Haiku product page bigassfans.com/product/113/ (cropped to the product photo), captured 2026-10-18.
+The pile kept growing and most devices we never identified. The real question isn't just "what is this device" but "what are people actually doing with Bluetooth in the wild?" — the answer is sometimes mundane, sometimes crazy. The next slide gives the crazy one.
 -->
 
 ---
@@ -102,6 +79,7 @@ class: text-center
 <div v-click class="card star mt-8 mx-auto text-center" style="width: 70%">
   <div class="text-6xl">⛽ 💳</div>
   <div class="text-4xl font-bold mt-3 whitespace-nowrap" style="color:#f87171">a gas pump skimmer</div>
+  <div class="text-2xl mt-3">stealing credit cards — over Bluetooth</div>
   <div class="text-xl mt-3 opacity-60">Please Pay Inside, USENIX Security '19</div>
 </div>
 
