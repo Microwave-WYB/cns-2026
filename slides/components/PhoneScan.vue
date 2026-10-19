@@ -1,11 +1,15 @@
 <script setup lang="ts">
-// Mock of a phone BLE scanner app (illustration, not a screenshot): a list full of "QT XXXXXXXX" names.
-const rows = [
-  { n: 'QT XXXXXXXX', s: 4 }, { n: 'Unknown', s: 2 }, { n: 'QT XXXXXXX', s: 3 },
-  { n: 'QT XXXXXXXX', s: 3 }, { n: 'Unknown', s: 1 }, { n: 'QT XXXXXXXX', s: 2 },
-  { n: 'QT XXXXXXX', s: 4 }, { n: 'Unknown', s: 2 }, { n: 'QT XXXXXXXX', s: 1 },
-  { n: 'QT XXXXXXX', s: 3 },
-]
+// Mock of a phone BLE scanner app (illustration, not a screenshot). Named devices are highlighted, "Unknown" is grey.
+type Row = { n: string; s: number }
+const props = withDefaults(defineProps<{ rows?: Row[]; stagger?: number; delay?: number; active?: boolean }>(), {
+  rows: () => [
+    { n: 'QT XXXXXXXX', s: 4 }, { n: 'Unknown', s: 2 }, { n: 'QT XXXXXXX', s: 3 },
+    { n: 'QT XXXXXXXX', s: 3 }, { n: 'Unknown', s: 1 }, { n: 'QT XXXXXXXX', s: 2 },
+    { n: 'QT XXXXXXX', s: 4 }, { n: 'Unknown', s: 2 }, { n: 'QT XXXXXXXX', s: 1 },
+    { n: 'QT XXXXXXX', s: 3 },
+  ],
+  stagger: 0.12, delay: 0, active: true,
+})
 </script>
 
 <template>
@@ -15,8 +19,8 @@ const rows = [
       <span class="title">Scanner</span>
       <span class="scan">SCANNING</span>
     </div>
-    <div class="list">
-      <div v-for="(r, i) in rows" :key="i" class="row" :class="{ qt: r.n.startsWith('QT') }" :style="{ animationDelay: `${i * 0.12}s` }">
+    <div v-if="props.active" class="list">
+      <div v-for="(r, i) in props.rows" :key="i" class="row" :class="{ qt: r.n !== 'Unknown' }" :style="{ animationDelay: `${props.delay + i * props.stagger}s` }">
         <div class="icon">ᛒ</div>
         <div class="text">
           <div class="name">{{ r.n }}</div>
@@ -39,7 +43,7 @@ const rows = [
 .icon { width: 24px; height: 24px; border-radius: 50%; background: #1f2a38; color: #6b7f99; display: grid; place-items: center; font-size: 13px; }
 .row.qt .icon { background: #173252; color: #9dd0ff; }
 .text { flex: 1; min-width: 0; text-align: left; }
-.name { font: 600 13px ui-monospace, "Noto Sans Mono", monospace; color: #8a8a8a; font-variant-ligatures: none; }
+.name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font: 600 13px ui-monospace, "Noto Sans Mono", monospace; color: #8a8a8a; font-variant-ligatures: none; }
 .row.qt .name { color: #9dd0ff; }
 .addr { font: 10px ui-monospace, monospace; color: #555; }
 .sig { display: flex; align-items: flex-end; gap: 2px; }

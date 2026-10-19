@@ -48,8 +48,8 @@ const SIGNALS = Array.from({ length: 34 }, (_, i) => ({ t: 0.15 + i * 0.14, dx: 
 </template>
 
 <style scoped>
-.stage { position: relative; width: 900px; height: 363px; margin: 0 auto; }
-.layer { position: absolute; left: 0; top: 0; width: 1140px; height: 460px; transform: scale(0.7895); transform-origin: 0 0; }
+.stage { position: relative; width: 660px; height: 266px; margin: 0 auto; flex: none; }
+.layer { position: absolute; left: 0; top: 0; width: 1140px; height: 460px; transform: scale(0.5789); transform-origin: 0 0; }
 .city { position: absolute; inset: 0; width: 100%; height: 100%; }
 .trail { stroke-dashoffset: 1; }
 .trail.go { animation: draw 5s linear .8s forwards; }
