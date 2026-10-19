@@ -114,6 +114,22 @@ class: text-center
 
 # We kept seeing "QT"
 
+<div class="flex justify-center items-center gap-16 mt-4">
+  <PhoneScan />
+  <div v-click class="text-6xl font-bold">what is<br><span style="color:#9dd0ff; font-family: ui-monospace, monospace">QT</span>?</div>
+</div>
+
+<!--
+Illustration of a phone BLE scanner app (not a real screenshot; serials and addresses masked). Wherever we scanned, the list was full of "QT" followed by a module ID. Nobody on the team knew what it was. Curiosity, not a plan.
+-->
+
+---
+layout: center
+class: text-center
+---
+
+# So we checked WiGLE…
+
 <div class="flex justify-center gap-6 mt-4 items-stretch">
   <img src="/shots/qt-wigle-sd.jpg" class="rounded-xl" style="height: 430px" />
   <div class="rounded-xl px-5 py-3 text-left" style="background:#161616; border:1px solid #2a2a2a; font-family: ui-monospace, monospace; font-variant-ligatures: none; color:#9dd0ff; font-size: 17px; line-height: 1.55; overflow: hidden; height: 430px">
@@ -135,7 +151,7 @@ class: text-center
 </div>
 
 <!--
-Every dot is a Bluetooth device named "QT" + a module ID, in WiGLE's crowdsourced data for San Diego County (the WiGLE download we made for the BLE Theft Auto paper, name like "QT %"). They are everywhere: on every freeway, in every neighborhood. Our own scans see the same names. Nobody on the team knew what it was. Curiosity, not a plan.
+Every dot is a Bluetooth device named "QT" + a module ID, in WiGLE's crowdsourced data for San Diego County (the WiGLE download we made for the BLE Theft Auto paper, name like "QT %"). They are everywhere: on every freeway, in every neighborhood. Say: "…and it was everywhere." Still no idea what it is: WiGLE only has the name.
 The list on the right shows the name format only; serial numbers are masked (X), no real IDs on screen.
 If asked: about 148,000 distinct WiGLE records (network IDs) in this map area; WiGLE locations are its own trilaterated estimates. Our own first-party scans also contain QT names in San Diego County (11 devices).
 Map: © OpenStreetMap contributors (standard tiles, darkened with a CSS filter); data: WiGLE; rendered with Leaflet.
