@@ -56,40 +56,14 @@ Tone: affectionate. They did the hard, curious work; the joke is about scale, no
 
 # Step 2: so many interesting devices
 
-<div class="mx-auto mt-6 p-6 rounded-xl text-left" style="width: 760px; background:#1c1c1c; border: 2px solid #2f2f2f; font-family: ui-monospace, monospace; font-variant-ligatures: none">
-  <div class="grid grid-cols-[130px_1fr] gap-x-4 text-xl leading-loose">
-    <span class="opacity-50">name</span><span><strong style="color:#9dd0ff">Haiku ····</strong></span>
-    <span class="opacity-50">address</span><span>••:••:••:••:••:••</span>
-    <span class="opacity-50">location</span><span>somewhere in San Diego</span>
-    <span class="opacity-50">service</span><span>e0fc1000-1fb1-4168-96df-b3f057a86e01</span>
-    <span class="opacity-50">mfr data</span><span>5C04 …</span>
-    <span class="opacity-50">seen</span><span>often</span>
-  </div>
-</div>
+<img src="/shots/furbo.jpg" class="mx-auto mt-4 rounded-lg" style="height: 340px; border: 1px solid #333" />
 
-<div class="text-5xl text-center mt-8">What is this?</div>
+<div v-click class="text-4xl text-center mt-6">a camera that <strong>tosses treats</strong> to your dog</div>
 
 <!--
-A fake-but-realistic scan record; the values come from our own scans, sanitized: the address is hidden, the name suffix is hidden, the location is only a city. Let the audience guess: a poetry app? a smart speaker? Nothing else is revealed on this slide.
--->
-
----
-layout: center
-class: text-center
----
-
-# A ceiling fan.
-
-<div class="grid grid-cols-[1.4fr_1fr] gap-8 mt-6 items-stretch">
-  <img src="/shots/bigassfans-site.jpg" class="rounded-lg w-full self-center" style="border: 1px solid #333" />
-  <img src="/shots/haiku-fan.jpg" class="rounded-lg w-full" style="height: 100%; max-height: 330px; object-fit: cover; border: 1px solid #333" />
-</div>
-
-<div v-click class="text-3xl mt-8">…by a company literally called <strong>Big Ass Fans</strong>.</div>
-
-<!--
-The device is a Haiku ceiling fan from Big Ass Fans. Say the joke line on the click.
-Screenshots: bigassfans.com homepage (logged out, popups dismissed) and the Haiku product page bigassfans.com/product/113/ (cropped to the product photo), captured 2026-10-18.
+Frame: Aaron and Nishant's lab: people do very unexpected things with Bluetooth, and we have to find the really unexpected ones. A fun one first, the scary one next.
+The fun one is from our own scans and wiki: a Furbo pet camera (Bluetooth is used for setup; it is the one that tosses treats to the dog). Medium-confidence attribution (name token plus service UUID); no numbers on the slide.
+Screenshot: furbo.com/us homepage hero, logged out, cropped to the camera and dog, captured 2026-10-19.
 -->
 
 ---
@@ -99,24 +73,22 @@ class: text-center
 
 # And sometimes it's this
 
-<div v-click class="card star mt-8 mx-auto text-center" style="width: 70%">
-  <div class="text-6xl">⛽ 💳</div>
-  <div class="text-4xl font-bold mt-3 whitespace-nowrap" style="color:#f87171">a gas pump skimmer</div>
-  <div class="text-xl mt-3 opacity-60">Please Pay Inside, USENIX Security '19</div>
+<div class="grid grid-cols-[1fr_1.4fr] gap-6 mt-6 items-center">
+  <img src="/shots/skimmer-tape.jpg" class="rounded-lg w-full" style="border: 1px solid #333" />
+  <img src="/shots/skimmer-board.jpg" class="rounded-lg w-full" style="border: 1px solid #333" />
 </div>
 
-<div class="grid grid-cols-2 gap-12 mt-10 text-2xl">
+<div v-click class="text-4xl mt-6" style="color:#f87171">a gas pump <strong>skimmer</strong></div>
+<div class="text-lg mt-2 opacity-60">Please Pay Inside, USENIX Security '19</div>
+
+<div class="grid grid-cols-2 gap-12 mt-8 text-2xl">
   <div v-click>a few → <strong>grad students</strong> dig in</div>
   <div v-click>the rest → <strong>undergrads</strong> 🫠</div>
 </div>
 
-<style>
-.card { background: #1c1c1c; border: 2px solid #2f2f2f; border-radius: 12px; padding: 12px 10px; }
-.star { border-color: #f87171; box-shadow: 0 0 24px rgba(248, 113, 113, 0.35); }
-</style>
-
 <!--
-Bluetooth is in everything; some of it is fun, some of it is scary. Punchline: the gas pump skimmer. Not from our scans but from Nishant's published paper (he is on the Step 1 slide): Bhaskar, Bland, Levchenko, Schulman, "Please Pay Inside: Evaluating Bluetooth-based Detection of Gas Pump Skimmers", USENIX Security 2019. They built the Bluetana app for inspectors. A perfect example of "a grad student dug in".
+Bluetooth is in everything; some of it is fun, some of it is scary. Punchline: the gas pump skimmer, real photos from the paper: Figure 1 an internal Bluetooth skimmer wrapped in grey tubing to blend in with the cabling inside the fuel pump (detected by Bluetana in Tempe, AZ), Figure 2 the board of a skimmer recovered from a fuel station in Southern California.
+Not from our scans but from Nishant's published paper (he is on the Step 1 slide): Bhaskar, Bland, Levchenko, Schulman, "Please Pay Inside: Evaluating Bluetooth-based Detection of Gas Pump Skimmers", USENIX Security 2019. They built the Bluetana app for inspectors. A perfect example of "a grad student dug in". Figures reproduced from the paper; keep the citation on screen.
 Numbers only if asked: Bluetooth scans at 1,185 gas stations in six states; 64 Bluetooth skimmers found in four states, all recovered by law enforcement.
 Then: a few interesting ones go to grad students, the rest to undergrads.
 -->
