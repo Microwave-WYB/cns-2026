@@ -105,20 +105,14 @@ class: text-center
   <div class="text-xl mt-3 opacity-60">Please Pay Inside, USENIX Security '19</div>
 </div>
 
-<div class="grid grid-cols-2 gap-12 mt-10 text-2xl">
-  <div v-click>a few → <strong>grad students</strong> dig in</div>
-  <div v-click>the rest → <strong>undergrads</strong> 🫠</div>
-</div>
-
 <style>
 .card { background: #1c1c1c; border: 2px solid #2f2f2f; border-radius: 12px; padding: 12px 10px; }
 .star { border-color: #f87171; box-shadow: 0 0 24px rgba(248, 113, 113, 0.35); }
 </style>
 
 <!--
-Bluetooth is in everything; some of it is fun, some of it is scary. Punchline: the gas pump skimmer. Not from our scans but from Nishant's published paper (he is on the Step 1 slide): Bhaskar, Bland, Levchenko, Schulman, "Please Pay Inside: Evaluating Bluetooth-based Detection of Gas Pump Skimmers", USENIX Security 2019. They built the Bluetana app for inspectors. A perfect example of "a grad student dug in".
+Bluetooth is in everything; some of it is fun, some of it is scary. Punchline: the gas pump skimmer. Not from our scans but from Nishant's published paper (he is on the Step 1 slide): Bhaskar, Bland, Levchenko, Schulman, "Please Pay Inside: Evaluating Bluetooth-based Detection of Gas Pump Skimmers", USENIX Security 2019. They built the Bluetana app for inspectors. A perfect example of "a grad student dug in", which leads into the KARR story next.
 Numbers only if asked: Bluetooth scans at 1,185 gas stations in six states; 64 Bluetooth skimmers found in four states, all recovered by law enforcement.
-Then: a few interesting ones go to grad students, the rest to undergrads.
 -->
 
 ---
