@@ -429,13 +429,18 @@ WiGLE is still useful later, for validation (see "Validate with WiGLE"): a quick
 ---
 layout: center
 class: text-center
+clicks: 4
 ---
 
 # Our own scanner
 
-<img src="/shots/our-scanner.jpg" class="mx-auto mt-2 rounded-2xl" style="height: 440px; border: 3px solid #3a3a3a" />
+<div class="mx-auto mt-2 overflow-hidden flex items-center justify-center" style="width: 880px; height: 440px">
+  <img src="/shots/our-scanner.jpg" class="rounded-2xl" style="height: 440px; max-width: none; border: 3px solid #3a3a3a; transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform-origin 1.2s cubic-bezier(0.65, 0, 0.35, 1)"
+    :style="(([fx, fy, z]) => ({ transformOrigin: `${fx * 100}% ${fy * 100}%`, transform: `translate(${(0.5 - fx) * 100}%, ${(0.5 - fy) * 100}%) scale(${z})` }))([[0.5,0.5,1],[0.5,0.225,2.3],[0.36,0.48,3],[0.5,0.63,2.5],[0.5,0.86,2.5]][Math.min($clicks, 4)])" />
+</div>
 
 <!--
+Clicks zoom in: 1 the live list of devices, 2 one device (name and address), 3 general information (signal, time, location, accuracy), 4 the raw advertisement broken into AD structures.
 So we built our own scanner: an Android app that records every advertisement in full, not just a name and a MAC. Here: a Govee thermometer (Govee_H6199_…), with signal strength, time, location, and the raw advertisement broken into its AD structures (flags, name, manufacturer data).
 Screenshot from our app, captured 2026-10-19; device ID, coordinates, the last three MAC bytes, the name suffix and the raw data bytes are blurred.
 -->

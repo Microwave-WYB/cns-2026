@@ -37,7 +37,7 @@
 - 隐藏（hide: true）："This one talks to your gas pedal"、"Found something suspicious?"、"Once BLE is visible, we can measure"；"What turned up" 之后直接收尾。
 - "Step 1: drive around and scan" 改成小动画 Wardrive.vue：城市地图上拿着 WiGLE 手机的 Nishant；点击后沿着街道到处走，沿途冒出信号点，右边复用 PhoneScan.vue 手机，扫到的名字逐个出现（Oral-B、Tile、Ember Mug、MyQ 等；示意，非真实数据）。
 - Step 2 删掉 Furbo 页，只保留 skimmer 页（标题改为 "Step 2: find out what's out there"）。
-- WiGLE 页之后新增 "Our own scanner"：我们自己扫描 App 的真实截图（Govee 设备详情 + Raw Data 分解；设备 ID、坐标、MAC 后三字节、名字后缀、raw data 字节已模糊）。
+- WiGLE 页之后新增 "Our own scanner"：我们自己扫描 App 的真实截图（点击依次放大：设备列表 → 单个设备 → General Information → Raw Data；Govee 设备；设备 ID、坐标、MAC 后三字节、名字后缀、raw data 字节已模糊）。
 - 测量 1 页、收尾 2 页。
 - 每页讲者备注里有讲稿要点和措辞提醒。
 - 构建：`mise run //:build`；预览：`mise run //:dev` → http://100.83.234.55:3030/ （讲者模式 `/presenter/`）。
