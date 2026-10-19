@@ -18,6 +18,16 @@ const STOPS: Stop[] = [
 ]
 // the "QT 5958868" line on page 6, as fractions of the page image
 const QT = { x0: 0.3370, y0: 0.2638, x1: 0.3668, y1: 0.2748 }
+// magnifying glass: centred on the QT line (which the last zoom puts at the viewer centre), 2x on top of the zoom
+const LENS = 280, LENS_X = 1.6
+const lensStyle = computed(() => {
+  const z = STOPS[STOPS.length - 1].zoom!
+  const pw = PH * pages[5].aspect * z.s * LENS_X, ph = PH * z.s * LENS_X
+  const cx = (QT.x0 + QT.x1) / 2, cy = (QT.y0 + QT.y1) / 2
+  return { width: `${LENS}px`, height: `${LENS}px`, left: `${W / 2 - LENS / 2}px`, top: `${H / 2 - LENS / 2}px`,
+    backgroundImage: 'url(/shots/karr-manual-p6.jpg)', backgroundSize: `${pw}px ${ph}px`,
+    backgroundPosition: `${LENS / 2 - cx * pw}px ${LENS / 2 - cy * ph}px` }
+})
 const stop = computed(() => STOPS[Math.min(props.step, STOPS.length - 1)])
 const camera = computed(() => {
   const z = stop.value.zoom
@@ -35,24 +45,23 @@ const camera = computed(() => {
         <div v-for="p in pages" :key="p.n" class="slot" :style="{ height: `${H}px` }">
           <div class="page" :style="{ height: `${PH}px`, width: `${PH * p.aspect}px` }">
             <img :src="p.src" :style="{ height: `${PH}px` }" />
-            <!-- emphasis on the "QT" name in the app screenshot, shown with the last zoom -->
-            <div v-if="p.n === 6" class="qt-mark" :class="{ on: props.step >= 5 }"
-              :style="{ left: `${QT.x0 * 100}%`, top: `${QT.y0 * 100}%`, width: `${(QT.x1 - QT.x0) * 100}%`, height: `${(QT.y1 - QT.y0) * 100}%` }" />
           </div>
         </div>
       </div>
     </div>
+    <!-- magnifying glass over the "QT" name, shown after the last zoom -->
+    <div class="lens" :class="{ on: props.step >= 5 }" :style="lensStyle"><div class="handle" /></div>
   </div>
 </template>
 
 <style scoped>
-.viewer { overflow: hidden; background: #525659; border-radius: 10px; border: 1px solid #333; }
+.viewer { position: relative; overflow: hidden; background: #525659; border-radius: 10px; border: 1px solid #333; }
 .camera { transform-origin: 0 0; transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1); width: 100%; height: 100%; }
 .column { transition: transform 2s cubic-bezier(0.65, 0, 0.35, 1); }
 .slot { display: flex; align-items: center; justify-content: center; }
 .page { position: relative; }
-.qt-mark { position: absolute; border: 0.4px solid #f87171; border-radius: 1px; box-shadow: 0 0 3px rgba(248,113,113,.8); opacity: 0; transition: opacity .6s 1.6s; }
-.qt-mark.on { opacity: 1; animation: pulse 1.6s ease-in-out 2.2s infinite; }
-@keyframes pulse { 50% { box-shadow: 0 0 6px rgba(248,113,113,1); } }
+.lens { position: absolute; border-radius: 50%; border: 8px solid #2b2b2b; box-shadow: 0 0 0 3px #9a9a9a, 0 12px 30px rgba(0,0,0,.6), inset 0 0 18px rgba(255,255,255,.25); background-repeat: no-repeat; opacity: 0; transform: scale(.4) translate(140px, 120px); transition: all .7s cubic-bezier(.3,1.4,.5,1) 1.8s; }
+.lens.on { opacity: 1; transform: none; }
+.handle { position: absolute; left: 88%; top: 88%; width: 120px; height: 26px; border-radius: 13px; background: linear-gradient(#3a3a3a, #1c1c1c); box-shadow: 0 0 0 3px #9a9a9a; transform-origin: 0 50%; transform: rotate(45deg); }
 .slot img { box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); background: #fff; }
 </style>
