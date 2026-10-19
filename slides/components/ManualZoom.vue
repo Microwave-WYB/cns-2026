@@ -1,22 +1,35 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 // The KARR user manual (FCC filing 2ASRL-1069) shown like a PDF viewer:
-// step 0 = cover, step >= 1 = scroll to page 6, step >= 2 = zoom into the app screenshot ("QT ..." line).
+// each click either scrolls to a page or zooms into a passage on it (see STOPS).
 const props = defineProps<{ step: number }>()
 const W = 820, H = 470, PAD = 14 // viewer size and page margin
 const PH = H - 2 * PAD // page height on screen
 const pages = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({ n, src: `/shots/karr-manual-p${n}.jpg`, aspect: n === 1 ? 372 / 552 : n >= 7 ? 372 / 577 : 744 / 552 }))
-const TARGET = 5 // page 6, 0-based
-// the "QT" line inside page 6, as a fraction of the page image
-const FX = 0.3516, FY = 0.2689, S = 8
-const pw = PH * pages[TARGET].aspect
-const px = (W - pw) / 2 + FX * pw, py = PAD + FY * PH
-const zoom = `translate(${W / 2 - px * S}px, ${H / 2 - py * S}px) scale(${S})`
+// click steps: each stop is a page (0-based) and an optional zoom target (fraction of that page image, scale)
+type Stop = { page: number; zoom?: { fx: number; fy: number; s: number } }
+const STOPS: Stop[] = [
+  { page: 0 },                                         // cover
+  { page: 0, zoom: { fx: 0.5, fy: 0.426, s: 3.6 } },   // cover blurb: "... the best in electronic vehicle security"
+  { page: 4 },                                         // page "KARR BT System Functions"
+  { page: 4, zoom: { fx: 0.168, fy: 0.553, s: 5 } },   // "The KARR BT System App allows you to arm/lock or disarm/unlock ..."
+  { page: 5 },                                         // page "Settings"
+  { page: 5, zoom: { fx: 0.3516, fy: 0.2689, s: 8 } }, // app screenshot: "QT" + serial
+]
+const stop = computed(() => STOPS[Math.min(props.step, STOPS.length - 1)])
+const camera = computed(() => {
+  const z = stop.value.zoom
+  if (!z) return 'none'
+  const pw = PH * pages[stop.value.page].aspect
+  const px = (W - pw) / 2 + z.fx * pw, py = PAD + z.fy * PH
+  return `translate(${W / 2 - px * z.s}px, ${H / 2 - py * z.s}px) scale(${z.s})`
+})
 </script>
 
 <template>
   <div class="viewer" :style="{ width: `${W}px`, height: `${H}px` }">
-    <div class="camera" :style="{ transform: step >= 2 ? zoom : 'none' }">
-      <div class="column" :style="{ transform: `translateY(${step >= 1 ? -TARGET * H : 0}px)` }">
+    <div class="camera" :style="{ transform: camera }">
+      <div class="column" :style="{ transform: `translateY(${-stop.page * H}px)` }">
         <div v-for="p in pages" :key="p.n" class="slot" :style="{ height: `${H}px` }">
           <img :src="p.src" :style="{ height: `${PH}px` }" />
         </div>

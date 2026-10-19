@@ -188,7 +188,7 @@ Screenshot: fccid.io page for the filing, logged out, desktop browser (auto-brow
 ---
 layout: center
 class: text-center
-clicks: 2
+clicks: 5
 ---
 
 # Its user manual
@@ -196,32 +196,13 @@ clicks: 2
 <ManualZoom :step="$clicks" class="mx-auto mt-2" />
 
 <!--
-The user manual in that FCC filing, shown like a PDF viewer. Cover: "SWDS · KARR Security Systems · BT Series · Customer User Guide"; the last page carries the same FCC ID, 2ASRL-1069. So the QT module is the KARR BT system, a dealer-installed car security system.
-Click 1: scroll down to the "Settings" page. Click 2: zoom into the app screenshot ("Unit Settings"), which shows the unit's name: "QT" plus a serial number. The same format we saw everywhere on the street: the QT devices are KARR modules. (The serial shown is the manual's own example.)
-Say: the same name we saw on the street. Then the real work: reverse engineering the module and its app, and writing the paper.
+The user manual in that FCC filing, shown like a PDF viewer. It says what the thing is and what it does, in the vendor's own words.
+Click 1, cover: "Congratulations on your purchase of the KARR BT system, designed with convenient, selectable features and a user friendly mobile app to provide you the best in electronic vehicle security." So it is a dealer-installed car security system (SWDS · KARR Security Systems · BT Series); the last page carries the same FCC ID, 2ASRL-1069.
+Clicks 2-3, "KARR BT System Functions": "The KARR BT System App allows you to arm/lock or disarm/unlock …". The phone app is the car key; arming also engages the immobilizer (manual, page 2).
+Clicks 4-5, "Settings": the app screenshot ("Unit Settings") shows the unit's name: "QT" plus a serial number. (The serial shown is the manual's own example.)
+Say: the same name we saw on the street. Then the real work: reverse engineering the module and its app, and writing the paper (BLE Theft Auto: Evaluating the Security of Aftermarket BLE-based Automotive Remote Control Systems; Jerry Yu*, Yibo Wei*, et al.). Context: the phone app works like a wireless key fob; these systems often skip BLE's built-in authentication and encryption and roll their own application-layer security.
 KARR, one slide only. The attack unlocks the car; it does not start it. The grad student who dug in was me (as a PhD). Do not go into BLE Theft Auto details. Optional aside: the car sits on the street, so "an attacker must be nearby" is not much comfort.
 Source: user manual in FCC filing 2ASRL-1069 (fccid.io), retrieved 2026-10-19.
--->
-
----
-layout: center
-class: text-center
----
-
-# That became BLE Theft Auto
-
-<div class="text-2xl mt-4 opacity-70">Evaluating the Security of Aftermarket BLE-based Automotive Remote Control Systems</div>
-
-<div class="text-3xl mt-12 space-y-5">
-  <div v-click>your phone app is the car key</div>
-  <div v-click>added after the car is sold, by dealers or owners</div>
-  <div v-click>vendors roll their own security</div>
-</div>
-
-<div class="text-lg mt-12 opacity-50">Jerry Yu*, Yibo Wei*, et al.</div>
-
-<!--
-Context for the audience: aftermarket BLE remote-control systems for cars. The phone app works like a wireless key fob; these systems often skip BLE's built-in authentication and encryption and implement their own application-layer security, which is a new attack surface.
 -->
 
 ---
