@@ -322,7 +322,7 @@ layout: center
 class: text-center
 ---
 
-# The Internet's default assumption
+# The Internet's common assumption
 
 <div v-click class="text-5xl mt-10 font-bold">"you <span v-mark.green="1">will</span> be found"</div>
 
@@ -335,7 +335,7 @@ Remote reachability is part of it too; BLE "needs proximity", but devices sit on
 
 ---
 
-# Bluetooth's default assumption
+# Bluetooth's common assumption
 
 <StreetDevices class="mt-10" />
 
