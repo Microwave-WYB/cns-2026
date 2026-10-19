@@ -81,16 +81,30 @@ class: text-center
 <div v-click class="text-4xl mt-6" style="color:#f87171">a gas pump <strong>skimmer</strong></div>
 <div class="text-lg mt-2 opacity-60">Please Pay Inside, USENIX Security '19</div>
 
-<div class="grid grid-cols-2 gap-12 mt-8 text-2xl">
-  <div v-click>a few → <strong>grad students</strong> dig in</div>
-  <div v-click>the rest → <strong>undergrads</strong> 🫠</div>
-</div>
-
 <!--
 Bluetooth is in everything; some of it is fun, some of it is scary. Punchline: the gas pump skimmer, real photos from the paper: Figure 1 an internal Bluetooth skimmer wrapped in grey tubing to blend in with the cabling inside the fuel pump (detected by Bluetana in Tempe, AZ), Figure 2 the board of a skimmer recovered from a fuel station in Southern California.
 Not from our scans but from Nishant's published paper (he is on the Step 1 slide): Bhaskar, Bland, Levchenko, Schulman, "Please Pay Inside: Evaluating Bluetooth-based Detection of Gas Pump Skimmers", USENIX Security 2019. They built the Bluetana app for inspectors. A perfect example of "a grad student dug in". Figures reproduced from the paper; keep the citation on screen.
 Numbers only if asked: Bluetooth scans at 1,185 gas stations in six states; 64 Bluetooth skimmers found in four states, all recovered by law enforcement.
-Then: a few interesting ones go to grad students, the rest to undergrads.
+Next: Step 3, the manual research on one device.
+-->
+
+---
+layout: center
+class: text-center
+---
+
+# Step 3: research
+
+<div class="text-4xl mt-10 leading-loose">
+  <div v-click>pick one</div>
+  <div v-click>buy it</div>
+  <div v-click>take it apart</div>
+  <div v-click><strong>what can it really do?</strong></div>
+</div>
+
+<!--
+Step 3 is the slow, manual part: pick one interesting device, buy it, open it up, read its app and firmware, and find out what it really does. One device at a time, by one person. That is where the old way stops scaling.
+Leads into the next slide: one of them, a grad student dug into.
 -->
 
 ---
