@@ -1,18 +1,18 @@
 <script setup lang="ts">
 // Step 1 story, deliberately simple, one scene on a city map:
 // step 0: Aaron and Nishant (with a phone running WiGLE) on the map,
-// step 1: Aaron flies off; Nishant wanders around the map and signals pop up wherever he goes.
+// step 1: Aaron flies off; Nishant walks the streets and signals pop up wherever he goes.
 defineProps<{ step: number }>()
 
 const W = 1140, H = 460
-const ROUTE = 'M 640 250 C 760 120, 980 110, 1020 230 S 860 420, 700 380 S 420 300, 380 180 S 200 60, 140 200 S 260 420, 520 400 S 900 320, 1060 400'
+const ROUTE = 'M 640 250 V 160 H 920 V 340 H 780 V 420 H 360 V 250 H 220 V 70 H 500 V 160 H 640 V 70 H 1060 V 420'
 const STREETS_H = [70, 160, 250, 340, 420]
 const STREETS_V = [80, 220, 360, 500, 640, 780, 920, 1060]
 const WALK = 10, START = 0.8 // seconds
 // signals that pop up as Nishant passes
 let seed = 7
 const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280)
-const SIGNALS = Array.from({ length: 34 }, (_, i) => ({ t: 0.3 + i * 0.28, dx: (rnd() - 0.5) * 120, dy: (rnd() - 0.5) * 90 }))
+const SIGNALS = Array.from({ length: 34 }, (_, i) => ({ t: 0.3 + i * 0.28, dx: (rnd() < 0.5 ? -1 : 1) * (22 + rnd() * 30), dy: (rnd() < 0.5 ? -1 : 1) * (22 + rnd() * 25) }))
 </script>
 
 <template>
