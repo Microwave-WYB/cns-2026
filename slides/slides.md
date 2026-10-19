@@ -76,7 +76,7 @@ clicks: 2
 <Eureka :step="$clicks" class="mt-4" />
 
 <!--
-Animation: Nishant thinking (spinning loader, AI-app style "Thinking… / Working…" status); click: a light bulb; click: the first page of the paper (Please Pay Inside, USENIX Security 2019).
+Animation: Nishant thinking (spinning loader, AI-app style "Thinking… / Working…" status); click: a light bulb, "Got it!" and "Thought for 2 years" (the joke: it looks like an AI agent calling tools, but it is a human PhD student, pre-AI; verify the duration before the talk); click: the first page of the paper (Please Pay Inside, USENIX Security 2019).
 Step 3 is the slow, manual part: pick one interesting device, buy it, open it up, read its app and firmware, and find out what it really does; for Nishant that became the skimmer paper. One device at a time, by one person. That is where the old way stops scaling.
 Leads into the next slide: one of them, a grad student dug into.
 -->

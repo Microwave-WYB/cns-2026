@@ -20,6 +20,7 @@ onUnmounted(() => clearInterval(t))
       <div class="status" :class="{ done: step >= 1 }">
         <span v-if="step < 1" :key="i" class="shimmer">{{ WORDS[i] }}</span>
         <span v-else class="got">Got it!</span>
+        <div class="took" :class="{ on: step >= 1 }">Thought for 2 years</div>
       </div>
     </div>
     <img src="/shots/please-pay-inside-p1.jpg" class="paper" :class="{ on: step >= 2 }" />
@@ -40,6 +41,8 @@ onUnmounted(() => clearInterval(t))
 .status { position: absolute; left: 50%; top: 222px; transform: translateX(-50%); white-space: nowrap; font: 500 26px Inter, system-ui, sans-serif; }
 .shimmer { background: linear-gradient(90deg, #6b6b6b 0%, #ededed 50%, #6b6b6b 100%); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 1.4s linear infinite; }
 .got { color: #fbbf24; font-weight: 650; }
+.took { font: 400 20px Inter, system-ui, sans-serif; color: #8a8a8a; margin-top: 6px; opacity: 0; transition: opacity .6s .5s; }
+.took.on { opacity: 1; }
 @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 @keyframes spin { to { transform: rotate(360deg); } }
 </style>
