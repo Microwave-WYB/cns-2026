@@ -690,7 +690,7 @@ layout: center
 </SlidevVideo>
 
 <!--
-Second way in: start from software. Filter the AndroZoo metadata by Bluetooth permissions before downloading anything; only those APKs are analyzed. Agents extract each app's scan fingerprint and what it controls.
+Second way in: start from software. Take apps with the Bluetooth permission (AndroZoo). One in detail: decompile it, find the BLE scan filter (the name, service UUID and manufacturer ID the app looks for), read the fingerprint off it, and what the app controls tells us the product: new knowledge. Then the same loop again and again, run by agents. Synthetic example (com.example.scooter, ES-4).
 -->
 
 ---
