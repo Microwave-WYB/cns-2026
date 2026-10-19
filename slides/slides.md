@@ -114,16 +114,16 @@ class: text-center
 
 # We kept seeing "QT"
 
-<div class="text-4xl mt-10 leading-loose">
-  <div v-click>on the <strong>highway</strong></div>
-  <div v-click>in <strong>parking lots</strong></div>
-  <div v-click>at <strong>gas stations</strong></div>
+<QtMap :step="$clicks" class="mx-auto mt-4" style="width: 780px" />
+
+<div class="text-3xl mt-4">
+  <span v-click="1" class="mx-4" style="color:#4ea8ff">highway</span>
+  <span v-click="2" class="mx-4" style="color:#2fc7b4">parking lots</span>
+  <span v-click="3" class="mx-4" style="color:#f87171">gas stations</span>
 </div>
 
-<div v-click class="text-6xl mt-8 font-bold" style="font-family: ui-monospace, monospace; color:#9dd0ff">QT ····</div>
-
 <!--
-In our own scans one name prefix, "QT" followed by a module ID, kept showing up everywhere: on the highway, in parking lots, at gas stations. Nobody on the team knew what it was. Curiosity, not a plan.
+In our own scans one name prefix, "QT" followed by a module ID, kept showing up everywhere: on the highway, in parking lots, at gas stations. Nobody on the team knew what it was. Curiosity, not a plan. The map is a schematic illustration, not real locations or data.
 -->
 
 ---
