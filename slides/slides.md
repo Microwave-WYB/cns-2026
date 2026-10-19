@@ -513,7 +513,7 @@ layout: center
 
 # What an entry looks like
 
-```md {1|2-5|6-8|7|8|9-10|13-19}
+```md {1|2-5|6-8|7|8|9|12-18}
 ---
 family: karr-module
 product: KARR (dealer-installed vehicle module)
@@ -523,7 +523,6 @@ fingerprint:
   name: { regex: "^QT [0-9A-F]{7,8}$" }
   mfr_data: { length: 6 }
 confidence: high
-evidence: [paper, real_devices, vendor_disclosure]
 ---
 
 # KARR module
@@ -543,7 +542,7 @@ Entries are plain Markdown files kept in git. They are compiled into the lookup 
 3. The fingerprint block: everything we match new advertisements against.
 4. The name is a regex, not a wildcard: "QT " plus 7-8 uppercase hex characters. KARR names normally cannot be renamed anyway.
 5. mfr_data: only the length is matched. The first two bytes vary per module and are not a Bluetooth SIG company ID, so we don't use them; this is why a single field is unreliable (ties back to "How do we classify all these advertisements?"). There is no stability field: an entry lists several independent features, so if one changes (e.g. a renamed device elsewhere) the others still match. A fingerprint lists only features that actually match.
-6. Confidence and evidence: the published paper, real devices tested, vendor disclosure.
+6. Confidence: high, because of the published paper and real-device testing. There is no evidence field; provenance lives in the git history and the linked paper.
 7. The body: what a human reads: what the device is, what it is used for, what it broadcasts, plus reference links (vendor site cited in the paper; Android package from a Google Play search listing). Links live in the body because they are for humans; frontmatter only holds what the matcher reads. No FCC ID could be found publicly; it would go in the body when known. Paper wording: a dealership pre-installed security system that allows users to lock/unlock doors and arm/disarm the immobilizer. The paper says the advertisements contain the module name and mode; we do not claim which bytes hold the mode. The advertisement structure (name, flags, 6 bytes of manufacturer data) is what first put these modules in one pile (triage); it is described in the text, not stored as a matching field. General rule: frontmatter = what the matcher reads, body = what a human reads.
 Context, notes only (do not put on the slide): the paper found no pairing by default, a challenge-response with fixed keys shared across all modules, and no encryption; we disclosed to the vendor, who developed patches.
 -->
