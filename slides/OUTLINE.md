@@ -35,7 +35,7 @@
 - 说明书页之后新增 "So we took the app apart"：download the app → decompile it → 简化示意的 challenge-response 代码（hash(challenge, name, mode, KEY)，DEALER_KEY / USER_KEY 硬编码且打码）→ "same keys, every KARR"；然后才是 "First submission"。
 - "Obscurity is dead" 换成 3 页纯图（DEF CON）：合影（点击放大到左二：一个 DEF CON 上遇到的人，用 AI 20 分钟复现了我们的攻击）→ 他在 DEF CON 讲复现的现场照 → 他的幻灯片 "Works on sim, confirmed also on real signals in Las Vegas"。论点（AI 让逆向变便宜，"If it's discoverable, assume it's already discovered"）放在备注里口述。
 - 隐藏（hide: true）："This one talks to your gas pedal"、"Found something suspicious?"、"Once BLE is visible, we can measure"；"What turned up" 之后直接收尾。
-- "Step 1: drive around and scan" 改成小动画 Wardrive.vue：Aaron 说 "go scan!" → Nishant 拿到装着 WiGLE 的手机 → 两者坐进车里在城市街道上开，沿途冒出 "?" 设备（示意，非真实数据）。
+- "Step 1: drive around and scan" 改成小动画 Wardrive.vue：同一张城市地图上 Aaron 和拿着 WiGLE 手机的 Nishant；点击后 Aaron 飞出去，Nishant 在地图上到处走，沿途冒出信号点（示意，非真实数据）。
 - 测量 1 页、收尾 2 页。
 - 每页讲者备注里有讲稿要点和措辞提醒。
 - 构建：`mise run //:build`；预览：`mise run //:dev` → http://100.83.234.55:3030/ （讲者模式 `/presenter/`）。

@@ -24,7 +24,7 @@ class: text-center
 <div v-click class="text-2xl opacity-60 mt-6">(a documentary)</div>
 
 ---
-clicks: 2
+clicks: 1
 ---
 
 # Step 1: drive around and scan
@@ -32,7 +32,7 @@ clicks: 2
 <Wardrive :step="$clicks" class="mt-6" />
 
 <!--
-Animation: click 1, Aaron sends Nishant out ("go scan!") and a phone running WiGLE appears; click 2, Nishant and the phone ride in a car around the city, "?" devices popping up along the way. Schematic, not real data.
+Animation: Aaron and Nishant (with a phone running WiGLE) on a city map; click: Aaron flies off, Nishant wanders all over the map and signals pop up wherever he goes. Schematic, not real data.
 Say: they drove around with WiGLE, everywhere, and kept going "ooh… what's that?"
 Photos: Aaron from his UCSD homepage (cseweb.ucsd.edu/~schulman), Nishant from cseweb.ucsd.edu/~nibhaska.
 WiGLE: a crowdsourced wardriving database of Wi-Fi, cell and Bluetooth sightings with locations, collected by volunteers' phones.
