@@ -40,25 +40,11 @@ Tone: affectionate. They did the hard, curious work; the joke is about scale, no
 -->
 
 ---
-
-# Step 2: find out what's out there
-
-<img src="/shots/furbo.jpg" class="mx-auto mt-4 rounded-lg" style="height: 340px; border: 1px solid #333" />
-
-<div v-click class="text-4xl text-center mt-6">a camera that <strong>tosses treats</strong> to your dog</div>
-
-<!--
-Frame: Aaron and Nishant's lab: people do very unexpected things with Bluetooth, and we have to find the really unexpected ones. A fun one first, the scary one next.
-The fun one is from our own scans and wiki: a Furbo pet camera (Bluetooth is used for setup; it is the one that tosses treats to the dog). Medium-confidence attribution (name token plus service UUID); no numbers on the slide.
-Screenshot: furbo.com/us homepage hero, logged out, cropped to the camera and dog, captured 2026-10-19.
--->
-
----
 layout: center
 class: text-center
 ---
 
-# And sometimes it's this
+# Step 2: find out what's out there
 
 <div class="grid grid-cols-[1fr_1.4fr] gap-6 mt-6 items-center">
   <img src="/shots/skimmer-tape.jpg" class="rounded-lg w-full" style="border: 1px solid #333" />
@@ -69,7 +55,7 @@ class: text-center
 <div class="text-lg mt-2 opacity-60">Please Pay Inside, USENIX Security '19</div>
 
 <!--
-Bluetooth is in everything; some of it is fun, some of it is scary. Punchline: the gas pump skimmer, real photos from the paper: Figure 1 an internal Bluetooth skimmer wrapped in grey tubing to blend in with the cabling inside the fuel pump (detected by Bluetana in Tempe, AZ), Figure 2 the board of a skimmer recovered from a fuel station in Southern California.
+People use Bluetooth for very unexpected things, and someone has to find the really unexpected ones. Example: the gas pump skimmer, real photos from the paper: Figure 1 an internal Bluetooth skimmer wrapped in grey tubing to blend in with the cabling inside the fuel pump (detected by Bluetana in Tempe, AZ), Figure 2 the board of a skimmer recovered from a fuel station in Southern California.
 Not from our scans but from Nishant's published paper (he is on the Step 1 slide): Bhaskar, Bland, Levchenko, Schulman, "Please Pay Inside: Evaluating Bluetooth-based Detection of Gas Pump Skimmers", USENIX Security 2019. They built the Bluetana app for inspectors. A perfect example of "a grad student dug in". Figures reproduced from the paper; keep the citation on screen.
 Numbers only if asked: Bluetooth scans at 1,185 gas stations in six states; 64 Bluetooth skimmers found in four states, all recovered by law enforcement.
 Next: Step 3, the manual research on one device.
