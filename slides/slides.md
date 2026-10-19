@@ -297,17 +297,38 @@ clicks: 3
 
 # Internet-wide measurement already exists
 
-<div class="mx-auto mt-2 overflow-hidden rounded-lg" style="width: 760px; height: 434px; border: 1px solid #333">
-  <img src="/shots/censys-search.jpg" style="width: 760px; height: 434px; max-width: none; transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform-origin 1.2s cubic-bezier(0.65, 0, 0.35, 1)"
+<div class="text-2xl mt-2 opacity-90"><span style="color:#9dd0ff">Search a product</span> → find every exposed device</div>
+
+<div class="mx-auto mt-3 overflow-hidden rounded-lg" style="width: 720px; height: 411px; border: 1px solid #333">
+  <img src="/shots/censys-search.jpg" style="width: 720px; height: 411px; max-width: none; transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform-origin 1.2s cubic-bezier(0.65, 0, 0.35, 1)"
     :style="(([fx, fy, z]) => ({ transformOrigin: `${fx * 100}% ${fy * 100}%`, transform: `translate(${(0.5 - fx) * 100}%, ${(0.5 - fy) * 100}%) scale(${z})` }))([[0.5,0.5,1],[0.34,0.192,2.6],[0.47,0.195,3.2],[0.7,0.44,1.9]][Math.min($clicks, 3)])" />
 </div>
 
 <!--
-Live demo, as a screenshot: searching Censys for one product. Click 1: the query, host.services.software.product:"Hikvision" (a camera / video-recorder vendor). Click 2: the result count (if asked: about 825,000 hosts). Click 3: each result is one Internet-facing device, with its network, location, open services and tags like CAMERA / IOT / LOGIN_PAGE.
+Forward direction: start from a product and find every exposed device. Searching Censys for one product. Click 1: the query, host.services.software.product:"Hikvision" (a camera / video-recorder vendor). Click 2: the result count (if asked: about 825,000 hosts). Click 3: each result is one Internet-facing device, with its network, location, open services and tags like CAMERA / IOT / LOGIN_PAGE.
 That is what defenders have for the Internet: pick a product, see every exposed instance. Shodan and Shadowserver do similar things (search engine; exposure reports to network owners).
 Screenshot: platform.censys.io search, logged out, captured 2026-10-19 via auto-browser; host IPs and hostnames blurred.
 Sources: Censys https://docs.censys.com/docs/internet-scanning ; Shodan https://help.shodan.io/the-basics/what-is-shodan ; Shadowserver https://www.shadowserver.org/what-we-do/data-collection/
 Coverage, scan frequency and access models differ. Do not claim every device or every service is measured continuously.
+-->
+
+---
+clicks: 2
+---
+
+# Internet-wide measurement already exists
+
+<div class="text-2xl mt-2 opacity-90"><span style="color:#9dd0ff">Look up a device</span> → find out what it is</div>
+
+<div class="mx-auto mt-3 overflow-hidden rounded-lg" style="width: 720px; height: 411px; border: 1px solid #333">
+  <img src="/shots/censys-host.jpg" style="width: 720px; height: 411px; max-width: none; transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform-origin 1.2s cubic-bezier(0.65, 0, 0.35, 1)"
+    :style="(([fx, fy, z]) => ({ transformOrigin: `${fx * 100}% ${fy * 100}%`, transform: `translate(${(0.5 - fx) * 100}%, ${(0.5 - fy) * 100}%) scale(${z})` }))([[0.5,0.5,1],[0.4,0.227,2.2],[0.33,0.833,3]][Math.min($clicks, 2)])" />
+</div>
+
+<!--
+The reverse direction: start from one device (an IP address) and ask what it is. Click 1: Censys has tagged it CAMERA / IOT and lists its open services: web (80), video stream (554 / RTSP) and a Hikvision recorder protocol (9020). Click 2: from the web server's response, the software is "Hikvision Web Server". So: this address is a Hikvision camera / recorder, on a residential ISP in Southern California.
+This is exactly what we want for Bluetooth: hear one advertisement → what product, app and vendor is it (our "Look it up" step later).
+Screenshot: Censys host page for one of the search results, logged out, captured 2026-10-19 via auto-browser; IP, reverse DNS, routing prefix, coordinates and URL blurred.
 -->
 
 ---
