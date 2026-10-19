@@ -746,6 +746,7 @@ layout: center
 
 <!--
 Phones and earbuds are everywhere. What is over-represented near hospitals compared with elsewhere becomes a new lead, a candidate, not an identification.
+The three names are real name patterns from our hospital-region WiGLE research (newcluetooth wiki): EmTag (Enovate clinical asset tag), ResMed + 6 digits (compatible with the ResMed AirMini pairing name), PrimexClock (Primex synchronized clock/repeater). They are candidates: no observation proves a particular hospital owns or uses them. The bar heights are illustrative, not measured counts; the map and dots are synthetic.
 -->
 
 ---

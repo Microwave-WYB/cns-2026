@@ -30,9 +30,9 @@ const APP_LEADS: Lead[] = [
   {ads: ad({uuid: 0xffb0, mfg: [0x0a90, 3]}), product: 'Kitchen scale', detail: '', status: 'attributed', src: 'app'},
 ];
 const PLACE_LEADS: Lead[] = [
-  {ads: ad({mfg: [0x0059, 8], name: 'XXTag'}), product: 'XXTag', detail: '', status: 'candidate', src: 'place'},
-  {ads: ad({uuid: 0xfeaa, svc: 10}), product: 'XXBeacon', detail: '', status: 'candidate', src: 'place'},
-  {ads: ad({mfg: [0x0c4e, 5], name: 'XXClock'}), product: 'XXClock', detail: '', status: 'candidate', src: 'place'},
+  {ads: ad({mfg: [0x0059, 8], name: 'EmTag'}), product: 'EmTag', detail: '', status: 'candidate', src: 'place'},
+  {ads: ad({mfg: [0x038d, 6], name: 'ResMed 000000'}), product: 'ResMed', detail: '', status: 'candidate', src: 'place'},
+  {ads: ad({mfg: [0x0c4e, 5], name: 'PrimexClock'}), product: 'PrimexClock', detail: '', status: 'candidate', src: 'place'},
 ];
 const WIGLE_ROW = 0; // the app lead with a distinctive name, checked against WiGLE
 
@@ -195,9 +195,9 @@ const DEV = (() => {
 const BARS: {label: string; kind: 'phone' | 'buds' | 'tag' | 'watch'; near: number; else_: number; hot: boolean}[] = [
   {label: 'phones', kind: 'phone', near: 0.9, else_: 0.85, hot: false},
   {label: 'earbuds', kind: 'buds', near: 0.6, else_: 0.62, hot: false},
-  {label: 'XXTag', kind: 'tag', near: 0.8, else_: 0.06, hot: true},
-  {label: 'XXBeacon', kind: 'tag', near: 0.55, else_: 0.05, hot: true},
-  {label: 'XXClock', kind: 'watch', near: 0.4, else_: 0.04, hot: true},
+  {label: 'EmTag', kind: 'tag', near: 0.8, else_: 0.06, hot: true},
+  {label: 'ResMed', kind: 'tag', near: 0.55, else_: 0.05, hot: true},
+  {label: 'PrimexClock', kind: 'watch', near: 0.4, else_: 0.04, hot: true},
 ];
 
 const Places = ({f}: {f: number}) => {
