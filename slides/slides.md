@@ -192,36 +192,20 @@ class: text-center
 
 # Its user manual
 
-<img src="/shots/karr-manual-cover.jpg" class="mx-auto mt-4 rounded-lg" style="height: 420px; border: 1px solid #333" />
-
-<!--
-The user manual in that FCC filing: "SWDS · KARR Security Systems · BT Series · Customer User Guide". The last page of the manual carries the same FCC ID, 2ASRL-1069. So the QT module is the KARR BT system, a dealer-installed car security system.
-Source: user manual in FCC filing 2ASRL-1069 (fccid.io), retrieved 2026-10-19.
--->
-
----
-layout: center
-class: text-center
----
-
-# And there it was
-
 <div class="flex justify-center items-center gap-10 mt-2">
-  <div class="rounded-lg" style="width: 607px; height: 450px; overflow: hidden; background: #fff; border: 1px solid #333">
-    <img src="/shots/karr-manual-p6.jpg"
-      :style="{ width: '607px', height: '450px', transformOrigin: '0 0', transition: 'transform 1.6s cubic-bezier(0.65, 0, 0.35, 1)',
-        transform: $clicks >= 1 ? 'translate(-1403.9px, -743.0px) scale(8)' : 'none' }" />
-  </div>
+  <ManualZoom :step="$clicks" />
   <div class="text-left" style="width: 330px">
-    <div v-click="2" class="text-3xl">the <strong>same name</strong> we saw on the street</div>
-    <div v-click="3" class="text-3xl mt-6" style="color:#9dd0ff">→ reverse engineer it, write the paper</div>
+    <div v-click="3" class="text-3xl">the <strong>same name</strong> we saw on the street</div>
+    <div v-click="4" class="text-3xl mt-6" style="color:#9dd0ff">→ reverse engineer it, write the paper</div>
   </div>
 </div>
 
 <!--
-A page of the manual (click: zoom into the phone screenshot, "Unit Settings") shows the unit's name: "QT" plus a serial number. The same format we saw everywhere on the street, which confirmed the identification: the QT devices are KARR modules. (The serial shown is the manual's own example.)
+The user manual in that FCC filing, shown like a PDF viewer. Cover: "SWDS · KARR Security Systems · BT Series · Customer User Guide"; the last page carries the same FCC ID, 2ASRL-1069. So the QT module is the KARR BT system, a dealer-installed car security system.
+Click 1: scroll down to the "Settings" page. Click 2: zoom into the app screenshot ("Unit Settings"), which shows the unit's name: "QT" plus a serial number. The same format we saw everywhere on the street: the QT devices are KARR modules. (The serial shown is the manual's own example.)
 Then the real work: reverse engineering the module and its app, and writing the paper.
 KARR, one slide only. The attack unlocks the car; it does not start it. The grad student who dug in was me (as a PhD). Do not go into BLE Theft Auto details. Optional aside: the car sits on the street, so "an attacker must be nearby" is not much comfort.
+Source: user manual in FCC filing 2ASRL-1069 (fccid.io), retrieved 2026-10-19.
 -->
 
 ---
