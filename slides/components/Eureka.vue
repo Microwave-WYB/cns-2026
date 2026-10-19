@@ -4,7 +4,7 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 defineProps<{ step: number }>()
 // AI-app style status line while thinking
-const WORDS = ['Thinking…', 'Scanning…', 'Reading the app…', 'Working…', 'Taking it apart…', 'Thinking…']
+const WORDS = ['Thinking…', 'Calling tool: WiGLE', 'Reading the app…', 'Working…', 'Taking it apart…', 'Thinking…']
 const i = ref(0)
 let t: ReturnType<typeof setInterval> | undefined
 onMounted(() => { t = setInterval(() => { i.value = (i.value + 1) % WORDS.length }, 1100) })
