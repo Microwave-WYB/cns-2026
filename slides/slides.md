@@ -114,16 +114,18 @@ class: text-center
 
 # We kept seeing "QT"
 
-<QtMap :step="$clicks" class="mx-auto mt-4" style="width: 860px" />
+<img src="/shots/qt-map.jpg" class="mx-auto mt-6 rounded-xl" style="width: 900px" />
 
-<div class="text-3xl mt-3">
-  <span v-click="1" class="mx-4">highway</span>
-  <span v-click="2" class="mx-4">parking lots</span>
-  <span v-click="3" class="mx-4">gas stations</span>
+<div class="flex justify-around text-2xl mt-3 opacity-70" style="width: 900px; margin-left: auto; margin-right: auto">
+  <div>San Diego</div>
+  <div>Bay Area</div>
 </div>
 
 <!--
-In our own scans one name prefix, "QT" followed by a module ID, kept showing up everywhere: on the highway, in parking lots, at gas stations. Nobody on the team knew what it was. Curiosity, not a plan. The map is a schematic illustration, not real locations or data; the serial numbers in the list are synthetic, in the observed format ("QT " + 7-8 hex digits).
+Real data: every "QT" sighting in our own scans (name matches "QT " + 7-8 hex digits), plotted on OpenStreetMap. Each circle is a ~1 km grid cell (coordinates rounded to two decimals), sized by how many distinct QT devices we saw there; no serial numbers and no exact locations are shown.
+In our own scans one name prefix, "QT" followed by a module ID, kept showing up: along the coast near Oceanside, in North County, near the border, and right on the freeway in the Bay Area. Nobody on the team knew what it was. Curiosity, not a plan.
+If asked for numbers: 18 distinct devices, about 1,200 scan rows, 8 grid cells. (Read-only query on our database, 2026-10-19.)
+Map: © OpenStreetMap contributors (standard tiles, darkened with a CSS filter), rendered with Leaflet.
 -->
 
 ---
