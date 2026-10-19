@@ -7,7 +7,8 @@ mdc: true
 
 # Toward a Continuous, Ecosystem-Scale<br>Bluetooth Security Observatory
 
-CNS 2026
+<div class="text-2xl mt-8">Yibo Wei</div>
+<div class="text-lg mt-2 opacity-60">UC San Diego · CNS 2026</div>
 
 <!--
 DRAFT v1, content first, theme later. See OUTLINE.md.
@@ -923,3 +924,5 @@ class: text-center
 ---
 
 # Thanks! Questions?
+
+<div class="text-2xl mt-8 opacity-80">Yibo Wei</div>
