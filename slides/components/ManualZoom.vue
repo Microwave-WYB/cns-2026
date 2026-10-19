@@ -5,7 +5,9 @@ import { computed } from 'vue'
 const props = defineProps<{ step: number }>()
 const W = 820, H = 470, PAD = 14 // viewer size and page margin
 const PH = H - 2 * PAD // page height on screen
-const pages = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({ n, src: `/shots/karr-manual-p${n}.jpg`, aspect: n === 1 ? 372 / 552 : n >= 7 ? 372 / 577 : 744 / 552 }))
+// asset paths must include the site base (e.g. /cns-2026/ on GitHub Pages); only static src in markdown is rewritten automatically
+const BASE = import.meta.env.BASE_URL
+const pages = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({ n, src: `${BASE}shots/karr-manual-p${n}.jpg`, aspect: n === 1 ? 372 / 552 : n >= 7 ? 372 / 577 : 744 / 552 }))
 // click steps: each stop is a page (0-based) and an optional zoom target (fraction of that page image, scale)
 type Stop = { page: number; zoom?: { fx: number; fy: number; s: number } }
 const STOPS: Stop[] = [
@@ -25,7 +27,7 @@ const lensStyle = computed(() => {
   const pw = PH * pages[5].aspect * z.s * LENS_X, ph = PH * z.s * LENS_X
   const cx = (QT.x0 + QT.x1) / 2, cy = (QT.y0 + QT.y1) / 2
   return { width: `${LENS}px`, height: `${LENS}px`, left: `${W / 2 - LENS / 2}px`, top: `${H / 2 - LENS / 2}px`,
-    backgroundImage: 'url(/shots/karr-manual-p6.jpg)', backgroundSize: `${pw}px ${ph}px`,
+    backgroundImage: `url(${BASE}shots/karr-manual-p6.jpg)`, backgroundSize: `${pw}px ${ph}px`,
     backgroundPosition: `${LENS / 2 - cx * pw}px ${LENS / 2 - cy * ph}px` }
 })
 const stop = computed(() => STOPS[Math.min(props.step, STOPS.length - 1)])
