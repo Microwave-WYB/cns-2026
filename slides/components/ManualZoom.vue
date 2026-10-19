@@ -2,7 +2,7 @@
 // The KARR user manual (FCC filing 2ASRL-1069) shown like a PDF viewer:
 // step 0 = cover, step >= 1 = scroll to page 6, step >= 2 = zoom into the app screenshot ("QT ..." line).
 const props = defineProps<{ step: number }>()
-const W = 600, H = 440, PAD = 12 // viewer size and page margin
+const W = 820, H = 470, PAD = 14 // viewer size and page margin
 const PH = H - 2 * PAD // page height on screen
 const pages = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => ({ n, src: `/shots/karr-manual-p${n}.jpg`, aspect: n === 1 ? 372 / 552 : n >= 7 ? 372 / 577 : 744 / 552 }))
 const TARGET = 5 // page 6, 0-based

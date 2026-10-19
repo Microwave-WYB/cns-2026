@@ -182,28 +182,23 @@ class: text-center
 
 <!--
 The search led to FCC ID 2ASRL-1069: "QT Solutions Bluetooth Sensor" by QT Solutions PTY LTD. The filing includes a user manual.
-Screenshot: fccid.io page for the filing, logged out, captured 2026-10-19.
+Screenshot: fccid.io page for the filing, logged out, desktop browser (auto-browser), captured 2026-10-19.
 -->
 
 ---
 layout: center
 class: text-center
+clicks: 2
 ---
 
 # Its user manual
 
-<div class="flex justify-center items-center gap-10 mt-2">
-  <ManualZoom :step="$clicks" />
-  <div class="text-left" style="width: 330px">
-    <div v-click="3" class="text-3xl">the <strong>same name</strong> we saw on the street</div>
-    <div v-click="4" class="text-3xl mt-6" style="color:#9dd0ff">→ reverse engineer it, write the paper</div>
-  </div>
-</div>
+<ManualZoom :step="$clicks" class="mx-auto mt-2" />
 
 <!--
 The user manual in that FCC filing, shown like a PDF viewer. Cover: "SWDS · KARR Security Systems · BT Series · Customer User Guide"; the last page carries the same FCC ID, 2ASRL-1069. So the QT module is the KARR BT system, a dealer-installed car security system.
 Click 1: scroll down to the "Settings" page. Click 2: zoom into the app screenshot ("Unit Settings"), which shows the unit's name: "QT" plus a serial number. The same format we saw everywhere on the street: the QT devices are KARR modules. (The serial shown is the manual's own example.)
-Then the real work: reverse engineering the module and its app, and writing the paper.
+Say: the same name we saw on the street. Then the real work: reverse engineering the module and its app, and writing the paper.
 KARR, one slide only. The attack unlocks the car; it does not start it. The grad student who dug in was me (as a PhD). Do not go into BLE Theft Auto details. Optional aside: the car sits on the street, so "an attacker must be nearby" is not much comfort.
 Source: user manual in FCC filing 2ASRL-1069 (fccid.io), retrieved 2026-10-19.
 -->
