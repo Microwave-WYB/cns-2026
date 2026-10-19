@@ -53,8 +53,6 @@ Tone: affectionate. They did the hard, curious work; the joke is about scale, no
 -->
 
 ---
-
----
 layout: center
 class: text-center
 ---
@@ -114,36 +112,17 @@ layout: center
 class: text-center
 ---
 
-# That became BLE Theft Auto
-
-<div class="text-2xl mt-4 opacity-70">Evaluating the Security of Aftermarket BLE-based Automotive Remote Control Systems</div>
-
-<div class="text-3xl mt-12 space-y-5">
-  <div v-click>your phone app is the car key</div>
-  <div v-click>added after the car is sold, by dealers or owners</div>
-  <div v-click>vendors roll their own security</div>
-</div>
-
-<div class="text-lg mt-12 opacity-50">Jerry Yu*, Yibo Wei*, et al.</div>
-
-<!--
-Context for the audience: aftermarket BLE remote-control systems for cars. The phone app works like a wireless key fob; these systems often skip BLE's built-in authentication and encryption and implement their own application-layer security, which is a new attack surface.
--->
-
----
-layout: center
----
-
-# First submission: one product. The reviews:
+# We wrote a paper on it.
 
 <div v-click class="mx-auto mt-10 rounded-xl p-8 text-left" style="max-width: 760px; background:#1c1c1c; border:1px solid #3a3a3a">
-  <div class="text-xl opacity-60">Reviewer #2</div>
+  <div class="text-xl opacity-60">Reviewer #2: <span style="color:#f87171">reject</span></div>
   <div class="text-4xl mt-4 leading-snug">"Only one vulnerability.<br><span v-mark.red="2">Lacks scientific novelty.</span>"</div>
   <div class="text-lg opacity-50 mt-6">(paraphrased)</div>
 </div>
 
 <!--
-True story (paraphrased): the first submission found one vulnerable product and was rejected for lacking scientific novelty.
+Say: we wrote this one product up as a paper, and it got rejected. True story (paraphrased review): only one vulnerable product, lacks scientific novelty.
+Background only if asked: aftermarket BLE remote-control systems for cars; the phone app is the key, installed after sale by dealers or owners, and vendors roll their own application-layer security instead of BLE's built-in pairing. The paper became "BLE Theft Auto" (Jerry Yu*, Yibo Wei*, et al.).
 -->
 
 ---
