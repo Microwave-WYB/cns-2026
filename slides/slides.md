@@ -428,6 +428,20 @@ WiGLE is still useful later, for validation (see "Validate with WiGLE"): a quick
 
 ---
 layout: center
+class: text-center
+---
+
+# Our own scanner
+
+<img src="/shots/our-scanner.jpg" class="mx-auto mt-2 rounded-2xl" style="height: 440px; border: 3px solid #3a3a3a" />
+
+<!--
+So we built our own scanner: an Android app that records every advertisement in full, not just a name and a MAC. Here: a Govee thermometer (Govee_H6199_…), with signal strength, time, location, and the raw advertisement broken into its AD structures (flags, name, manufacturer data).
+Screenshot from our app, captured 2026-10-19; device ID, coordinates, the last three MAC bytes, the name suffix and the raw data bytes are blurred.
+-->
+
+---
+layout: center
 ---
 
 # Listen
