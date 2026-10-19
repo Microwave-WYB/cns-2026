@@ -164,13 +164,11 @@ class: text-center
 
 # So we googled it
 
-<div class="text-5xl mt-10" style="font-family: ui-monospace, monospace; color:#9dd0ff">"QT FCC ID"</div>
-
-<!-- TODO: Google results screenshot (headless capture is blocked by Google's bot check); add as /shots/google-qt-fcc.jpg -->
+<img src="/shots/google-qt-fcc.jpg" class="mx-auto mt-6 rounded-lg" style="height: 400px; border: 1px solid #333" />
 
 <!--
-Every radio device sold in the US has an FCC ID, and the filing is public. So we searched the name plus "FCC ID".
-TODO: add a screenshot of the Google results page (Google blocks the headless browser, so it needs a manual capture).
+Every radio device sold in the US has an FCC ID, and the filing is public. So we searched the name plus "FCC ID". The first web result is the FCC filing 2ASRL-1069 and its user manual.
+Screenshot: Google search for "QT FCC ID", logged out, desktop, captured 2026-10-19 (via auto-browser after a human passed Google's check). The AI Overview at the top is Google's, not ours.
 -->
 
 ---
