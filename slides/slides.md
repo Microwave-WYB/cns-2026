@@ -834,7 +834,7 @@ layout: center
 <!--
 Every product family in our research wiki so far, scrolling: left is the name pattern, right is what it is. Each wiki entry also matches on company field / service UUIDs, not shown here. Early, medium-confidence attributions from our own scans; candidates, not authenticated identities. No device-level identifiers: these are family-level fingerprints.
 Point out a few as they scroll by: a heated coffee mug (Ember), a smart-bed cooler (Eight Sleep Pod), a laundry payment box (PayRange BluKey), truck air suspension (Air Lift), a trucker's electronic logging device (Xirgo HarpBT; ELDs are legally required in US trucks), a garage opener (Chamberlain myQ), a gas-pedal controller (Pedal Commander).
-If asked: 116 families listed here (wiki pages with a structured "How to recognize it" block, minus rollup/unknown pages).
+If asked: 110 families listed here (wiki pages with a structured "How to recognize it" block, minus rollup/unknown pages; near-identical families such as several generic LED controllers and two Dreo pages merged for the slide).
 -->
 
 ---
