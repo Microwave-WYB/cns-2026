@@ -17,7 +17,7 @@
 
 ## 初稿 v2（2026-10-15，最新）
 
-共 40 页；`overview.png` 是旧版缩略图总览，尚未随本次页面调整重新生成。
+共 41 页；`overview.png` 是旧版缩略图总览，尚未随本次页面调整重新生成。
 - 开场 10 页：UCSD 纪录片 → KARR → "That became BLE Theft Auto"（论文背景）→ 第一次投稿只有一个产品，被拒（"lacks scientific novelty"，转述）→ 做了 6 遍，3 个严重漏洞，USENIX 接收 → "If 6 is science… imagine 6,000" → 两格 meme（假论文封面 vs 印满 agent 论文标题的厕纸卷）"not yet another LLM security paper"。
 - 第 11 页直接展示互联网已有测量基础：Censys（主机/服务地图）、Shodan（设备/服务搜索）、Shadowserver（扫描与暴露报告），备注含官方来源。删去学生流动转折页，并替换泛化的互联网扫描动画页；衔接由讲者口述，不再增加转折页。
 - 核心假设 2 页（原生页，放在"广播结构"之后）："How do we classify all these advertisements?"（名字 / MAC OUI / manufacturer ID / UUID 单独都有歧义）→ "Similar devices → similar advertisements"（车、手表、标签三种形状；形状就是指纹，局限写在备注里）。（"广播高度结构化、不需要 embedding" 和相关工作写在这页备注里。）组件 `components/AdStrip.vue`。
@@ -25,7 +25,7 @@
   01 Listen · 02 广播结构 · 03 各不相同 · 04 名字通配符 · 05 同模板成簇 · 06 Company ID → 厂商 · 07 名字 → App · 08 反编译代码 · 09 回到观测数据验证 · 10 全部簇并行 · 11 知识库 · 12 扩大规模。
 - More ways in 5 页：13 从 App（AndroZoo 元数据按蓝牙权限预筛）· 14 WiGLE 验证 · 15 从地点（OSM 有急诊的医院，合成数据，XXTag 等占位名）· 16 医院附近明显偏多 → 新线索（候选）· 17 三个来源汇入同一知识库（WiGLE 只做验证）。
 - 验证 1 页："Found something suspicious?"（hypothesis → validate → buy the real device → 在买来的设备上读 GATT，作为最终证据）。GATT 已并入第 19 页 "How do we classify all these advertisements?" 的最后一行（not broadcast, may not be legal 🙃），原来单独的 GATT 页已删除。
-- 指纹澄清（talk/lookup-fingerprint 分支）：按广播结构聚类只是快速分流（决定先查哪一堆），不是最终指纹；查完后提取具体指纹（厂商 ID + 固定字节、私有 UUID、名字模式）存入知识库。新增原生页 "Look it up"（"Remember it" 之后，新广播 → 知识库 → 产品；名字缺失仍可识别；早期原型，数字只在被问时说）。总页数 39 → 40。
+- 指纹澄清（talk/lookup-fingerprint 分支）：按广播结构聚类只是快速分流（决定先查哪一堆），不是最终指纹；查完后提取具体指纹（厂商 ID + 固定字节、私有 UUID、名字模式）存入知识库。新增原生页 "Look it up"（"Remember it" 之后，新广播 → 知识库 → 产品；名字缺失仍可识别；早期原型，数字只在被问时说）。新增原生页 "What an entry looks like"（"Remember it" 与 "Look it up" 之间，合成的知识库条目：Markdown + YAML frontmatter，用代码行高亮逐步讲解；该页是"屏幕上不放数字/ID"原则的有意例外，值都是假的）；"Look it up" 第二行改为用户改名 "My Car"。总页数 39 → 41。
 - 测量 1 页、收尾 2 页。
 - 每页讲者备注里有讲稿要点和措辞提醒。
 - 构建：`mise run //:build`；预览：`mise run //:dev` → http://100.83.234.55:3030/ （讲者模式 `/presenter/`）。

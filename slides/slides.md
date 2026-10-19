@@ -511,6 +511,47 @@ Each entry stores a specific fingerprint (vendor ID, fixed bytes in the manufact
 layout: center
 ---
 
+# What an entry looks like <span class="text-lg opacity-60 ml-4">synthetic example</span>
+
+```md {1|2-5|6-11|7-9|10|11|12-13|15-19}
+---
+family: vx-car-module
+product: VX car module
+vendor: Example Motors
+app: com.example.vxcontrol
+fingerprint:
+  company_id: 0xFFFF
+  mfr_data: { prefix: "5A 01 00 00", mask: "FF FF 00 00" }
+  service_uuids: ["fffe0001-0000-4000-8000-000000000000"]
+  name: { pattern: "VX-*", stability: editable }
+  shape: [flags, uuid, mfg, name]   # triage only
+confidence: medium
+evidence: [app_package, decompiled_code, bought_device: no]
+---
+
+# VX car module
+Phone-app-controlled car module.
+Identified from its companion app's code.
+Verify: match the fixed bytes, then test a bought device.
+```
+
+<!--
+Synthetic example: fictional vendor, reserved test company ID, made-up UUID and package name. The talk-wide rule is no numbers or IDs on screen; this slide is the deliberate exception, and every value is fake.
+Entries are plain Markdown files kept in git. They are compiled into the lookup index, which is the "Look it up" step.
+1. Frontmatter: one entry per product family.
+2. Identity: product, vendor and app. This is what a match tells us.
+3. The fingerprint block: everything we match new advertisements against.
+4. The stable firmware fields: company ID, fixed manufacturer-data bytes with a mask (some bytes are don't-care), and a private UUID.
+5. The name pattern, marked editable: users can rename the device, so the name only supports a match. This is why renamed devices are still recognized.
+6. The shape is for triage only: it decided which pile to investigate, it is not matched on.
+7. Confidence and evidence: app package, decompiled code, and whether we validated on a bought device.
+8. The body: what it is, how it was identified, how to verify. Readable by the next student or agent.
+-->
+
+---
+layout: center
+---
+
 # Look it up
 
 <div class="grid grid-cols-[auto_auto_auto] gap-x-6 gap-y-10 mt-10 items-center">
@@ -518,13 +559,13 @@ layout: center
   <div v-click="1" class="text-2xl opacity-70 whitespace-nowrap">→ knowledge base →</div>
   <div v-click="1" class="text-3xl font-semibold whitespace-nowrap">car module</div>
 
-  <AdStrip v-click="2" :tile="8" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'mfg',n:11}]" label="name missing" />
+  <AdStrip v-click="2" :tile="8" :parts="[{t:'flags',n:3},{t:'uuid',n:4},{t:'mfg',n:11},{t:'name',n:6}]" label='"My Car"' />
   <div v-click="3" class="text-2xl opacity-70 whitespace-nowrap">→ knowledge base →</div>
   <div v-click="3" class="text-3xl font-semibold whitespace-nowrap">car module</div>
 </div>
 
 <!--
-A new advertisement arrives; we match it against the fingerprints stored in the knowledge base and get a product label. Second example: the name was changed or is missing, and it is still recognized through the other fields.
+A new advertisement arrives; we match it against the fingerprints stored in the knowledge base and get a product label. Second example: the owner renamed the device to "My Car", and it is still recognized through the other fields.
 Several fields are matched together (vendor ID, fixed bytes, private UUIDs, name pattern), so a renamed device is still recognized; no single field decides.
 Advertisements we cannot match become the next investigation list. This ties to "only new templates need investigating".
 Say: this is an early prototype on our own scan data; we built it this week. Synthetic example on the slide.
