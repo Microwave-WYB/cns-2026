@@ -33,7 +33,7 @@ const props = withDefaults(defineProps<{ rows?: Row[]; stagger?: number; delay?:
 </template>
 
 <style scoped>
-.phone { width: 234px; height: 416px; border-radius: 36px; border: 3px solid #3a3a3a; background: #0d0d0d; padding: 34px 10px 12px; position: relative; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+.phone { flex: none; width: 234px; height: 416px; border-radius: 36px; border: 3px solid #3a3a3a; background: #0d0d0d; padding: 34px 10px 12px; position: relative; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
 .notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 80px; height: 16px; border-radius: 10px; background: #000; }
 .bar { display: flex; justify-content: space-between; align-items: center; padding: 4px 8px 10px; border-bottom: 1px solid #262626; }
 .title { font: 600 17px Inter, system-ui, sans-serif; color: #ededed; }

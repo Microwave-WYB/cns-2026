@@ -31,11 +31,11 @@ clicks: 1
 
 <div class="flex items-center justify-center gap-6 mt-4">
   <Wardrive :step="$clicks" />
-  <PhoneScan :active="$clicks >= 1" :delay="0.8" :stagger="0.5" :rows="[{ n: 'Oral-B', s: 4 }, { n: 'Unknown', s: 2 }, { n: 'Tile', s: 3 }, { n: 'Ember Mug', s: 3 }, { n: 'MyQ-XXX', s: 2 }, { n: 'Unknown', s: 1 }, { n: 'GO Plus', s: 4 }, { n: 'OBDII', s: 3 }, { n: 'Haiku XXXX', s: 2 }, { n: 'Unknown', s: 2 }]" />
+  <PhoneScan :active="$clicks >= 1" :delay="0.3" :stagger="0.5" :rows="[{ n: 'Oral-B', s: 4 }, { n: 'Unknown', s: 2 }, { n: 'Tile', s: 3 }, { n: 'Ember Mug', s: 3 }, { n: 'MyQ-XXX', s: 2 }, { n: 'Unknown', s: 1 }, { n: 'GO Plus', s: 4 }, { n: 'OBDII', s: 3 }, { n: 'Haiku XXXX', s: 2 }, { n: 'Unknown', s: 2 }]" />
 </div>
 
 <!--
-Animation: Aaron and Nishant (with a phone running WiGLE) on a city map; click: Aaron flies off, Nishant walks the streets all over the map and signals pop up wherever he goes. The phone on the right fills with the names they picked up (examples of name formats from our wiki; the phone is a mock, not a screenshot). Schematic, not real data.
+Animation: Nishant (with a phone running WiGLE) on a city map; click: he walks the streets all over the map and signals pop up wherever he goes. The phone on the right fills with the names they picked up (examples of name formats from our wiki; the phone is a mock, not a screenshot). Schematic, not real data.
 Say: they drove around with WiGLE, everywhere, and kept going "ooh… what's that?"
 Photos: Aaron from his UCSD homepage (cseweb.ucsd.edu/~schulman), Nishant from cseweb.ucsd.edu/~nibhaska.
 WiGLE: a crowdsourced wardriving database of Wi-Fi, cell and Bluetooth sightings with locations, collected by volunteers' phones.
