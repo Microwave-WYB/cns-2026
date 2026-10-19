@@ -114,12 +114,12 @@ class: text-center
 
 # We kept seeing "QT"
 
-<QtMap :step="$clicks" class="mx-auto mt-4" style="width: 780px" />
+<QtMap :step="$clicks" class="mx-auto mt-4" style="width: 720px" />
 
-<div class="text-3xl mt-4">
-  <span v-click="1" class="mx-4" style="color:#4ea8ff">highway</span>
-  <span v-click="2" class="mx-4" style="color:#2fc7b4">parking lots</span>
-  <span v-click="3" class="mx-4" style="color:#f87171">gas stations</span>
+<div class="text-3xl mt-3">
+  <span v-click="1" class="mx-4">highway</span>
+  <span v-click="2" class="mx-4">parking lots</span>
+  <span v-click="3" class="mx-4">gas stations</span>
 </div>
 
 <!--
