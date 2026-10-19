@@ -513,7 +513,7 @@ layout: center
 
 # What an entry looks like
 
-```md {1|2-5|6-11|7|8-10|11|12-13|16-19}
+```md {1|2-5|6-8|7|8|9|10-11|14-17}
 ---
 family: karr-module
 product: KARR (dealer-installed vehicle module)
@@ -521,10 +521,8 @@ vendor: KARR Security
 app: KARR Security app
 fingerprint:
   name: { regex: "^QT [0-9A-F]{7,8}$" }
-  company_id: none    # field reused for module data, not a SIG ID
-  mfr_data: 6 bytes, per-module
-  service_uuids: none
-  shape: [name, flags, mfr(6)]    # triage only
+  mfr_data: { length: 6 }
+shape: [name, flags, mfr(6)]    # triage only
 confidence: high
 evidence: [paper, real_devices, vendor_disclosure]
 ---
@@ -542,8 +540,8 @@ Entries are plain Markdown files kept in git. They are compiled into the lookup 
 2. Identity: product, vendor and app. This is what a match tells us.
 3. The fingerprint block: everything we match new advertisements against.
 4. The name is a regex, not a wildcard: "QT " plus 7-8 uppercase hex characters. KARR names normally cannot be renamed anyway.
-5. company_id, mfr_data, service_uuids: the "company id" bytes vary per module and are not a Bluetooth SIG company ID, so a single field is unreliable (ties back to "How do we classify all these advertisements?"). There is no stability field: an entry lists several independent features, so if one changes (e.g. a renamed device elsewhere) the others still match.
-6. The shape is for triage only: it told us which pile to investigate, it is not matched on.
+5. mfr_data: only the length is matched. The first two bytes vary per module and are not a Bluetooth SIG company ID, so we don't use them; this is why a single field is unreliable (ties back to "How do we classify all these advertisements?"). There is no stability field: an entry lists several independent features, so if one changes (e.g. a renamed device elsewhere) the others still match. A fingerprint lists only features that actually match.
+6. The shape sits at the top level, outside the fingerprint: it is for triage only. It told us which pile to investigate, it is not matched on.
 7. Confidence and evidence: the published paper, real devices tested, vendor disclosure.
 8. The body: what it is and what we found (the advertisement carries the module name and mode; no pairing by default; a challenge-response with fixed keys shared across all modules; no encryption). Readable by the next student or agent.
 -->
