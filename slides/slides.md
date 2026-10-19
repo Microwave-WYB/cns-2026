@@ -880,6 +880,7 @@ Say: The knowledge base tells us which device is worth buying.
 Keep it short. Earlier checks can rule out many hypotheses cheaply; real hardware is always the final confirmation, before any disclosure.
 -->
 
+---
 hide: true
 ---
 
