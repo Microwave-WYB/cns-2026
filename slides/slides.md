@@ -20,7 +20,64 @@ layout: center
 class: text-center
 ---
 
-# How BLE security research<br>used to be done at UCSD
+# Ever wondered what all these are?
+
+<div class="flex justify-center mt-6">
+<div class="rounded-2xl flex items-center justify-center text-center" style="width: 260px; height: 420px; border: 3px dashed #4a4a4a; color: #8a8a8a">
+  <div><div class="text-xl font-bold">TODO</div><div class="text-lg mt-2">Bluetooth settings<br>screenshot</div></div>
+</div>
+</div>
+
+---
+---
+
+# That's not the whole story
+
+<div class="flex justify-center items-center gap-16 mt-6">
+<div class="rounded-2xl flex items-center justify-center text-center" style="width: 260px; height: 420px; border: 3px dashed #4a4a4a; color: #8a8a8a">
+  <div><div class="text-xl font-bold">TODO</div><div class="text-lg mt-2">nRF Connect<br>screenshot</div></div>
+</div>
+  <div class="text-left flex flex-col gap-8">
+    <div v-click><div class="text-4xl font-bold" style="font-family: ui-monospace, monospace; color:#9dd0ff">4C 00 = Apple</div><div class="text-xl mt-2 opacity-70">Find My, AirDrop, …</div></div>
+    <div v-click><div class="text-4xl font-bold">68%</div><div class="text-xl mt-2 opacity-70">of what we hear is Apple</div></div>
+    <div v-click><div class="text-4xl font-bold">91%</div><div class="text-xl mt-2 opacity-70">have no name at all</div></div>
+  </div>
+</div>
+
+---
+layout: center
+class: text-center
+---
+
+# What is all this Bluetooth doing?
+
+<div v-click class="text-4xl mt-10">nobody really knows</div>
+
+---
+layout: center
+class: text-center
+---
+
+# Why should you care?
+
+<div class="grid grid-cols-[1fr_1.4fr] gap-6 mt-6 items-center">
+  <img src="/shots/skimmer-tape.jpg" class="rounded-lg w-full" style="border: 1px solid #333" />
+  <img src="/shots/skimmer-board.jpg" class="rounded-lg w-full" style="border: 1px solid #333" />
+</div>
+
+<div v-click class="text-4xl mt-6" style="color:#f87171">a gas pump card <strong>skimmer</strong></div>
+<div v-click class="text-3xl mt-3">over Bluetooth: no trip back for the data, no getting caught</div>
+<div class="text-lg mt-2 opacity-60">Please Pay Inside, USENIX Security '19</div>
+
+---
+layout: center
+class: text-center
+hide: true
+---
+
+# Let me tell you a story
+
+<div class="text-3xl mt-8 opacity-80">how BLE security research used to be done at UCSD</div>
 
 <div v-click class="text-2xl opacity-60 mt-6">(a documentary)</div>
 
@@ -28,7 +85,7 @@ class: text-center
 clicks: 1
 ---
 
-# Step 1: drive around and scan
+# This is Nishant, our former PhD student
 
 <div class="flex items-center justify-center gap-6 mt-4">
   <Wardrive :step="$clicks" />
@@ -48,7 +105,7 @@ layout: center
 class: text-center
 ---
 
-# Step 2: find out what's out there
+# Find out what's out there
 
 <div class="grid grid-cols-[1fr_1.4fr] gap-6 mt-6 items-center">
   <img src="/shots/skimmer-tape.jpg" class="rounded-lg w-full" style="border: 1px solid #333" />
@@ -71,7 +128,7 @@ class: text-center
 clicks: 2
 ---
 
-# Step 3: research
+# Research
 
 <Eureka :step="$clicks" class="mt-4" />
 
@@ -94,7 +151,10 @@ class: text-center
 </div>
 
 <!--
-Illustration of a phone BLE scanner app (not a real screenshot; serials and addresses masked). Wherever we scanned, the list was full of "QT" followed by a module ID. Nobody on the team knew what it was. Curiosity, not a plan.
+It will be good if there's a place I can go to just to figure out what QT is
+Callback to the opening demo: this is the same question, "what is this device?", for one name we kept seeing everywhere.
+Say: wouldn't it be nice to have a tool where I type in a Bluetooth device and it tells me what it is? We didn't have one, so we did it the slow way (next slides).
+Illustration of a phone BLE scanner app (not a real screenshot; serials and addresses masked).
 -->
 
 ---
@@ -102,27 +162,65 @@ layout: center
 class: text-center
 ---
 
-# So we checked WiGLE…
+# So what is QT?
 
-<div class="flex justify-center gap-6 mt-4 items-stretch">
-  <img src="/shots/qt-wigle-sd.jpg" class="rounded-xl" style="height: 430px" />
-  <div class="rounded-xl px-5 py-3 text-left" style="background:#161616; border:1px solid #2a2a2a; font-family: ui-monospace, monospace; font-variant-ligatures: none; color:#9dd0ff; font-size: 17px; line-height: 1.55; overflow: hidden; height: 430px">
-    <div>QT XXXXXXXX</div>
-    <div>QT XXXXXXX</div>
-    <div>QT XXXXXXXX</div>
-    <div>QT XXXXXXXX</div>
-    <div>QT XXXXXXX</div>
-    <div>QT XXXXXXXX</div>
-    <div>QT XXXXXXX</div>
-    <div>QT XXXXXXXX</div>
-    <div>QT XXXXXXXX</div>
-    <div>QT XXXXXXX</div>
-    <div>QT XXXXXXXX</div>
-    <div>QT XXXXXXXX</div>
-    <div>QT XXXXXXX</div>
-    <div class="opacity-50">…</div>
-  </div>
-</div>
+<img src="/shots/google-what-is-qt.jpg" class="mx-auto mt-4 rounded-lg" style="height: 420px; border: 1px solid #333" />
+
+<!--
+Say: wouldn't it be nice to have a tool where I type in a Bluetooth device and it tells me what it is? There isn't one. Google "what is QT": a quart, "on the QT" (quietly), quantitative tightening, the Qt software framework. Nothing about a little box that keeps showing up on the street.
+So we had to do it by hand: WiGLE → Google → FCC filing → user manual → the app. The next slides are exactly those steps, for one device, over many hours. The rest of the talk is about building that missing tool.
+Screenshot: Google search "what is QT", logged out, desktop, captured 2026-10-19 via auto-browser.
+-->
+
+---
+clicks: 3
+---
+
+# For the Internet, there's Censys
+
+<div class="text-2xl mt-2 opacity-90"><span style="color:#9dd0ff">Search a product</span> → find every exposed device</div>
+
+<ShotTour :step="$clicks" src="/shots/censys-search.jpg" :iw="1600" :ih="913" class="mt-3" :stops="[
+  {},
+  { x: 560, y: 90, s: 2.2, boxes: [{ x0: 405, y0: 54, x1: 700, y1: 82 }], caption: 'search: one product' },
+  { x: 820, y: 200, s: 2.2, boxes: [{ x0: 698, y0: 168, x1: 826, y1: 189 }], caption: '825,171 hosts' },
+  { x: 900, y: 780, s: 1.8, boxes: [{ x0: 718, y0: 709, x1: 856, y1: 734 }, { x0: 836, y0: 756, x1: 970, y1: 780 }, { x0: 740, y0: 834, x1: 1052, y1: 859 }], caption: 'what it is, what it runs', captionTop: true },
+]" />
+
+<!--
+We don't know what they are
+
+How can you go from what we scan locally to what this thing is
+-->
+
+---
+clicks: 2
+---
+
+# For the Internet, there's Censys
+
+<div class="text-2xl mt-2 opacity-90"><span style="color:#9dd0ff">Look up a device</span> → find out what it is</div>
+
+<ShotTour :step="$clicks" src="/shots/censys-host.jpg" :iw="1600" :ih="913" class="mt-3" :stops="[
+  {},
+  { x: 560, y: 240, s: 2, boxes: [{ x0: 384, y0: 136, x1: 522, y1: 160 }, { x0: 440, y0: 332, x1: 752, y1: 357 }], caption: 'tags and open services' },
+  { x: 520, y: 820, s: 2.2, boxes: [{ x0: 440, y0: 805, x1: 570, y1: 826 }], caption: 'software, from its own banner' },
+]" />
+
+<!--
+The reverse direction: start from one device (an IP address) and ask what it is. Click 1: Censys has tagged it CAMERA / IOT and lists its open services: web (80), video stream (554 / RTSP) and a Hikvision recorder protocol (9020). Click 2: from the web server's response, the software is "Hikvision Web Server". So: this address is a Hikvision camera / recorder, on a residential ISP in Southern California.
+This is exactly what we want for Bluetooth: hear one advertisement → what product, app and vendor is it (our "Look it up" step later).
+Screenshot: Censys host page for one of the search results, logged out, captured 2026-10-19 via auto-browser; IP, reverse DNS, routing prefix, coordinates and URL blurred.
+-->
+
+---
+layout: center
+class: text-center
+---
+
+# For Bluetooth, the closest is WiGLE
+
+<img src="/shots/wigle-qt-search.jpg" class="mx-auto mt-4 rounded-lg" style="height: 440px; border: 1px solid #333" />
 
 <!--
 Every dot is a Bluetooth device named "QT" + a module ID, in WiGLE's crowdsourced data for San Diego County (the WiGLE download we made for the BLE Theft Auto paper, name like "QT %"). They are everywhere: on every freeway, in every neighborhood. Say: "…and it was everywhere." Still no idea what it is: WiGLE only has the name.
@@ -136,9 +234,98 @@ layout: center
 class: text-center
 ---
 
-# So we googled it
+# By hand: all we have
 
-<img src="/shots/google-qt-fcc.jpg" class="mx-auto mt-6 rounded-lg" style="height: 400px; border: 1px solid #333" />
+<div class="mx-auto mt-4 text-left rounded-2xl px-8 py-6" style="width: 900px; background:#1c1c1c; border:1px solid #2f2f2f">
+  <div class="text-3xl font-bold" style="font-family: ui-monospace, monospace; font-variant-ligatures: none">QT 8B1<span style="opacity:.35">XXXXX</span></div>
+  <div class="text-xl mt-1 opacity-70" style="font-family: ui-monospace, monospace; font-variant-ligatures: none">40:84:32<span style="opacity:.45">:XX:XX:XX</span></div>
+  <div class="grid grid-cols-[60px_90px_340px_1fr] gap-y-3 mt-6 text-xl" style="font-family: ui-monospace, monospace; font-variant-ligatures: none">
+    <div class="opacity-60">Len</div><div class="opacity-60">Type</div><div></div><div class="opacity-60">Data</div>
+    <div>11</div><div>0x09</div><div class="opacity-70">Complete Local Name</div><div>QT 8B1<span style="opacity:.35">XXXXX</span></div>
+    <div>2</div><div>0x01</div><div class="opacity-70">Flags</div><div>06</div>
+    <div>7</div><div>0xFF</div><div class="opacity-70">Manufacturer Specific Data</div><div><span style="color:#9dd0ff">76 31</span> 31 73 34 e8</div>
+  </div>
+</div>
+
+<!--
+This is everything one QT device tells us: a name, a MAC address, and an advertisement with three AD structures: name, flags, and manufacturer-specific data.
+By the spec, the first two bytes of manufacturer data are the company ID assigned by the Bluetooth SIG (highlighted, little-endian: 0x3176).
+Say: so what can we do with just this? Two obvious things to try.
+Real advertisement from our scans (simi cluetooth DB, read-only); name serial and the last three MAC bytes masked.
+-->
+
+---
+layout: center
+class: text-center
+clicks: 1
+---
+
+# The MAC address prefix
+
+<img v-if="$clicks < 1" src="/shots/oui-lookup-408432.jpg" class="mx-auto mt-4 rounded-lg" style="height: 340px; border: 1px solid #333" />
+<img v-else src="/shots/microchip-products.jpg" class="mx-auto mt-4 rounded-lg" style="height: 340px; border: 1px solid #333" />
+
+<div v-click class="text-3xl mt-6 opacity-80">a chip maker, not a product</div>
+
+<!--
+The first three bytes of a public MAC address (the OUI) are registered with the IEEE. QT devices use Microchip prefixes (40:84:32, 44:B7:D0, 2C:FE:8B, …) and SST Taiwan (a Microchip subsidiary).
+Say: so it has a Microchip Bluetooth chip inside. Like thousands of other products. Still no idea what it is.
+If asked: our scans have about 1,700 QT devices; every OUI they use belongs to Microchip or SST. Source: IEEE OUI registry.
+-->
+
+---
+layout: center
+class: text-center
+---
+
+# The manufacturer ID
+
+<div class="grid grid-cols-[auto_auto_auto] gap-x-10 gap-y-3 mt-8 mx-auto w-fit text-3xl text-left" style=" font-family: ui-monospace, monospace; font-variant-ligatures: none">
+  <div style="color:#9dd0ff">0x3176</div><div class="opacity-50">→</div><div>?</div>
+  <div style="color:#9dd0ff">0x3978</div><div class="opacity-50">→</div><div>?</div>
+  <div style="color:#9dd0ff">0x3670</div><div class="opacity-50">→</div><div>?</div>
+  <div style="color:#9dd0ff">0x3970</div><div class="opacity-50">→</div><div>?</div>
+  <div style="color:#9dd0ff">0x3875</div><div class="opacity-50">→</div><div>?</div>
+</div>
+
+<!--
+Five QT devices, five different "manufacturer IDs". Every QT device we saw has a different one.
+Click: we looked them up in the Bluetooth SIG company identifier list: none of them exists. The list currently ends around 0x1132; these are all far beyond it.
+Say: either there are thousands of secret Bluetooth companies, or something is off. We only found out what was going on much later, when we took the app apart (keep the reveal for that slide).
+Real values from our scans; Bluetooth SIG Assigned Numbers, company_identifiers.yaml, retrieved 2026-10-19.
+-->
+
+---
+layout: center
+class: text-center
+clicks: 4
+---
+
+# Bluetooth SIG company IDs
+
+<SigPdfZoom :step="$clicks" class="mx-auto mt-2" />
+
+---
+layout: center
+class: text-center
+clicks: 2
+---
+
+# Luckily: wireless devices sold in the US need an FCC ID
+
+<ShotZoom :step="$clicks" src="/shots/ecfr-2925-page.jpg" :iw="1585" :ih="840"
+  :zoom="{ x: 880, y: 630, s: 2 }"
+  :lines="[{ x0: 561, x1: 1228, y: 706 }, { x0: 592, x1: 1217, y: 759 }, { x0: 593, x1: 1216, y: 781 }]"
+  class="mx-auto mt-6" />
+
+---
+layout: center
+class: text-center
+clicks: 1
+---
+
+<ShotZoom :step="$clicks" src="/shots/google-qt-fcc.jpg" :iw="1200" :ih="806" :width="760"
+  :zoom="{ x: 494, y: 572, s: 2.15 }" :lines="[]" class="mx-auto" />
 
 <!--
 Every radio device sold in the US has an FCC ID, and the filing is public. So we searched the name plus "FCC ID". The first web result is the FCC filing 2ASRL-1069 and its user manual.
@@ -184,21 +371,69 @@ layout: center
 class: text-center
 ---
 
+<img src="/shots/play-karr-security.jpg" class="mx-auto rounded-lg" style="width: 860px; border: 1px solid #333" />
+
+---
+layout: center
+class: text-center
+---
+
 # So we took the app apart
 
-<div class="mx-auto mt-10 text-left rounded-xl px-6 py-4" style="width: 760px; background:#1c1c1c; border:1px solid #2f2f2f; font-family: ui-monospace, monospace; font-variant-ligatures: none; font-size: 20px; line-height: 1.7; white-space: pre">
-  <div><span style="color:#6b6b6b">// challenge-response, simplified; keys redacted</span></div>
-  <div>response = hash(challenge, <span style="color:#9dd0ff">name</span>, <span style="color:#9dd0ff">mode</span>, <span style="color:#f87171">KEY</span>)</div>
-  <div><span style="color:#f87171">DEALER_KEY</span> = <span style="display:inline-block; width: 10em; height: 0.9em; background:#3a3a3a; border-radius: 3px; vertical-align: middle"></span>&nbsp;&nbsp;<span style="color:#6b6b6b">// hard-coded</span></div>
-  <div><span style="color:#f87171">USER_KEY</span>&nbsp;&nbsp;&nbsp;= <span style="display:inline-block; width: 10em; height: 0.9em; background:#3a3a3a; border-radius: 3px; vertical-align: middle"></span>&nbsp;&nbsp;<span style="color:#6b6b6b">// hard-coded</span></div>
-</div>
+```python {*|2}
+# manufacturer data, simplified
+color   = parse_int(manufacturer_data[0:2])
+mode    = parse_int(manufacturer_data[2:4])
+armed   = parse_int(manufacturer_data[3:4])
+battery = parse_int(manufacturer_data[5:6])
 
+# challenge-response, simplified; keys redacted
+DEALER_KEY = "████████████"  # hard-coded
+USER_KEY   = "████████████"  # hard-coded
+if mode == Mode.DEALER:
+    key = DEALER_KEY
+else:
+    key = USER_KEY
+response = hash(challenge, name, key)
+```
+
+<style>
+.slidev-code { font-size: 1.15rem !important; line-height: 1.6 !important; text-align: left; width: 860px; margin-left: auto; margin-right: auto; }
+</style>
 
 <!--
 We downloaded the KARR Android app and decompiled it. Authentication is a custom application-layer challenge-response over BLE: the module sends random challenge bytes, and the app answers with a hash of the challenge, the module name and mode (both broadcast in the advertisement, highlighted) and one of two hard-coded fixed keys: a dealer-level key (operate and configure) and a user-level key (operate only).
 The same keys are in every copy of the app and work for every KARR module. No pairing by default, no encryption. So anyone with the keys can write an app that authenticates to every KARR module within range: the attack unlocks the car; it does not start it.
-Code on the slide is a simplified illustration, not the decompiled source; the real keys are never shown. Disclosed to the vendor, who developed patches.
+Code on the slide is a simplified illustration, not the decompiled source; the real keys are never shown.
+Click (the reveal from "The manufacturer ID", highlights the color line): how the app reads the manufacturer data. It starts at byte 0: there is no company ID at all. d[0] and d[1] (highlighted line), the two bytes every scanner reads as a "company", carry a colour code (an integer enum: 1 ORANGE, 2 BLUE, 3 LIGHTGREEN, …); then mode, armed, snow mode and the car battery voltage (d[5] × 0.06 V). That is why every QT device shows a different, nonexistent company. Example 76 31 31 73 34 e8: colour ORANGE, battery 13.92 V.
+The `if mode == Mode.DEALER` line connects the two blocks: the mode broadcast in the advertisement decides which hard-coded key the app uses (simplified: in the real app the dealer key is used for every mode except USER and VALET).
+Simplified from our reverse engineering (qtclient, protocol.py QTAdData; decompiled FRMBLEDealerApp), not the original source. Disclosed to the vendor, who developed patches.
 Source: BLE Theft Auto paper, KARR case study.
+-->
+
+---
+layout: center
+---
+
+# Who can open which car?
+
+```python
+# access control, simplified
+devices = scan()                     # every KARR module nearby
+my_cars = api.get_my_vehicles(user)  # from the vendor's server
+for device in devices:
+    if device.name in my_cars:
+        allow_access(device)
+```
+
+<style>
+.slidev-code { font-size: 1.3rem !important; line-height: 1.7 !important; text-align: left; width: 860px; margin-left: auto; margin-right: auto; }
+</style>
+
+<!--
+How the app decides who may open which car. It scans every KARR module nearby, asks the vendor's API for the list of vehicles this user's account owns, and loops: if the scanned device is in that list, the app lets the user connect.
+Say: the check lives only in the app. The module never asks who you are, only for the shared hard-coded key from the previous slide. A client that skips this loop can talk to every module in range.
+Simplified illustration of the decompiled app's logic, not the original source.
 -->
 
 ---
@@ -240,13 +475,62 @@ Same investigation, six representative aftermarket systems; critical pairing/aut
 -->
 
 ---
-layout: center
-class: text-center
 ---
 
-# If 6 is science…
+# Everyone rolled their own auth
 
-<div v-click class="text-8xl mt-10 font-bold">imagine 6,000</div>
+<div class="grid grid-cols-[180px_1fr] gap-x-8 gap-y-7 mt-10 text-2xl">
+  <div v-click class="font-bold" style="color:#f87171">KARR</div>
+  <div v-after>Same two hard-coded keys unlock every module</div>
+  <div v-click class="font-bold" style="color:#f87171">CarLink</div>
+  <div v-after>Anyone nearby can pair; AES key from sniffable values</div>
+  <div v-click class="font-bold" style="color:#f87171">Rockledge</div>
+  <div v-after>Credentials derivable from its own advertisements</div>
+</div>
+
+---
+---
+
+# Takeaways
+
+<v-clicks>
+
+- BLE pairing doesn't fit many phones per car → vendors roll their own
+- Home-made protocols misuse crypto
+- No over-the-air updates → N-days stay forever
+- Vulnerable cars travel: US systems found on other continents
+
+</v-clicks>
+
+<style>
+.slidev-layout ul { font-size: 1.6rem; line-height: 1.5; margin-top: 2.5rem; }
+.slidev-layout li { margin-bottom: 1.2rem; }
+</style>
+
+---
+---
+
+# We need systematic security measurement
+
+<v-clicks>
+
+- BLE devices have real-world impact: cars, locks, medical devices
+- Weak devices have been deployed at scale for years, never audited
+
+</v-clicks>
+
+<style>
+.slidev-layout ul { font-size: 1.6rem; line-height: 1.5; margin-top: 2.5rem; }
+.slidev-layout li { margin-bottom: 1.2rem; }
+</style>
+
+---
+layout: center
+class: text-center
+clicks: 1
+---
+
+<ScaleUp :step="$clicks" />
 
 ---
 hide: true
@@ -287,75 +571,6 @@ Say: Not yet another LLM security paper.
 Two-panel meme. Left: the paper we "could" write by scaling up with agents. Right: the toilet roll printed with such titles. The joke is about the sheer volume, not about anyone's specific work.
 Pivot: agents are a tool here, not the contribution. The contribution is a continuous, systematic observatory: a reusable knowledge base and measurement of deployment and repair.
 All titles are made up.
--->
-
----
-clicks: 3
----
-
-# Internet-wide measurement already exists
-
-<div class="text-2xl mt-2 opacity-90"><span style="color:#9dd0ff">Search a product</span> → find every exposed device</div>
-
-<div class="mx-auto mt-3 overflow-hidden rounded-lg" style="width: 720px; height: 411px; border: 1px solid #333">
-  <img src="/shots/censys-search.jpg" style="width: 720px; height: 411px; max-width: none; transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform-origin 1.2s cubic-bezier(0.65, 0, 0.35, 1)"
-    :style="(([fx, fy, z]) => ({ transformOrigin: `${fx * 100}% ${fy * 100}%`, transform: `translate(${(0.5 - fx) * 100}%, ${(0.5 - fy) * 100}%) scale(${z})` }))([[0.5,0.5,1],[0.34,0.192,2.6],[0.47,0.195,3.2],[0.7,0.44,1.9]][Math.min($clicks, 3)])" />
-</div>
-
-<!--
-Forward direction: start from a product and find every exposed device. Searching Censys for one product. Click 1: the query, host.services.software.product:"Hikvision" (a camera / video-recorder vendor). Click 2: the result count (if asked: about 825,000 hosts). Click 3: each result is one Internet-facing device, with its network, location, open services and tags like CAMERA / IOT / LOGIN_PAGE.
-That is what defenders have for the Internet: pick a product, see every exposed instance. Shodan and Shadowserver do similar things (search engine; exposure reports to network owners).
-Screenshot: platform.censys.io search, logged out, captured 2026-10-19 via auto-browser; host IPs and hostnames blurred.
-Sources: Censys https://docs.censys.com/docs/internet-scanning ; Shodan https://help.shodan.io/the-basics/what-is-shodan ; Shadowserver https://www.shadowserver.org/what-we-do/data-collection/
-Coverage, scan frequency and access models differ. Do not claim every device or every service is measured continuously.
--->
-
----
-clicks: 2
----
-
-# Internet-wide measurement already exists
-
-<div class="text-2xl mt-2 opacity-90"><span style="color:#9dd0ff">Look up a device</span> → find out what it is</div>
-
-<div class="mx-auto mt-3 overflow-hidden rounded-lg" style="width: 720px; height: 411px; border: 1px solid #333">
-  <img src="/shots/censys-host.jpg" style="width: 720px; height: 411px; max-width: none; transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1), transform-origin 1.2s cubic-bezier(0.65, 0, 0.35, 1)"
-    :style="(([fx, fy, z]) => ({ transformOrigin: `${fx * 100}% ${fy * 100}%`, transform: `translate(${(0.5 - fx) * 100}%, ${(0.5 - fy) * 100}%) scale(${z})` }))([[0.5,0.5,1],[0.4,0.227,2.2],[0.33,0.833,3]][Math.min($clicks, 2)])" />
-</div>
-
-<!--
-The reverse direction: start from one device (an IP address) and ask what it is. Click 1: Censys has tagged it CAMERA / IOT and lists its open services: web (80), video stream (554 / RTSP) and a Hikvision recorder protocol (9020). Click 2: from the web server's response, the software is "Hikvision Web Server". So: this address is a Hikvision camera / recorder, on a residential ISP in Southern California.
-This is exactly what we want for Bluetooth: hear one advertisement → what product, app and vendor is it (our "Look it up" step later).
-Screenshot: Censys host page for one of the search results, logged out, captured 2026-10-19 via auto-browser; IP, reverse DNS, routing prefix, coordinates and URL blurred.
--->
-
----
-layout: center
-class: text-center
----
-
-# The Internet's common assumption
-
-<div v-click class="text-5xl mt-10 font-bold leading-tight">"if you're hackable,<br>you <span v-mark.green="1">will</span> be hacked"</div>
-
-
-<!--
-Say: So nobody dares to run a server naked.
-Frame as a difference in assumptions and pressure, not a quantitative "the Internet is X times safer" claim.
-Remote reachability is part of it too; BLE "needs proximity", but devices sit on streets and in parking lots.
--->
-
----
-
-# Bluetooth's common assumption
-
-<StreetDevices class="mt-10" />
-
-<div v-click class="text-5xl text-center mt-12 font-bold">"nobody will notice"</div>
-
-
-<!--
-Say: Besides the vendor and the user, nobody knows what these are.
 -->
 
 ---
@@ -402,6 +617,38 @@ This also answers "aren't you helping attackers?": we assume they already are lo
 ---
 layout: center
 class: text-center
+hide: true
+---
+
+# The Internet's common assumption
+
+<div v-click class="text-5xl mt-10 font-bold leading-tight">"if you're hackable,<br>you <span v-mark.green="1">will</span> be hacked"</div>
+
+
+<!--
+Say: So nobody dares to run a server naked.
+Frame as a difference in assumptions and pressure, not a quantitative "the Internet is X times safer" claim.
+Remote reachability is part of it too; BLE "needs proximity", but devices sit on streets and in parking lots.
+-->
+
+---
+hide: true
+---
+
+# Bluetooth's common assumption
+
+<StreetDevices class="mt-10" />
+
+<div v-click class="text-5xl text-center mt-12 font-bold">"nobody will notice"</div>
+
+
+<!--
+Say: Besides the vendor and the user, nobody knows what these are.
+-->
+
+---
+layout: center
+class: text-center
 ---
 
 # We want a <span style="color:#9dd0ff">Censys</span> for Bluetooth
@@ -412,7 +659,24 @@ First step: a BLE knowledge base: every device we hear → a fingerprint → a p
 -->
 
 ---
+clicks: 2
+---
+
+# The goal: scan, and know what it is
+
+<LensApp :step="$clicks" class="mt-2" />
+
+---
+clicks: 3
+---
+
+# Discover, attribute, remember, audit
+
+<PipelineMap :step="$clicks" class="mt-4" />
+
+---
 layout: center
+hide: true
 ---
 
 # Why not just use WiGLE?
@@ -427,16 +691,8 @@ layout: center
   </div>
 </div>
 
-
 <!--
-WiGLE is a crowdsourced wardriving database of Wi-Fi, cell and Bluetooth sightings with locations; we already met it in the opening story. Screenshot: the map area of the public wigle.net landing page, logged out (cropped to avoid the stats numbers), captured 2026-10-18.
-The natural first move, once we know what we want to build, is to look at WiGLE. It is a great crowdsourced map; here is what it exposes for our purpose (not a criticism).
-- For Bluetooth it basically keeps a name and a MAC address, plus location (slide: "no advertisement data"). Not the advertisement contents: no manufacturer data, no UUIDs, no structure.
-- Names can only be matched with simple wildcards. If a product's name does not fit a wildcard, you cannot find it.
-- If the MAC address is random, there is basically nothing to match on.
-- The API is not convenient for complex queries.
-So we decided to build our own scanner and database; that is the next step, Listen.
-WiGLE is still useful later, for validation (see "Validate with WiGLE"): a quick, broad check that a device exists in the wild and where. Deep (ours) and wide (WiGLE) are complementary. No numbers here.
+Introduce problem first then why wigle isn't solving it yet
 -->
 
 ---
@@ -462,7 +718,7 @@ Screenshot from our app, captured 2026-10-19; device ID, coordinates, the last t
 layout: center
 ---
 
-# Listen
+# Scan
 
 <SlidevVideo autoplay class="mx-auto rounded-lg mt-2" style="height: 420px">
   <source src="/anim/01-scan.mp4" type="video/mp4" />
@@ -761,6 +1017,8 @@ layout: center
 
 <!--
 Scans, apps and places all feed the same knowledge base; WiGLE helps validate along the way.
+
+Overview the whole thing
 -->
 
 ---
@@ -830,17 +1088,100 @@ Numbers only if asked, and say they are preliminary: roughly half of the non-App
 
 ---
 layout: center
+class: text-center
+---
+
+# Our knowledge base today
+
+<div class="grid grid-cols-3 gap-10 mt-12 mx-auto" style="width: 900px">
+  <div v-click><div class="text-6xl font-bold">12.3M</div><div class="text-2xl mt-3 opacity-70">sightings</div></div>
+  <div v-click><div class="text-6xl font-bold" style="color:#9dd0ff">252K</div><div class="text-2xl mt-3 opacity-70">distinct advertisements</div></div>
+  <div v-click><div class="text-6xl font-bold" style="color:#4ade80">142</div><div class="text-2xl mt-3 opacity-70">product types identified</div></div>
+</div>
+
+<div class="text-lg mt-12 opacity-50">our scans, Jul 2025 to Aug 2026</div>
+
+---
+layout: center
 ---
 
 # What turned up
 
-<WikiScroll class="mx-auto mt-2" style="width: 900px" />
+<div class="grid grid-cols-4 gap-5 mt-6 text-left">
+  <div v-click class="cat">
+    <div class="n" style="color:#f87171">5</div>
+    <div class="label">Healthcare</div>
+    <div class="ex"><span class="mono">EmTag</span><span class="d">clinical asset tag</span></div>
+    <div class="ex"><span class="mono">ResMed*</span><span class="d">CPAP machine</span></div>
+    <div class="ex"><span class="mono">SoniShield</span><span class="d">cold-chain monitor</span></div>
+    <div class="ex"><span class="mono">Gozio</span><span class="d">hospital wayfinding</span></div>
+  </div>
+  <div v-click class="cat">
+    <div class="n" style="color:#fbbf24">32</div>
+    <div class="label">Enterprise</div>
+    <div class="ex"><span class="mono">SensorSwitch*</span><span class="d">lighting control</span></div>
+    <div class="ex"><span class="mono">CAREL</span><span class="d">HVAC control</span></div>
+    <div class="ex"><span class="mono">PrimexClock</span><span class="d">synced wall clock</span></div>
+    <div class="ex"><span class="mono">HID Seos</span><span class="d">door reader</span></div>
+  </div>
+  <div v-click class="cat">
+    <div class="n" style="color:#9dd0ff">26</div>
+    <div class="label">Vehicles</div>
+    <div class="ex"><span class="mono">Rivian*</span><span class="d">vehicle phone key</span></div>
+    <div class="ex"><span class="mono">GM_PEPS_VKM</span><span class="d">GM phone key</span></div>
+    <div class="ex"><span class="mono">OBDII</span><span class="d">diagnostic adapter</span></div>
+    <div class="ex"><span class="mono">HarpBT*</span><span class="d">truck ELD</span></div>
+  </div>
+  <div v-click class="cat">
+    <div class="n" style="color:#4ade80">79</div>
+    <div class="label">Consumer IoT</div>
+    <div class="ex"><span class="mono">Oral-B</span><span class="d">toothbrush</span></div>
+    <div class="ex"><span class="mono">Ember*</span><span class="d">smart mug</span></div>
+    <div class="ex"><span class="mono">Schlage*</span><span class="d">door lock</span></div>
+    <div class="ex"><span class="mono">MyQ-*</span><span class="d">garage opener</span></div>
+  </div>
+</div>
+
+<style>
+.cat { background: #181818; border: 1px solid #2c2c2c; border-radius: 14px; padding: 18px 18px 14px; }
+.cat .n { font-size: 3.2rem; font-weight: 700; line-height: 1; }
+.cat .label { font-size: 1.3rem; margin: 6px 0 12px; color: #ddd; }
+.cat .ex { display: flex; flex-direction: column; padding: 7px 0; border-top: 1px solid #262626; }
+.cat .mono { font-family: ui-monospace, monospace; font-variant-ligatures: none; font-size: 0.95rem; color: #eee; }
+.cat .d { font-size: 0.85rem; color: #888; }
+</style>
 
 <!--
-Every product family in our research wiki so far, scrolling: left is the name pattern, right is what it is. Each wiki entry also matches on company field / service UUIDs, not shown here. Early, medium-confidence attributions from our own scans; candidates, not authenticated identities. No device-level identifiers: these are family-level fingerprints.
-Point out a few as they scroll by: a heated coffee mug (Ember), a smart-bed cooler (Eight Sleep Pod), a laundry payment box (PayRange BluKey), truck air suspension (Air Lift), a trucker's electronic logging device (Xirgo HarpBT; ELDs are legally required in US trucks), a garage opener (Chamberlain myQ), a gas-pedal controller (Pedal Commander).
-If asked: 109 families listed here (wiki pages with a structured "How to recognize it" block, minus rollup/unknown pages; near-identical families such as several generic LED controllers and two Dreo pages merged for the slide).
+Put real numbers in it
+Find vulnerabilities
 -->
+
+---
+---
+
+# Match against known CVEs
+
+<div class="flex flex-col gap-5 mt-10">
+  <div v-click class="cve-row">
+    <div><div class="p">KARR car alarm module</div><div class="m">QT*</div></div>
+    <div class="arrow">→</div>
+    <div><a class="hit" href="https://nvd.nist.gov/vuln/detail/CVE-2026-18411" target="_blank">CVE-2026-18411</a><div class="m">is the patch out in the field?</div></div>
+  </div>
+  <div v-click class="cve-row">
+    <div><div class="p">Throttle controller</div><div class="m">Pedal Commander*</div></div>
+    <div class="arrow">→</div>
+    <div><div class="miss">no known CVE</div><div class="m">audit candidate</div></div>
+  </div>
+</div>
+
+<style>
+.cve-row { display: grid; grid-template-columns: 380px 60px 1fr; align-items: center; background: #181818; border: 1px solid #2c2c2c; border-radius: 14px; padding: 18px 26px; }
+.cve-row .p { font-size: 1.6rem; color: #eee; }
+.cve-row .m { font-family: ui-monospace, monospace; font-size: 1rem; color: #888; margin-top: 4px; }
+.cve-row .arrow { font-size: 1.6rem; color: #888; }
+.cve-row .hit { font-family: ui-monospace, monospace; font-size: 1.6rem; color: #f87171; text-decoration: underline; }
+.cve-row .miss { font-size: 1.6rem; color: #fbbf24; }
+</style>
 
 ---
 layout: center
@@ -864,21 +1205,23 @@ No product photo: the vendor site redirects our headless browser, so none was ca
 -->
 
 ---
-layout: center
-class: text-center
-hide: true
 ---
 
 # Found something suspicious?
 
-<div class="flex justify-center items-center gap-8 text-3xl mt-12">
-  <div v-click>hypothesis</div>
-  <div v-click>→ validate</div>
-  <div v-click>→ buy the real device</div>
-</div>
+<v-clicks>
 
+- Form a hypothesis from the app and the advertisements
+- Validate it cheaply, without hardware
+- Buy the real device
+- Confirm on the device itself: the final proof, before disclosure
 
-<div v-click class="text-3xl mt-10">on the device we bought: read its GATT → <span v-mark.green="5">the final proof</span></div>
+</v-clicks>
+
+<style>
+.slidev-layout ul { font-size: 1.6rem; line-height: 1.5; margin-top: 2.5rem; }
+.slidev-layout li { margin-bottom: 1.2rem; }
+</style>
 
 <!--
 Say: The knowledge base tells us which device is worth buying.

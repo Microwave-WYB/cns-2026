@@ -13,6 +13,8 @@
 
 ## TODO
 
+- [x] **Hook（2026-10-19）**：标题页后加现场 demo 页 "What's around us right now?"（打开扫描器，备用：点一下显示模拟手机列表）和问题页 "What are all of these? / and what do they do?"。整个演讲围绕这个问题；QT 页口头呼应："如果有个工具能告诉我这个蓝牙设备是什么就好了"。
+
 - [x] "Our scans vs WiGLE" 的位置已解决：改成 "Why not just use WiGLE?"，放在 "Let defenders see first" 之后、Listen 之前（讲 WiGLE 的局限 → 自建扫描器）。
 
 ## 初稿 v2（2026-10-15，最新）
