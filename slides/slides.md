@@ -16,13 +16,11 @@ Every slide: few, big words. Details go in these notes.
 -->
 
 ---
-layout: center
-class: text-center
 ---
 
 # Ever wondered what all these are?
 
-<div class="flex justify-center mt-6">
+<div class="flex mt-6">
 <div class="rounded-2xl flex items-center justify-center text-center" style="width: 260px; height: 420px; border: 3px dashed #4a4a4a; color: #8a8a8a">
   <div><div class="text-xl font-bold">TODO</div><div class="text-lg mt-2">Bluetooth settings<br>screenshot</div></div>
 </div>
@@ -33,7 +31,7 @@ class: text-center
 
 # That's not the whole story
 
-<div class="flex justify-center items-center gap-16 mt-6">
+<div class="flex items-center gap-16 mt-6">
 <div class="rounded-2xl flex items-center justify-center text-center" style="width: 260px; height: 420px; border: 3px dashed #4a4a4a; color: #8a8a8a">
   <div><div class="text-xl font-bold">TODO</div><div class="text-lg mt-2">nRF Connect<br>screenshot</div></div>
 </div>
