@@ -58,15 +58,6 @@ class: text-center
 
 # Why should you care?
 
-<div class="grid grid-cols-[1fr_1.4fr] gap-6 mt-6 items-center">
-  <img src="/shots/skimmer-tape.jpg" class="rounded-lg w-full" style="border: 1px solid #333" />
-  <img src="/shots/skimmer-board.jpg" class="rounded-lg w-full" style="border: 1px solid #333" />
-</div>
-
-<div v-click class="text-4xl mt-6" style="color:#f87171">a gas pump card <strong>skimmer</strong></div>
-<div v-click class="text-3xl mt-3">over Bluetooth: no trip back for the data, no getting caught</div>
-<div class="text-lg mt-2 opacity-60">Please Pay Inside, USENIX Security '19</div>
-
 ---
 layout: center
 class: text-center
@@ -110,7 +101,8 @@ class: text-center
   <img src="/shots/skimmer-board.jpg" class="rounded-lg w-full" style="border: 1px solid #333" />
 </div>
 
-<div v-click class="text-4xl mt-6" style="color:#f87171">a gas pump <strong>skimmer</strong></div>
+<div v-click class="text-4xl mt-6" style="color:#f87171">a gas pump card <strong>skimmer</strong></div>
+<div v-click class="text-3xl mt-3">over Bluetooth: no trip back for the data, no getting caught</div>
 <div class="text-lg mt-2 opacity-60">Please Pay Inside, USENIX Security '19</div>
 
 <!--
