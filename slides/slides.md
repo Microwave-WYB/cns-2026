@@ -461,6 +461,65 @@ Simplified illustration of the decompiled app's logic, not the original source.
 -->
 
 ---
+clicks: 1
+---
+
+# Does it work on a real car?
+
+<div class="flex items-center gap-8 mt-6">
+  <img src="/shots/qtclient-vscode.jpg" style="height: 400px; border: 1px solid #333" />
+  <img v-click src="/shots/slack-car-unlocked.jpg" style="width: 300px" />
+</div>
+
+---
+clicks: 2
+---
+
+# How many cars?
+
+<div class="formulas mt-4" :class="{ dim: $clicks >= 1 }">
+
+$$P(X = k) = (1 - p)^{k-1} p, \quad p = \frac{n}{N}, \quad P(X = 1) = p \approx \frac{\mathrm{count}(\Delta = 1)}{n-1}$$
+
+$$N = \frac{n}{P(X=1)} \approx \frac{n}{\mathrm{count}(\Delta = 1) / (n-1)}, \qquad \log f(k) = \beta_0 + \beta_1 k, \; R^2 > 0.9$$
+
+$$N_{\mathrm{QT}} \approx \frac{1{,}141{,}798}{583{,}392 / 1{,}141{,}797} \approx 2{,}234{,}692 \qquad N_{\mathrm{DR}} \approx \frac{246{,}512}{98{,}219 / 246{,}511} \approx 618{,}698$$
+
+$$N_{\mathrm{KARR}} \approx N_{\mathrm{QT}} + N_{\mathrm{DR}} \approx 2{,}234{,}692 + 618{,}698 \approx 2{,}853{,}390$$
+
+</div>
+
+<div class="flex justify-center gap-12 mt-10 text-2xl whitespace-nowrap">
+  <div v-click="2">✓ checked in <strong>Lean</strong> (by Claude and GPT)</div>
+</div>
+
+
+<div v-click="1" class="absolute text-5xl" style="left: 0; right: 0; top: 180px; text-align: center; color: #fbbf24; text-shadow: 0 0 24px #121212, 0 0 12px #121212">(nobody can read this)</div>
+
+<style>
+.formulas { font-size: 0.9rem; transition: opacity .5s; }
+.formulas .katex-display { margin: 0.4em 0; }
+.formulas.dim { opacity: .25; }
+</style>
+
+---
+clicks: 5
+---
+
+# How many cars?
+
+<MacDensity :step="$clicks" class="mt-8" />
+
+<div class="text-center mt-8">
+  <div v-click="3" class="text-2xl whitespace-nowrap">Rivian: we estimate
+    <strong v-if="$clicks < 4">603,468</strong><strong v-else style="color:#4ade80">603,468 ÷ 4 = 150,867</strong>
+    · Rivian reported <strong>146,659</strong>
+    <span v-if="$clicks < 4" style="color:#fbbf24">?!</span><span v-else style="color:#4ade80">(2.9% off)</span></div>
+  <div v-click="4" class="text-xl mt-2" style="color:#4ade80">each Rivian has 4 BLE sensors</div>
+  <div v-click="5" class="text-4xl font-bold mt-4 whitespace-nowrap" style="color:#f87171">KARR: 2.8 million</div>
+</div>
+
+---
 layout: center
 ---
 
@@ -513,7 +572,7 @@ class: text-center
 <div class="flex justify-center items-center gap-14 mt-6">
   <div>
     <div v-click="7" class="text-2xl" style="color:#f87171">3 critically vulnerable</div>
-    <div v-click="8" class="text-2xl mt-2" style="color:#f87171">~2.9 million vehicles exposed (est.)</div>
+    <div v-click="8" class="text-2xl mt-2" style="color:#f87171">over 2 million vehicles exposed (est.)</div>
     <div v-click="9" class="text-4xl mt-6 font-bold" style="color:#4ade80">USENIX: accept</div>
   </div>
   <img v-click="9" src="/shots/ble-theft-auto-p1.jpg" style="height: 250px; border: 1px solid #333" />
