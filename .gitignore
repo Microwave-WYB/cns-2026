@@ -9,3 +9,6 @@ dist/
 
 # Videos are generated from the Remotion sources.
 *.mp4
+
+# Machine-local mise overrides.
+mise.local.toml

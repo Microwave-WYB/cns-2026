@@ -7,8 +7,8 @@ config_roots = ["remotion", "slides"]
 node = "24"
 
 [env]
-# Dev servers listen only on this address (the Tailnet IP). Override per machine if needed.
-CNS_BIND_HOST = "100.83.234.55"
+# Dev servers listen only on this address. Override per machine if needed (e.g. a Tailnet IP).
+CNS_BIND_HOST = "localhost"
 
 [tasks.build]
 description = "Render the animation and build the slides"
