@@ -256,9 +256,9 @@ const Places = ({f}: {f: number}) => {
 const Converge = ({f}: {f: number}) => {
   const k = p(f, 0, 30);
   const SRC = [
-    {label: 'Our scans', glyph: 'car' as const, color: C.blue, y: 330, gate: false},
-    {label: 'Apps', glyph: 'phone' as const, color: C.purple, y: 560, gate: true},
-    {label: 'Places', glyph: 'tag' as const, color: C.yellow, y: 790, gate: true},
+    {label: 'Our scans', glyph: 'car' as const, color: C.blue, y: 330},
+    {label: 'Apps', glyph: 'phone' as const, color: C.purple, y: 560},
+    {label: 'Places', glyph: 'tag' as const, color: C.yellow, y: 790},
   ];
   return <g opacity={k}>
     {SRC.map((s, i) => {
@@ -269,10 +269,6 @@ const Converge = ({f}: {f: number}) => {
         <g transform={`translate(${170} ${s.y}) scale(2.2)`}><Glyph kind={s.glyph} color={s.color}/></g>
         <Txt x={230} y={s.y + 12} size={34} color={C.text} weight={700}>{s.label}</Txt>
         <path d={`M 420 ${s.y} C 800 ${s.y}, 900 560, 1190 560`} fill="none" stroke={s.color} strokeWidth={4} strokeDasharray="14 12" strokeDashoffset={-dash} opacity={0.8}/>
-        {s.gate && <g opacity={p(f, 70 + i * 10, 90 + i * 10)}>
-          <rect x={560} y={s.y + (s.y < 560 ? 10 : -50) - 20} width={220} height={44} rx={22} fill={C.bg} stroke={C.green} strokeWidth={2}/>
-          <Txt x={670} y={s.y + (s.y < 560 ? 10 : -50) + 9} size={20} color={C.green} anchor="middle" weight={650}>✓ validate · WiGLE</Txt>
-        </g>}
       </g>;
     })}
   </g>;

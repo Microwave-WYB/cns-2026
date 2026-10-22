@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// One PhD student working slowly through 60,000 apps, then a crowd of AI agents that finish fast.
+// One PhD student working slowly, then a crowd of AI agents that finish fast.
 // step 0: Yibo thinking (slow spinner), step 1: AI agents spin fast and all finish.
 import { onUnmounted, ref, watch } from 'vue'
 const props = defineProps<{ step: number }>()
@@ -22,7 +22,6 @@ onUnmounted(() => timers.forEach(clearTimeout))
     <div class="me" :class="{ aside: step >= 1 }">
       <div class="ring slow" />
       <img :src="`${BASE}people/yibo.jpg`" class="face" />
-      <div class="status"><span class="shimmer">Reading app 1 / 60,000…</span></div>
     </div>
     <div class="agents" :class="{ on: step >= 1 }">
       <div v-for="(d, i) in done" :key="i" class="agent" :class="{ done: d }">

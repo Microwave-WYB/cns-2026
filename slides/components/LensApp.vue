@@ -30,7 +30,7 @@ const ROWS = [
 .stage { position: relative; width: 900px; height: 430px; margin: 0 auto; }
 .holder { position: absolute; left: 50%; top: 0; transform: translateX(-50%); transition: left 1s cubic-bezier(.65,0,.35,1); }
 .holder.aside { left: 22%; }
-.card { position: absolute; left: 42%; top: 110px; width: 460px; padding: 22px 26px; border-radius: 14px; background: #181818; border: 1px solid #333; text-align: left; opacity: 0; transform: translateX(20px); transition: all .6s .6s; }
+.card { position: absolute; left: 42%; top: 110px; width: 460px; text-align: left; opacity: 0; transform: translateX(20px); transition: all .6s .6s; }
 .card.on { opacity: 1; transform: none; }
 .title { font: 600 24px Inter, system-ui, sans-serif; color: #fff; margin-bottom: 10px; }
 .card p { font: 400 19px/1.5 Inter, system-ui, sans-serif; color: #ccc; margin: 6px 0; }

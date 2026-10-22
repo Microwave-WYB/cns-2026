@@ -9,6 +9,7 @@ mdc: true
 
 <div class="text-2xl mt-8">Yibo Wei</div>
 <div class="text-lg mt-2 opacity-60">UC San Diego · CNS 2026</div>
+<div class="text-lg mt-6" style="color:#fbbf24">preliminary work, in progress</div>
 
 <!--
 DRAFT v1, content first, theme later. See OUTLINE.md.
@@ -16,15 +17,13 @@ Every slide: few, big words. Details go in these notes.
 -->
 
 ---
+layout: center
+class: text-center
 ---
 
 # Ever wondered what all these are?
 
-<div class="flex mt-6">
-<div class="rounded-2xl flex items-center justify-center text-center" style="width: 260px; height: 420px; border: 3px dashed #4a4a4a; color: #8a8a8a">
-  <div><div class="text-xl font-bold">TODO</div><div class="text-lg mt-2">Bluetooth settings<br>screenshot</div></div>
-</div>
-</div>
+<div class="text-3xl mt-10 opacity-70">open your Bluetooth settings</div>
 
 ---
 ---
@@ -32,11 +31,9 @@ Every slide: few, big words. Details go in these notes.
 # That's not the whole story
 
 <div class="flex items-center gap-16 mt-6">
-<div class="rounded-2xl flex items-center justify-center text-center" style="width: 260px; height: 420px; border: 3px dashed #4a4a4a; color: #8a8a8a">
-  <div><div class="text-xl font-bold">TODO</div><div class="text-lg mt-2">nRF Connect<br>screenshot</div></div>
-</div>
+<img src="/shots/nrf-connect.jpg" class="rounded-2xl" style="height: 430px; border: 3px solid #3a3a3a" />
   <div class="text-left flex flex-col gap-8">
-    <div v-click><div class="text-4xl font-bold" style="font-family: ui-monospace, monospace; color:#9dd0ff">4C 00 = Apple</div><div class="text-xl mt-2 opacity-70">Find My, AirDrop, …</div></div>
+    <div v-click><div class="text-4xl font-bold" style="font-family: ui-monospace, monospace; color:#9dd0ff">0x004C = Apple</div><div class="text-xl mt-2 opacity-70">Find My, AirDrop, …</div></div>
     <div v-click><div class="text-4xl font-bold">68%</div><div class="text-xl mt-2 opacity-70">of what we hear is Apple</div></div>
     <div v-click><div class="text-4xl font-bold">91%</div><div class="text-xl mt-2 opacity-70">have no name at all</div></div>
   </div>
@@ -166,15 +163,13 @@ Screenshot: Google search "what is QT", logged out, desktop, captured 2026-10-19
 clicks: 3
 ---
 
-# For the Internet, there's Censys
+# Internet devices: Censys scans for us
 
-<div class="text-2xl mt-2 opacity-90"><span style="color:#9dd0ff">Search a product</span> → find every exposed device</div>
-
-<ShotTour :step="$clicks" src="/shots/censys-search.jpg" :iw="1600" :ih="913" class="mt-3" :stops="[
+<ShotTour :step="$clicks" src="/shots/censys-search.jpg" :iw="1600" :ih="913" :width="720" class="mt-6" :stops="[
   {},
   { x: 560, y: 90, s: 2.2, boxes: [{ x0: 405, y0: 54, x1: 700, y1: 82 }], caption: 'search: one product' },
   { x: 820, y: 200, s: 2.2, boxes: [{ x0: 698, y0: 168, x1: 826, y1: 189 }], caption: '825,171 hosts' },
-  { x: 900, y: 780, s: 1.8, boxes: [{ x0: 718, y0: 709, x1: 856, y1: 734 }, { x0: 836, y0: 756, x1: 970, y1: 780 }, { x0: 740, y0: 834, x1: 1052, y1: 859 }], caption: 'what it is, what it runs', captionTop: true },
+  { x: 900, y: 780, s: 1.8, boxes: [{ x0: 718, y0: 709, x1: 856, y1: 734 }, { x0: 836, y0: 756, x1: 970, y1: 780 }, { x0: 740, y0: 834, x1: 1052, y1: 859 }], caption: 'what it runs', captionTop: true },
 ]" />
 
 <!--
@@ -185,6 +180,7 @@ How can you go from what we scan locally to what this thing is
 
 ---
 clicks: 2
+hide: true
 ---
 
 # For the Internet, there's Censys
@@ -204,13 +200,16 @@ Screenshot: Censys host page for one of the search results, logged out, captured
 -->
 
 ---
-layout: center
-class: text-center
+clicks: 2
 ---
 
-# For Bluetooth, the closest is WiGLE
+# Bluetooth devices: WiGLE
 
-<img src="/shots/wigle-qt-search.jpg" class="mx-auto mt-4 rounded-lg" style="height: 440px; border: 1px solid #333" />
+<ShotTour :step="$clicks" src="/shots/wigle-qt-search.jpg" :iw="2968" :ih="2026" :width="660" class="mt-4" :stops="[
+  {},
+  { x: 290, y: 520, s: 2.6, boxes: [{ x0: 33, y0: 611, x1: 398, y1: 665 }], caption: 'search: name QT %' },
+  { x: 1113, y: 300, s: 2.4, boxes: [{ x0: 757, y0: 108, x1: 1475, y1: 186 }], caption: 'a name, a place, a date' },
+]" />
 
 <!--
 Every dot is a Bluetooth device named "QT" + a module ID, in WiGLE's crowdsourced data for San Diego County (the WiGLE download we made for the BLE Theft Auto paper, name like "QT %"). They are everywhere: on every freeway, in every neighborhood. Say: "…and it was everywhere." Still no idea what it is: WiGLE only has the name.
@@ -224,9 +223,40 @@ layout: center
 class: text-center
 ---
 
-# By hand: all we have
+# The closest: wireless intrusion detection
 
-<div class="mx-auto mt-4 text-left rounded-2xl px-8 py-6" style="width: 900px; background:#1c1c1c; border:1px solid #2f2f2f">
+<img src="/shots/bastille-home.jpg" class="mx-auto mt-4 rounded-lg" style="height: 300px; border: 1px solid #333" />
+
+<div v-click class="text-3xl mt-8">flags <strong>suspicious devices</strong> in your own building</div>
+
+---
+---
+
+# So we did it by hand
+
+<v-clicks>
+
+1. Read the advertisement
+2. Look up the MAC prefix and the company ID
+3. Find its FCC filing and user manual
+4. Get the app and take it apart
+5. Find out what it does, and whether it's secure
+
+</v-clicks>
+
+<style>
+.slidev-layout ol { font-size: 1.6rem; line-height: 1.5; margin-top: 2.5rem; }
+.slidev-layout li { margin-bottom: 1rem; }
+</style>
+
+---
+layout: center
+class: text-center
+---
+
+# All we have: one advertisement
+
+<div class="mx-auto mt-4 text-left" style="width: 900px">
   <div class="text-3xl font-bold" style="font-family: ui-monospace, monospace; font-variant-ligatures: none">QT 8B1<span style="opacity:.35">XXXXX</span></div>
   <div class="text-xl mt-1 opacity-70" style="font-family: ui-monospace, monospace; font-variant-ligatures: none">40:84:32<span style="opacity:.45">:XX:XX:XX</span></div>
   <div class="grid grid-cols-[60px_90px_340px_1fr] gap-y-3 mt-6 text-xl" style="font-family: ui-monospace, monospace; font-variant-ligatures: none">
@@ -370,7 +400,7 @@ class: text-center
 
 # So we took the app apart
 
-```python {*|2}
+```python {*|2|2}
 # manufacturer data, simplified
 color   = parse_int(manufacturer_data[0:2])
 mode    = parse_int(manufacturer_data[2:4])
@@ -386,6 +416,10 @@ else:
     key = USER_KEY
 response = hash(challenge, name, key)
 ```
+
+<img v-click="2" src="/shots/facepalm.gif" class="absolute" style="right: 40px; top: 120px; width: 280px; border: 1px solid #333" />
+<div v-click="2" class="absolute text-left" style="left: 640px; top: 350px; width: 300px; font-size: 1.35rem; color: #f87171">This is supposed to be<br>the manufacturer ID</div>
+<Arrow v-click="2" x1="636" y1="358" x2="508" y2="152" color="#f87171" width="3" />
 
 <style>
 .slidev-code { font-size: 1.15rem !important; line-height: 1.6 !important; text-align: left; width: 860px; margin-left: auto; margin-right: auto; }
@@ -432,7 +466,7 @@ layout: center
 
 # First submission: one product. The reviews:
 
-<div v-click class="mx-auto mt-10 rounded-xl p-8 text-left" style="max-width: 760px; background:#1c1c1c; border:1px solid #3a3a3a">
+<div v-click class="mx-auto mt-10 text-left" style="max-width: 760px">
   <div class="text-xl opacity-60">Reviewer #2</div>
   <div class="text-4xl mt-4 leading-snug">"Only one vulnerability.<br><span v-mark.red="2">Lacks scientific novelty.</span>"</div>
   <div class="text-lg opacity-50 mt-6">(paraphrased)</div>
@@ -449,15 +483,41 @@ class: text-center
 
 # So we did it 6 times.
 
-<div class="flex justify-center gap-3 mt-12">
-  <div v-for="(n, i) in ['KARR', 'CarLink', 'DS4', 'EvoStart', 'Rockledge', 'Linkr']" :key="n" v-click="i + 1"
-    class="rounded-xl flex items-center justify-center text-xl font-bold"
-    :style="{ width: '128px', height: '96px', background: '#1c1c1c', border: '2px solid ' + (['KARR', 'CarLink', 'Rockledge'].includes(n) && $clicks >= 7 ? '#f87171' : '#4ea8ff') }">{{ n }}</div>
+<div class="flex justify-center gap-10 mt-8">
+  <div v-click="1" class="flex flex-col items-center">
+    <img src="/logos/karr.png" style="width: 80px; height: 80px; border-radius: 18px" />
+    <div class="text-2xl font-bold mt-3" :style="{ color: $clicks >= 7 ? '#f87171' : '#9dd0ff' }">KARR</div>
+  </div>
+  <div v-click="2" class="flex flex-col items-center">
+    <img src="/logos/carlink.png" style="width: 80px; height: 80px; border-radius: 18px" />
+    <div class="text-2xl font-bold mt-3" :style="{ color: $clicks >= 7 ? '#f87171' : '#9dd0ff' }">CarLink</div>
+  </div>
+  <div v-click="3" class="flex flex-col items-center">
+    <img src="/logos/ds4.png" style="width: 80px; height: 80px; border-radius: 18px" />
+    <div class="text-2xl font-bold mt-3" :style="{ color: '#9dd0ff' }">DS4</div>
+  </div>
+  <div v-click="4" class="flex flex-col items-center">
+    <img src="/logos/evostart.png" style="width: 80px; height: 80px; border-radius: 18px" />
+    <div class="text-2xl font-bold mt-3" :style="{ color: '#9dd0ff' }">EvoStart</div>
+  </div>
+  <div v-click="5" class="flex flex-col items-center">
+    <img src="/logos/rockledge.png" style="width: 80px; height: 80px; border-radius: 18px" />
+    <div class="text-2xl font-bold mt-3" :style="{ color: $clicks >= 7 ? '#f87171' : '#9dd0ff' }">Rockledge</div>
+  </div>
+  <div v-click="6" class="flex flex-col items-center">
+    <img src="/logos/linkr.png" style="width: 80px; height: 80px; border-radius: 18px" />
+    <div class="text-2xl font-bold mt-3" :style="{ color: '#9dd0ff' }">Linkr</div>
+  </div>
 </div>
 
-<div v-click="7" class="text-3xl mt-8" style="color:#f87171">3 critically vulnerable</div>
-<div v-click="8" class="text-3xl mt-3" style="color:#f87171">~2.9 million vehicles exposed (est.)</div>
-<div v-click="9" class="text-5xl mt-8 font-bold" style="color:#4ade80">USENIX: accept</div>
+<div class="flex justify-center items-center gap-14 mt-6">
+  <div>
+    <div v-click="7" class="text-2xl" style="color:#f87171">3 critically vulnerable</div>
+    <div v-click="8" class="text-2xl mt-2" style="color:#f87171">~2.9 million vehicles exposed (est.)</div>
+    <div v-click="9" class="text-4xl mt-6 font-bold" style="color:#4ade80">USENIX: accept</div>
+  </div>
+  <img v-click="9" src="/shots/ble-theft-auto-p1.jpg" style="height: 250px; border: 1px solid #333" />
+</div>
 
 <!--
 Say: n = 6 → science.
@@ -498,6 +558,14 @@ Same investigation, six representative aftermarket systems; critical pairing/aut
 </style>
 
 ---
+clicks: 4
+---
+
+# How we did it: by hand
+
+<PipelineMap :step="$clicks" manual class="mt-4" />
+
+---
 ---
 
 # We need systematic security measurement
@@ -506,6 +574,7 @@ Same investigation, six representative aftermarket systems; critical pairing/aut
 
 - BLE devices have real-world impact: cars, locks, medical devices
 - Weak devices have been deployed at scale for years, never audited
+- AI makes reverse engineering far cheaper, for us and for attackers
 
 </v-clicks>
 
@@ -515,12 +584,28 @@ Same investigation, six representative aftermarket systems; critical pairing/aut
 </style>
 
 ---
-layout: center
-class: text-center
-clicks: 1
+layout: full
 ---
 
-<ScaleUp :step="$clicks" />
+<div class="absolute inset-0 flex items-center justify-center" style="background:#121212">
+  <img src="/shots/wired-karr.jpg" style="width: 100%; max-height: 100%; object-fit: contain" />
+</div>
+
+---
+layout: full
+---
+
+<div class="absolute inset-0 flex items-center justify-center" style="background:#121212">
+  <img src="/defcon/karr-talk-stage.jpg" style="height: 100%; max-width: none" />
+</div>
+
+---
+layout: full
+---
+
+<div class="absolute inset-0 flex items-center justify-center" style="background:#121212">
+  <img src="/defcon/team-selfie.jpg" style="height: 100%; max-width: none" />
+</div>
 
 ---
 hide: true
@@ -564,12 +649,11 @@ All titles are made up.
 -->
 
 ---
+layout: full
 clicks: 1
 ---
 
-# DEF CON 34
-
-<div class="mx-auto mt-4 rounded-xl overflow-hidden flex items-center justify-center" style="height: 420px; width: fit-content; border: 1px solid #333">
+<div class="absolute inset-0 overflow-hidden flex items-center justify-center" style="background:#121212">
   <img src="/defcon/group.jpg" style="height: 100%; max-width: none; transform-origin: 30.4% 22.3%; transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1)"
     :style="{ transform: $clicks >= 1 ? 'translate(19.6%, 27.7%) scale(5)' : 'none' }" />
 </div>
@@ -580,10 +664,12 @@ DEF CON. Click: zoom in on the second person from the left: a random guy we met 
 
 ---
 layout: full
+clicks: 1
 ---
 
-<div class="absolute inset-0 flex items-center justify-center" style="background:#121212">
-  <img src="/defcon/talk.jpg" style="height: 100%; max-width: none" />
+<div class="absolute inset-0 overflow-hidden flex items-center justify-center" style="background:#121212">
+  <img src="/defcon/talk.jpg" style="height: 100%; max-width: none; transform-origin: 32.5% 44%; transition: transform 1.8s cubic-bezier(0.65, 0, 0.35, 1)"
+    :style="{ transform: $clicks >= 1 ? 'translate(17.5%, 6%) scale(3.7)' : 'none' }" />
 </div>
 
 <!--
@@ -639,6 +725,7 @@ Say: Besides the vendor and the user, nobody knows what these are.
 ---
 layout: center
 class: text-center
+hide: true
 ---
 
 # We want a <span style="color:#9dd0ff">Censys</span> for Bluetooth
@@ -647,6 +734,14 @@ class: text-center
 Ties back to the Internet measurement slide: the Internet has Censys / Shodan / Shadowserver, so defenders see what is exposed first. We want the same for Bluetooth.
 First step: a BLE knowledge base: every device we hear → a fingerprint → a product → an app → a vendor.
 -->
+
+---
+layout: center
+class: text-center
+clicks: 1
+---
+
+<ScaleUp :step="$clicks" />
 
 ---
 clicks: 2
@@ -663,6 +758,26 @@ clicks: 3
 # Discover, attribute, remember, audit
 
 <PipelineMap :step="$clicks" class="mt-4" />
+
+---
+---
+
+# The apps tell us what's out there
+
+<v-clicks>
+
+- **What** devices are being scanned for
+- **How** they are scanned for: names, UUIDs, company IDs
+- **What's wrong** with them: how they authenticate
+
+</v-clicks>
+
+<div v-click class="text-2xl mt-10" style="color:#a78bfa">AI agents reverse-engineer the APKs automatically</div>
+
+<style>
+.slidev-layout ul { font-size: 1.6rem; line-height: 1.5; margin-top: 2.5rem; }
+.slidev-layout li { margin-bottom: 1.2rem; }
+</style>
 
 ---
 layout: center
@@ -1012,6 +1127,14 @@ Overview the whole thing
 -->
 
 ---
+clicks: 2
+---
+
+# Audit: which ones are weak?
+
+<AuditTriage :step="$clicks" class="mt-4" />
+
+---
 layout: center
 ---
 
@@ -1054,6 +1177,7 @@ Context, notes only (do not put on the slide): the paper found no pairing by def
 
 ---
 layout: center
+hide: true
 ---
 
 # Look it up
@@ -1092,61 +1216,107 @@ class: text-center
 <div class="text-lg mt-12 opacity-50">our scans, Jul 2025 to Aug 2026</div>
 
 ---
-layout: center
 ---
 
-# What turned up
+# What turned up: Healthcare
 
-<div class="grid grid-cols-4 gap-5 mt-6 text-left">
-  <div v-click class="cat">
-    <div class="n" style="color:#f87171">5</div>
-    <div class="label">Healthcare</div>
-    <div class="ex"><span class="mono">EmTag</span><span class="d">clinical asset tag</span></div>
-    <div class="ex"><span class="mono">ResMed*</span><span class="d">CPAP machine</span></div>
-    <div class="ex"><span class="mono">SoniShield</span><span class="d">cold-chain monitor</span></div>
-    <div class="ex"><span class="mono">Gozio</span><span class="d">hospital wayfinding</span></div>
-  </div>
-  <div v-click class="cat">
-    <div class="n" style="color:#fbbf24">32</div>
-    <div class="label">Enterprise</div>
-    <div class="ex"><span class="mono">SensorSwitch*</span><span class="d">lighting control</span></div>
-    <div class="ex"><span class="mono">CAREL</span><span class="d">HVAC control</span></div>
-    <div class="ex"><span class="mono">PrimexClock</span><span class="d">synced wall clock</span></div>
-    <div class="ex"><span class="mono">HID Seos</span><span class="d">door reader</span></div>
-  </div>
-  <div v-click class="cat">
-    <div class="n" style="color:#9dd0ff">26</div>
-    <div class="label">Vehicles</div>
-    <div class="ex"><span class="mono">Rivian*</span><span class="d">vehicle phone key</span></div>
-    <div class="ex"><span class="mono">GM_PEPS_VKM</span><span class="d">GM phone key</span></div>
-    <div class="ex"><span class="mono">OBDII</span><span class="d">diagnostic adapter</span></div>
-    <div class="ex"><span class="mono">HarpBT*</span><span class="d">truck ELD</span></div>
-  </div>
-  <div v-click class="cat">
-    <div class="n" style="color:#4ade80">79</div>
-    <div class="label">Consumer IoT</div>
-    <div class="ex"><span class="mono">Oral-B</span><span class="d">toothbrush</span></div>
-    <div class="ex"><span class="mono">Ember*</span><span class="d">smart mug</span></div>
-    <div class="ex"><span class="mono">Schlage*</span><span class="d">door lock</span></div>
-    <div class="ex"><span class="mono">MyQ-*</span><span class="d">garage opener</span></div>
+<style>
+.kb-ex { display: flex; flex-direction: column; padding: 6px 0; border-top: 1px solid #2a2a2a; }
+.kb-ex .m { font-family: ui-monospace, monospace; font-variant-ligatures: none; font-size: 1.05rem; color: #eee; }
+.kb-ex .d { font-size: 0.95rem; color: #888; }
+</style>
+
+<div class="flex items-center gap-12 mt-4">
+  <img src="/shots/kb-map-healthcare.jpg" class="rounded-lg" style="height: 420px; border: 1px solid #333" />
+  <div class="text-left">
+    <div class="text-8xl font-bold" style="color:#f87171">5</div>
+    <div class="text-2xl mt-3">identifiable product types</div>
+    <div class="mt-6">
+      <div class="kb-ex"><span class="m">EmTag</span><span class="d">clinical asset tag</span></div>
+      <div class="kb-ex"><span class="m">ResMed*</span><span class="d">CPAP machine</span></div>
+      <div class="kb-ex"><span class="m">SoniShield</span><span class="d">cold-chain monitor</span></div>
+      <div class="kb-ex"><span class="m">Gozio</span><span class="d">hospital wayfinding</span></div>
+    </div>
   </div>
 </div>
 
+---
+---
+
+# What turned up: Enterprise
+
 <style>
-.cat { background: #181818; border: 1px solid #2c2c2c; border-radius: 14px; padding: 18px 18px 14px; }
-.cat .n { font-size: 3.2rem; font-weight: 700; line-height: 1; }
-.cat .label { font-size: 1.3rem; margin: 6px 0 12px; color: #ddd; }
-.cat .ex { display: flex; flex-direction: column; padding: 7px 0; border-top: 1px solid #262626; }
-.cat .mono { font-family: ui-monospace, monospace; font-variant-ligatures: none; font-size: 0.95rem; color: #eee; }
-.cat .d { font-size: 0.85rem; color: #888; }
+.kb-ex { display: flex; flex-direction: column; padding: 6px 0; border-top: 1px solid #2a2a2a; }
+.kb-ex .m { font-family: ui-monospace, monospace; font-variant-ligatures: none; font-size: 1.05rem; color: #eee; }
+.kb-ex .d { font-size: 0.95rem; color: #888; }
 </style>
 
-<!--
-Put real numbers in it
-Find vulnerabilities
--->
+<div class="flex items-center gap-12 mt-4">
+  <img src="/shots/kb-map-enterprise.jpg" class="rounded-lg" style="height: 420px; border: 1px solid #333" />
+  <div class="text-left">
+    <div class="text-8xl font-bold" style="color:#fbbf24">32</div>
+    <div class="text-2xl mt-3">identifiable product types</div>
+    <div class="mt-6">
+      <div class="kb-ex"><span class="m">SensorSwitch*</span><span class="d">lighting control</span></div>
+      <div class="kb-ex"><span class="m">CAREL</span><span class="d">HVAC control</span></div>
+      <div class="kb-ex"><span class="m">PrimexClock</span><span class="d">synced wall clock</span></div>
+      <div class="kb-ex"><span class="m">HID Seos</span><span class="d">door reader</span></div>
+    </div>
+  </div>
+</div>
 
 ---
+---
+
+# What turned up: Vehicles
+
+<style>
+.kb-ex { display: flex; flex-direction: column; padding: 6px 0; border-top: 1px solid #2a2a2a; }
+.kb-ex .m { font-family: ui-monospace, monospace; font-variant-ligatures: none; font-size: 1.05rem; color: #eee; }
+.kb-ex .d { font-size: 0.95rem; color: #888; }
+</style>
+
+<div class="flex items-center gap-12 mt-4">
+  <img src="/shots/kb-map-vehicles.jpg" class="rounded-lg" style="height: 420px; border: 1px solid #333" />
+  <div class="text-left">
+    <div class="text-8xl font-bold" style="color:#9dd0ff">26</div>
+    <div class="text-2xl mt-3">identifiable product types</div>
+    <div class="mt-6">
+      <div class="kb-ex"><span class="m">Rivian*</span><span class="d">vehicle phone key</span></div>
+      <div class="kb-ex"><span class="m">GM_PEPS_VKM</span><span class="d">GM phone key</span></div>
+      <div class="kb-ex"><span class="m">OBDII</span><span class="d">diagnostic adapter</span></div>
+      <div class="kb-ex"><span class="m">HarpBT*</span><span class="d">truck ELD</span></div>
+    </div>
+  </div>
+</div>
+
+---
+---
+
+# What turned up: Consumer IoT
+
+<style>
+.kb-ex { display: flex; flex-direction: column; padding: 6px 0; border-top: 1px solid #2a2a2a; }
+.kb-ex .m { font-family: ui-monospace, monospace; font-variant-ligatures: none; font-size: 1.05rem; color: #eee; }
+.kb-ex .d { font-size: 0.95rem; color: #888; }
+</style>
+
+<div class="flex items-center gap-12 mt-4">
+  <img src="/shots/kb-map-consumer.jpg" class="rounded-lg" style="height: 420px; border: 1px solid #333" />
+  <div class="text-left">
+    <div class="text-8xl font-bold" style="color:#4ade80">79</div>
+    <div class="text-2xl mt-3">identifiable product types</div>
+    <div class="mt-6">
+      <div class="kb-ex"><span class="m">Oral-B</span><span class="d">toothbrush</span></div>
+      <div class="kb-ex"><span class="m">Ember*</span><span class="d">smart mug</span></div>
+      <div class="kb-ex"><span class="m">Schlage*</span><span class="d">door lock</span></div>
+      <div class="kb-ex"><span class="m">MyQ-*</span><span class="d">garage opener</span></div>
+    </div>
+  </div>
+</div>
+
+---
+hide: true
 ---
 
 # Match against known CVEs
@@ -1165,7 +1335,7 @@ Find vulnerabilities
 </div>
 
 <style>
-.cve-row { display: grid; grid-template-columns: 380px 60px 1fr; align-items: center; background: #181818; border: 1px solid #2c2c2c; border-radius: 14px; padding: 18px 26px; }
+.cve-row { display: grid; grid-template-columns: 380px 60px 1fr; align-items: center; padding: 18px 0; border-bottom: 1px solid #2a2a2a; }
 .cve-row .p { font-size: 1.6rem; color: #eee; }
 .cve-row .m { font-family: ui-monospace, monospace; font-size: 1rem; color: #888; margin-top: 4px; }
 .cve-row .arrow { font-size: 1.6rem; color: #888; }
@@ -1195,6 +1365,7 @@ No product photo: the vendor site redirects our headless browser, so none was ca
 -->
 
 ---
+hide: true
 ---
 
 # Found something suspicious?

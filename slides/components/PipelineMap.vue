@@ -3,8 +3,13 @@
 // Edges are labelled with the data they carry and animate as flowing streams.
 // step 0: sources → Discover → Attribute → knowledge base, step 1: public sources, AI agents, and the knowledge base feed Attribute,
 // step 2: the knowledge base feeds known fingerprints back into Discover, step 3: entries go on to Audit.
-defineProps<{ step: number }>()
-const INPUTS = [{ y: 150, t: 'BLE scans' }, { y: 230, t: 'App stores' }, { y: 310, t: 'Places' }]
+// `manual`: the same pipeline as we used to run it, with one PhD student as the agent and our Slack as the knowledge base;
+// step 4 (manual only) enlarges the Slack thread.
+const props = defineProps<{ step: number; manual?: boolean }>()
+const BASE = import.meta.env.BASE_URL
+const INPUTS = props.manual
+  ? [{ y: 150, t: 'Driving around' }, { y: 230, t: 'WiGLE' }, { y: 310, t: 'Google' }]
+  : [{ y: 150, t: 'BLE scans' }, { y: 230, t: 'App stores' }, { y: 310, t: 'Places' }]
 const SOURCES = [{ x: 463, t: 'Search' }, { x: 523, t: 'FCC' }, { x: 583, t: 'APKs' }, { x: 643, t: 'SIG' }]
 const AGENTS = [520, 550, 580, 610, 640]
 // a database cylinder: body plus a top ellipse, (x, y) is the top-left corner
@@ -16,6 +21,7 @@ const top = (x: number, y: number, w: number) => `M${x} ${y + 9} A${w / 2} 9 0 0
 </script>
 
 <template>
+  <div class="wrap">
   <svg viewBox="0 0 900 440" class="map">
     <defs>
       <marker v-for="c in ['#888', '#4ade80']" :id="`ah${c.slice(1)}`" :key="c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -54,13 +60,21 @@ const top = (x: number, y: number, w: number) => `M${x} ${y + 9} A${w / 2} 9 0 0
         <text :x="src.x + 28" y="67" class="label">{{ src.t }}</text>
         <line :x1="src.x + 28" y1="82" :x2="src.x + 28" y2="136" class="flow" marker-end="url(#ah888)" />
       </g>
-      <g v-for="x in AGENTS" :key="x">
-        <circle :cx="x" cy="222" r="12" class="agent-bg" />
-        <circle :cx="x" cy="222" r="12" class="agent-ring" />
-        <text :x="x" y="226" class="agent-label">AI</text>
-      </g>
-      <text x="580" y="266" class="body" style="fill:#c4b5fd">AI agents</text>
-      <text x="580" y="296" class="small">+ human review</text>
+      <template v-if="manual">
+        <clipPath id="me-clip"><circle cx="580" cy="238" r="40" /></clipPath>
+        <image :href="`${BASE}people/yibo.jpg`" x="540" y="198" width="80" height="80" clip-path="url(#me-clip)" preserveAspectRatio="xMidYMid slice" />
+        <circle cx="580" cy="238" r="46" class="me-ring" />
+        <text x="580" y="306" class="small">me</text>
+      </template>
+      <template v-else>
+        <g v-for="x in AGENTS" :key="x">
+          <circle :cx="x" cy="222" r="12" class="agent-bg" />
+          <circle :cx="x" cy="222" r="12" class="agent-ring" />
+          <text :x="x" y="226" class="agent-label">AI</text>
+        </g>
+        <text x="580" y="266" class="body" style="fill:#c4b5fd">AI agents</text>
+        <text x="580" y="296" class="small">+ human review</text>
+      </template>
       <!-- the knowledge base is also an input: agents start from what is already known -->
       <line x1="756" y1="258" x2="704" y2="258" class="flow loop" marker-end="url(#ah4ade80)" />
       <text x="729" y="280" class="edge" style="fill:#4ade80">known</text>
@@ -71,29 +85,42 @@ const top = (x: number, y: number, w: number) => `M${x} ${y + 9} A${w / 2} 9 0 0
     <text x="729" y="214" class="edge">profiles</text>
 
     <!-- knowledge base -->
-    <path :d="cyl(760, 170, 120, 120)" class="store" style="stroke:#4ade80" />
-    <path :d="top(760, 170, 120)" class="store-top" style="stroke:#4ade80" />
-    <text x="820" y="228" class="body" style="fill:#4ade80">Knowledge</text>
-    <text x="820" y="252" class="body" style="fill:#4ade80">base</text>
+    <template v-if="manual">
+      <image :href="`${BASE}logos/slack.png`" x="785" y="190" width="70" height="70" />
+      <text x="820" y="290" class="body" style="fill:#4ade80">our Slack</text>
+    </template>
+    <template v-else>
+      <path :d="cyl(760, 170, 120, 120)" class="store" style="stroke:#4ade80" />
+      <path :d="top(760, 170, 120)" class="store-top" style="stroke:#4ade80" />
+      <text x="820" y="228" class="body" style="fill:#4ade80">Knowledge</text>
+      <text x="820" y="252" class="body" style="fill:#4ade80">base</text>
+    </template>
 
     <!-- step 3: knowledge-base entries go on to Audit -->
     <g class="fade" :class="{ on: step >= 3 }">
       <line x1="820" y1="166" x2="820" y2="122" class="flow" marker-end="url(#ah888)" />
       <rect x="742" y="40" width="156" height="80" rx="14" class="proc" style="stroke:#f87171" />
       <text x="820" y="76" class="stage" style="fill:#f87171">Audit</text>
-      <text x="820" y="104" class="edge">CVE match · review</text>
+      <text x="820" y="104" class="edge">{{ manual ? 'me, for months' : 'APKs · CVEs · review' }}</text>
     </g>
 
     <!-- step 2: known fingerprints flow back into Discover -->
     <g class="fade" :class="{ on: step >= 2 }">
       <path d="M820 292 L820 372 Q820 380 812 380 L313 380 Q305 380 305 372 L305 284" class="flow loop" marker-end="url(#ah4ade80)" />
-      <text x="562" y="405" class="edge" style="fill:#4ade80">known fingerprints: only new devices go on</text>
+      <text x="562" y="405" class="edge" style="fill:#4ade80">{{ manual ? 'if someone remembers the thread' : 'known fingerprints: only new devices go on' }}</text>
     </g>
   </svg>
+  <!-- manual, step 4: the "knowledge base" up close -->
+  <img v-if="manual" :src="`${BASE}shots/slack-qt.png`" class="slack-big" :class="{ on: step >= 4 }" />
+  </div>
 </template>
 
 <style scoped>
+.wrap { position: relative; width: 900px; margin: 0 auto; }
+.wrap { position: relative; width: 900px; margin: 0 auto; }
 .map { width: 900px; height: 440px; display: block; margin: 0 auto; }
+.slack-big { position: absolute; left: 50%; top: 50%; height: 430px; transform: translate(-50%, -50%) scale(.3); opacity: 0; transition: all .6s cubic-bezier(.3,1.2,.5,1); border: 1px solid #444; box-shadow: 0 20px 60px rgba(0,0,0,.8); pointer-events: none; max-width: none; }
+.slack-big.on { opacity: 1; transform: translate(-50%, -50%); }
 .proc { fill: #181818; stroke-width: 2.5; }
 .store { fill: #1d2530; stroke: #4ea8ff; stroke-width: 1.8; }
 .store-top { fill: none; stroke: #4ea8ff; stroke-width: 1.8; }
@@ -108,6 +135,7 @@ const top = (x: number, y: number, w: number) => `M${x} ${y + 9} A${w / 2} 9 0 0
 .fade { opacity: 0; transition: opacity .5s; }
 .fade.on { opacity: 1; }
 .agent-bg { fill: #241c3a; }
+.me-ring { fill: none; stroke: #4ea8ff; stroke-width: 4; stroke-dasharray: 72 217; transform-box: fill-box; transform-origin: center; animation: spin 6s linear infinite; }
 .agent-ring { fill: none; stroke: #a78bfa; stroke-width: 3; stroke-dasharray: 38 38; transform-box: fill-box; transform-origin: center; animation: spin .5s linear infinite; }
 .agent-label { font: 600 10px Inter, system-ui, sans-serif; fill: #ccc; text-anchor: middle; }
 @keyframes spin { to { transform: rotate(360deg); } }
