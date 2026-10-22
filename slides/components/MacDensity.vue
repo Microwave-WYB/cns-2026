@@ -18,9 +18,9 @@ const ROWS = [
 ].map((r) => {
   const idx = r.seen.flatMap((v, i) => (v ? [i] : []))
   const adj = idx.slice(1).filter((v, k) => v - idx[k] === 1)
-  return { ...r, n: idx.length, gaps: idx.length - 1, adj, est: Math.round(idx.length * (idx.length - 1) / adj.length) }
+  return { ...r, n: idx.length, gaps: idx.length - 1, adj, est: (idx.length * (idx.length - 1) / adj.length).toFixed(1), dens: (adj.length / (idx.length - 1)).toFixed(3) }
 })
-const CELL = 16, GAP = 4
+const CELL = 14, GAP = 4
 const rowW = computed(() => N * (CELL + GAP))
 </script>
 
@@ -36,8 +36,8 @@ const rowW = computed(() => N * (CELL + GAP))
           :style="{ left: `${(i - 1) * (CELL + GAP) + CELL / 2}px`, width: `${CELL + GAP}px` }" />
       </div>
       <div class="count" :class="{ on: step >= 1 }">
-        <template v-if="step < 2">density = {{ r.adj.length }}/{{ r.gaps }} = {{ (r.adj.length / r.gaps).toFixed(2) }}</template>
-        <template v-else><span style="color:#4ade80">{{ r.n }} seen</span> ÷ <span class="frac">{{ (r.adj.length / r.gaps).toFixed(2) }}</span> ≈ <strong>{{ r.est }}</strong></template>
+        <template v-if="step < 2">density = {{ r.adj.length }}/{{ r.gaps }} = {{ r.dens }}</template>
+        <template v-else><span style="color:#4ade80">{{ r.n }}</span> ÷ <span class="frac">{{ r.dens }}</span> ≈ <strong>{{ r.est }}</strong></template>
       </div>
     </div>
     <div class="legend">
@@ -59,7 +59,7 @@ const rowW = computed(() => N * (CELL + GAP))
 .cell.seen { background: #4ade80; }
 .link { position: absolute; top: -10px; height: 6px; border: 2.5px solid #fbbf24; border-bottom: none; border-radius: 4px 4px 0 0; opacity: 0; transition: opacity .4s; }
 .link.on { opacity: 1; }
-.count { margin-left: 18px; width: 230px; height: 36px; line-height: 36px; font-size: 1.2rem; color: #fbbf24; opacity: 0; transition: opacity .4s; white-space: nowrap; }
+.count { margin-left: 16px; width: 270px; height: 36px; line-height: 36px; font-size: 1.2rem; color: #fbbf24; opacity: 0; transition: opacity .4s; white-space: nowrap; }
 .count.on { opacity: 1; }
 .count strong { color: #9dd0ff; font-size: 1.5rem; line-height: 1; }
 .count .frac { color: #fbbf24; }

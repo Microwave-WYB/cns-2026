@@ -230,6 +230,7 @@ class: text-center
 <div v-click class="text-3xl mt-8">flags <strong>suspicious devices</strong> in your own building</div>
 
 ---
+hide: true
 ---
 
 # So we did it by hand
@@ -466,9 +467,9 @@ clicks: 1
 
 # Does it work on a real car?
 
-<div class="flex items-center gap-8 mt-6">
-  <img src="/shots/qtclient-vscode.jpg" style="height: 400px; border: 1px solid #333" />
-  <img v-click src="/shots/slack-car-unlocked.jpg" style="width: 300px" />
+<div class="flex items-center justify-center gap-8 mt-4">
+  <img src="/shots/qtclient-vscode.jpg" style="width: 600px" />
+  <img v-click src="/shots/slack-car-unlocked.jpg" style="height: 400px" />
 </div>
 
 ---
@@ -598,6 +599,7 @@ Same investigation, six representative aftermarket systems; critical pairing/aut
 </div>
 
 ---
+hide: true
 ---
 
 # Takeaways
@@ -839,25 +841,24 @@ clicks: 3
 </style>
 
 ---
-layout: center
-hide: true
 ---
 
-# Why not just use WiGLE?
+# Why build our own scanner?
 
-<div class="grid grid-cols-[1.2fr_1fr] gap-10 mt-6 items-center">
-  <img src="/shots/wigle.jpg" class="rounded-lg" style="aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid #333" />
-  <div class="text-2xl leading-loose whitespace-nowrap">
-    <div v-click>Bluetooth: <strong>no advertisement data</strong></div>
-    <div v-click>names: <strong>wildcards</strong> only</div>
-    <div v-click>random MACs: <strong>nothing to match</strong></div>
-    <div v-click>API: <strong>no complex queries</strong></div>
-  </div>
-</div>
+| | WiGLE | Our scanner |
+|---|---|---|
+| Coverage | <span style="color:#4ade80">worldwide, crowdsourced</span> | only where we go |
+| What it keeps | name, location, time, company ID | <span style="color:#4ade80">the full raw advertisement</span> |
+| Unnamed devices (91%) | <span style="color:#f87171">only MAC and company ID</span> | <span style="color:#4ade80">every byte they broadcast</span> |
+| Queries | name search through an API | <span style="color:#4ade80">SQL over everything</span> |
 
-<!--
-Introduce problem first then why wigle isn't solving it yet
--->
+<div v-click class="text-2xl mt-8">WiGLE tells us <strong>where</strong>; our scanner tells us <strong>what</strong></div>
+
+<style>
+.slidev-layout table { font-size: 1.3rem; margin-top: 1.5rem; width: 100%; }
+.slidev-layout td, .slidev-layout th { padding: 0.75rem 1.1rem; white-space: nowrap; }
+.slidev-layout td:first-child { color: #aaa; }
+</style>
 
 ---
 layout: center
